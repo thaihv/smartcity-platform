@@ -1,0 +1,81 @@
+### Common
+
+spring:
+  application:
+    name: historicaldata-service
+  profiles:
+    active: dev
+  resources:
+    add-mappings: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+server:
+  port: 8091
+  
+app:
+  kafka:
+    bootstrap-servers: http://www.tamky.xyz:9092
+    consumer:
+      group-id: iot
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: com.jdvn.smartcity.tamky.util.TemperatureSensorDataMessageDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.jdvn.smartcity.tamky.util.TemperatureSensorDataMessageSerializer
+    topic:
+      temperature-sensor: TrackTemperature
+
+  influxdb:
+    url: http://www.tamky.xyz:8086
+    user: admin
+    pass: admin
+    database: sensordata
+    retention-policy: autogen
+    read-timeout-in-seconds: 100
+  
+logging:
+  level:
+    root: INFO
+
+okta:
+  oauth2:
+    issuer: https://dev-2985632.okta.com/oauth2/default
+    client-secret: 14sE8ZMFFHsUbcfIIrRj_MGltQwBn31xOmEK4Sxl
+    client-id: 0oa10jb8a44XavQC45d7
+
+---
+### Dev profile
+
+spring:
+  profiles: dev
+
+logging:
+  level:
+    com.unloadbrain: DEBUG
+
+---
+
+### Prod profile
+
+spring:
+  profiles: prod
+
+logging:
+  level:
+    com.unloadbrain: INFO
+
+---
+
+### Integration test profile
+
+spring:
+  profiles: it
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+
+
+
