@@ -48,13 +48,14 @@ public class BaseExceptionHandlerIT {
     /**
      * This test ensure internal exception stacktraces are not spilling over HTTP response.
      */
-    @Test
+
+	@Test
     public void runtimeExceptionShouldBeCaughtByGlobalExceptionHandler() throws Exception {
 
         doThrow(new RuntimeException("Something bad")).when(sensorDataCollectorServiceMock).collect(any());
 
         mockMvc.perform(post("/temperatures"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError())
                 .andExpect(jsonPath("$.code").value("INTERNAL_SERVER_ERROR"))
                 .andExpect(jsonPath("$.message").value("An unexpected internal server error occurred"))

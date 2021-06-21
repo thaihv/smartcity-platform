@@ -65,9 +65,9 @@ public class TemperatureCollectorApiIT {
 
         mockMvc.perform(post("/temperatures")
                 .content(objectMapper.writeValueAsString((dataRequest)))
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success").value("true"))
                 .andDo(print());
     }
@@ -86,9 +86,9 @@ public class TemperatureCollectorApiIT {
 
         mockMvc.perform(post("/batch/temperatures")
                 .content(objectMapper.writeValueAsString((requests)))
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMultiStatus())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].success").value("true"))
                 .andExpect(jsonPath("$[1].success").value("false"))
                 .andDo(print());
