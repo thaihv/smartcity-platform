@@ -5,7 +5,7 @@ It includes:
    Kafka
    Influxdb
    Spring Boot 2
- - A KPI service for creating and storing smart city Key Performance Indicators
+ - A KPI service for creating and storing smart city Key Performance Indicators:
    Hibernate
    H2 database
    Springboot
