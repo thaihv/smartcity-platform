@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jdvn.smartcity.tamky</groupId>
-    <artifactId>smartcitykpi-service</artifactId>
+    <artifactId>kpi-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>smartcitykpi-service</name>
-    <description>Service for monitoring of smartcity management</description>
+    <name>kpi-service</name>
+    <description>Service for monitoring of smartcity management based on Key Performance Indicators</description>
 
     <properties>
         <java.version>8</java.version>

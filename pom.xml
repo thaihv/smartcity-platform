@@ -10,7 +10,7 @@
     <modules>
         <module>discovery-service</module>
         <module>api-gateway</module>
-        <module>smartcitykpi-service</module>
+        <module>kpi-service</module>
         <module>historicdata-service</module>
     </modules>
 </project>
