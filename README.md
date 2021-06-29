@@ -1,6 +1,6 @@
 "# smartcity-platform" 
 A boilerplate code  for smartcity-platform. 
-That included:
+It includes:
  - A real time service for archiving data from sensor (with infrastructure using  Docker container of Kafka, influxdb)
  - A KPI service for creating and storing smart city Key Performance Indicator
  - Other micro-services using Sping cloud for Discovery and registrer and API gateway, circuit breaker
