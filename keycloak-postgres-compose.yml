@@ -1,6 +1,7 @@
 version: '3'
 
 volumes:
+  postgres:
   postgres_data:
       driver: local
 
@@ -15,6 +16,19 @@ services:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
+  kpi_db:
+    image: postgres
+    environment:
+      POSTGRES_DB: kpi
+      POSTGRES_USER: kpi
+      POSTGRES_PASSWORD: kpi
+      PGDATA: "/data/kpi/postgres"
+    volumes:
+       - postgres:/data/kpi/postgres
+    ports:
+       - "15432:5432"
+    restart: unless-stopped
+
   keycloak:
       image: quay.io/keycloak/keycloak:latest
       environment:
