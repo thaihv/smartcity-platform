@@ -11,6 +11,6 @@
         <module>discovery-service</module>
         <module>api-gateway</module>
         <module>kpi-service</module>
-        <module>historicdata-service</module>
+        <module>realtime-service</module>
     </modules>
 </project>

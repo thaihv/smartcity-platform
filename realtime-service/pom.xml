@@ -13,11 +13,11 @@
     </parent>
 
     <groupId>com.jdvn.smartcity.tamky</groupId>
-    <artifactId>historicdata-service</artifactId>
+    <artifactId>realtime-service</artifactId>
     <packaging>jar</packaging>
     <version>1.0.0</version>
 
-    <name>historicdata-service</name>
+    <name>realtime-service</name>
     <description>Service to archive real time  data from applications and devices</description>
 
     <properties>

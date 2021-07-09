@@ -2,7 +2,7 @@
 
 spring:
   application:
-    name: historicaldata-service
+    name: realtime-service
   profiles:
     active: dev
   resources:
