@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "ClassKpi")
+@Table(name = "classkpi")
 public class ClassKpi {
 
 	@Id
-	private Long kpiID;
-	private Long classID;
+	private Long kpiId;
+	private Long classificationId;
 
 }

@@ -17,8 +17,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "classification") // This table stores a first level classifications for the KPIs.
-public class Classification {
+@Table(name = "category") // This table stores the second level classifications for the KPIs
+public class Category {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Classification {
 	
     @ManyToOne
     @MapsId("id")
-    @JoinColumn(name = "categoryId")    
-    private Category category;	
+    @JoinColumn(name = "subcategoryId") 
+    private SubCategory subCategory;
 
 }

@@ -6,14 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "Kpi")
+@Table(name = "kpi")
 public class Kpi {
 
 	public Kpi(String name) {
@@ -21,14 +23,13 @@ public class Kpi {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long kpiID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
 	@NonNull
 	private String name; // Descriptive human readable name of the KPI
 
-	@NonNull
-	private String code; // Identifier of the KPI outside the system, in a human readable form
+	private String code; // Identifier in a human readable form
 
 	private int frequencyInDays; // How often the KPI is calculated in days
 

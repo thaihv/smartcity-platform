@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "ClassificationType") // This table stores the second level classifications for the KPIs
-public class ClassificationType {
+@Table(name = "subcategory") // This table stores the third level classifications for the KPIs
+public class SubCategory {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long classTypeID;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String name;
 
 }
