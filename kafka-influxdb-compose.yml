@@ -15,10 +15,9 @@ services:
       - "9092:9092"
     hostname: kafka
     environment:
-      KAFKA_CREATE_TOPICS: "TrackTemperature:1:1" # topic:partition:replicas
+      KAFKA_CREATE_TOPICS: "TrackTemperature:1:2, TrackUpload:1:1, GetEmailContent:1:1" # topic:partition:replicas
       KAFKA_ADVERTISED_HOST_NAME: 174.138.25.165 # docker-machine ip
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LOG_DIRS: /kafka/kafka-logs
       KAFKA_ADVERTISED_PORT: 9092
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
