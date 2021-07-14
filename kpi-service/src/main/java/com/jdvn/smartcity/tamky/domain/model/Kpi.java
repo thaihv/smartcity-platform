@@ -1,5 +1,8 @@
 package com.jdvn.smartcity.tamky.domain.model;
 
+import java.util.Collection;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -22,11 +26,6 @@ import lombok.ToString;
 @Entity
 @Table(name = "kpi") // This table stores the general information for each KPI
 public class Kpi {
-
-//	public Kpi(String name, Unit unit) {
-//		this.name = name;
-//		this.unit = unit;
-//	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +44,13 @@ public class Kpi {
 	@ToString.Exclude
 	private Unit unit; // Reference to the unit of the measurements of the KPI e.g. KWh/m²
 
-	@Column(name = "structuralElement", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...
+	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...
 	private String structuralElement; // The structural element that the KPI is calculated for
+	
+	@OneToMany(mappedBy = "kpi", cascade = CascadeType.MERGE)
+    @EqualsAndHashCode.Exclude 
+    @ToString.Exclude 
+	private Collection<Measure> measures;
+	
 
 }

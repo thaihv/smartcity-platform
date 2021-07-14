@@ -12,10 +12,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -28,12 +30,10 @@ public class Unit {
 	}	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "name")
 	private String name; // the unit for human readability e.g "Watt", "Degree Celsius", or "Watt hour"
-	@Column(name = "symbol")
+
 	private String symbol; // symbol of the unit e.g. W, ºC, Wh
 
 	@OneToMany(mappedBy = "unit", cascade = CascadeType.MERGE)

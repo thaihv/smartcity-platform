@@ -1,0 +1,65 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
+server:
+  port: 8080
+keycloak-client:
+  server-url: http://tamky.xyz:8080/auth
+  realm:  Smartcity
+spring:
+  application:
+    name: api-gateway 
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: api-gateway
+            client-secret: 8e54940b-bad9-4229-9f7b-1f4affb25758
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+            scope: openid
+        provider:
+          keycloak:
+            authorization-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            user-name-attribute: name
+            user-info-authentication-method: header
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+  cloud:
+    gateway:
+      routes:
+        - id: kpi-service
+          uri: lb://kpi-service
+          predicates:
+            - Path=/kpi/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+        - id: realtime-service
+          uri: lb://realtime-service
+          predicates:
+            - Path=/temperatures/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+#zuul:
+#  routes:
+#    microservice-consumer:
+#      serviceId: microservice-consumer
+#      path: /api/consume/**
