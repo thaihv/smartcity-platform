@@ -2,7 +2,6 @@ package com.jdvn.smartcity.tamky.domain.model;
 
 import java.sql.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

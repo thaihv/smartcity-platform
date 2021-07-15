@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -25,6 +28,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "kpi") // This table stores the general information for each KPI
+@JsonIgnoreProperties (value = { "hibernateLazyInitializer", "handler"})
 public class Kpi {
 
 	@Id
@@ -42,6 +46,7 @@ public class Kpi {
 	@JoinColumn(name = "unitId")
 	@EqualsAndHashCode.Exclude
 	@ToString.Exclude
+	@JsonBackReference
 	private Unit unit; // Reference to the unit of the measurements of the KPI e.g. KWh/m²
 
 	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...

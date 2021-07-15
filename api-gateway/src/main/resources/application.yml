@@ -41,7 +41,7 @@ spring:
         - id: kpi-service
           uri: lb://kpi-service
           predicates:
-            - Path=/kpi/**
+            - Path=/kpi/**, /kpi-unit/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
