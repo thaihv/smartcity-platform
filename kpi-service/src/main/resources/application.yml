@@ -1,5 +1,7 @@
 server:
   port: 8090
+  servlet:
+    context-path: /kpi  
 eureka:
   client:
     serviceUrl:
@@ -54,6 +56,14 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
-springdoc:
-  swagger-ui.path: /swagger-ui
-  swagger-ui.operationsSorter: method
+#springfox:
+#  documentation:
+#    swagger-ui:
+#      baseUrl: /kpi/swagger-ui
+#    openApi:
+#      v3:
+#        path: /kpi/v3/api-docs      
+#    swagger:
+#      v2:
+#        path: /kpi/v2/api-docs          
+

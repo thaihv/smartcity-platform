@@ -1,6 +1,5 @@
 package com.jdvn.smartcity.tamky;
 
-import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -8,9 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdvn.smartcity.tamky.domain.model.Kpi;
@@ -18,8 +18,8 @@ import com.jdvn.smartcity.tamky.domain.model.Unit;
 import com.jdvn.smartcity.tamky.domain.repository.KpiRepository;
 import com.jdvn.smartcity.tamky.domain.repository.UnitRepository;
 
+
 @RestController
-@RequestMapping("/kpi")
 public class KpiController {
 
 	@Autowired
@@ -30,11 +30,13 @@ public class KpiController {
 
 	private final static Logger log = LoggerFactory.getLogger(KpiController.class);
 
-	@GetMapping("/hi")
-	public String Greetings(Principal principal) {
-		String username = principal.getName();
+	@GetMapping("/")
+	public String Greetings(@AuthenticationPrincipal Jwt jwt) {
 		log.info("Get Principal");
-		return "Hello, " + username;
+//        KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
+//        AccessToken accessToken = keycloakAuthenticationToken.getAccount().getKeycloakSecurityContext().getToken();
+//        model.addAttribute("username", accessToken.getGivenName());		
+		return String.format("Hello, %s", jwt.getClaim("preferred_username").toString());
 	}
 
 	@GetMapping("/kpis")
@@ -58,10 +60,10 @@ public class KpiController {
 		return result;
 	}
 
-	@GetMapping("/units/{kpiId}")
-	public CollectionModel<Unit> getUnitByKpiId(@PathVariable Long kpiId) {
-		Kpi kpi = kpiRepository.getOne(kpiId);
-		CollectionModel<Unit> result = CollectionModel.of(Arrays.asList(kpi.getUnit()));
+	@GetMapping("/units/{unitId}")
+	public CollectionModel<Unit> getUnitByUnitId(@PathVariable Long unitId) {
+		Unit unit = unitRepository.findById(unitId).get();
+		CollectionModel<Unit> result = CollectionModel.of(Arrays.asList(unit));
 		return result;
 	}
 }
