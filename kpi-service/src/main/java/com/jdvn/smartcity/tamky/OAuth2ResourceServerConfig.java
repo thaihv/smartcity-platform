@@ -9,9 +9,9 @@ public class OAuth2ResourceServerConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-        		.antMatchers("/kpi/api-docs/**", "/kpi/swagger-ui/**")
-        		.permitAll()
+        http
+		        .csrf().disable()
+		        .authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login()

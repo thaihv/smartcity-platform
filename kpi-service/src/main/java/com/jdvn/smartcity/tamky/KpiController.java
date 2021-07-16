@@ -39,28 +39,28 @@ public class KpiController {
 		return String.format("Hello, %s", jwt.getClaim("preferred_username").toString());
 	}
 
-	@GetMapping("/kpis")
+	@GetMapping("/kpi-all")
 	public CollectionModel<Kpi> getAllKpis() {
 		List<Kpi> kpis = kpiRepository.findAll();
 		CollectionModel<Kpi> result = CollectionModel.of(kpis);
 		return result;
 	}
 
-	@GetMapping("/kpis/{kpiId}")
+	@GetMapping("/kpi-all/{kpiId}")
 	public CollectionModel<Kpi> getKpiById(@PathVariable Long kpiId) {
 
 		CollectionModel<Kpi> result = CollectionModel.of(Arrays.asList(kpiRepository.getOne(kpiId)));
 		return result;
 	}
 
-	@GetMapping("/units")
+	@GetMapping("/unit-all")
 	public CollectionModel<Unit> getKpiUnits() {
 		List<Unit> units = unitRepository.findAll();
 		CollectionModel<Unit> result = CollectionModel.of(units);
 		return result;
 	}
 
-	@GetMapping("/units/{unitId}")
+	@GetMapping("/unit-all/{unitId}")
 	public CollectionModel<Unit> getUnitByUnitId(@PathVariable Long unitId) {
 		Unit unit = unitRepository.findById(unitId).get();
 		CollectionModel<Unit> result = CollectionModel.of(Arrays.asList(unit));
