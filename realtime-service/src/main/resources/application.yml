@@ -1,5 +1,17 @@
 ### Common
 
+server:
+  port: 8091
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/    
+
+ 
+keycloak-client:
+  server-url: http://tamky.xyz:8080/auth
+  realm:  Smartcity
+    
 spring:
   application:
     name: realtime-service
@@ -9,8 +21,28 @@ spring:
     add-mappings: false
   mvc:
     throw-exception-if-no-handler-found: true
-server:
-  port: 8091
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: keycloak
+            client-id: realtime-service
+            client-secret: f127b769-f8f8-44e0-af16-735497f677d5
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:8091/login/oauth2/code/keycloak
+            scope: openid
+        provider:
+          keycloak:
+            authorization-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/auth
+            token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
+            user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
+            jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            user-name-attribute: name
+            user-info-authentication-method: header
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs    
   
 app:
   kafka:
@@ -38,11 +70,6 @@ logging:
   level:
     root: INFO
 
-okta:
-  oauth2:
-    issuer: https://dev-2985632.okta.com/oauth2/default
-    client-secret: 14sE8ZMFFHsUbcfIIrRj_MGltQwBn31xOmEK4Sxl
-    client-id: 0oa10jb8a44XavQC45d7
 
 ---
 ### Dev profile
@@ -52,7 +79,7 @@ spring:
 
 logging:
   level:
-    com.unloadbrain: DEBUG
+    com.jdvn.smartcity.tamky: DEBUG
 
 ---
 
@@ -63,7 +90,7 @@ spring:
 
 logging:
   level:
-    com.unloadbrain: INFO
+    com.jdvn.smartcity.tamky: INFO
 
 ---
 

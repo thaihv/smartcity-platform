@@ -1,7 +1,7 @@
 package com.jdvn.smartcity.tamky;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jdvn.smartcity.tamky.HistoricDataServiceApplication;
+import com.jdvn.smartcity.tamky.RealtimeServiceApplication;
 import com.jdvn.smartcity.tamky.dto.request.TemperatureSensorDataRequest;
 import com.jdvn.smartcity.tamky.dto.response.DataCollectionStatusResponse;
 import com.jdvn.smartcity.tamky.service.SensorDataCollectorService;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {HistoricDataServiceApplication.class})
+@SpringBootTest(classes = {RealtimeServiceApplication.class})
 @AutoConfigureMockMvc
 @ActiveProfiles("it")
 public class TemperatureCollectorApiIT {
