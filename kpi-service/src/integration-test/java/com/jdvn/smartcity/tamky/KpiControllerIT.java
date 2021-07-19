@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource(locations = "classpath:application-integrationtest.yml")
-public class KpiControllerIntegrationTest {
+public class KpiControllerIT {
 
 	@Autowired
 	private MockMvc mockMvc;

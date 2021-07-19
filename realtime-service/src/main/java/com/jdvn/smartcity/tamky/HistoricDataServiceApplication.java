@@ -28,7 +28,7 @@ public class HistoricDataServiceApplication {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			// @formatter:off
-			http.authorizeRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt();
+//			http.authorizeRequests().anyRequest().authenticated().and().oauth2ResourceServer().jwt();
 			// @formatter:on
 		}
 	}    
