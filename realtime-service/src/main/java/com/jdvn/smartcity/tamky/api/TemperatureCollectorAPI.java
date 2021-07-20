@@ -43,7 +43,7 @@ public class TemperatureCollectorAPI {
      * @param dataRequests list of temperature data request.
      * @return the response entity list of booleans indicating request status and HTTP Status 207.
      */
-    @PostMapping("/batch/temperatures")
+    @PostMapping("/temperatures/batch")
     public ResponseEntity<List<DataCollectionStatusResponse>> collectTemperatures(
             @RequestBody List<TemperatureSensorDataRequest> dataRequests) {
         return new ResponseEntity(temperatureSensorDataCollectorService.collect(dataRequests), HttpStatus.MULTI_STATUS);

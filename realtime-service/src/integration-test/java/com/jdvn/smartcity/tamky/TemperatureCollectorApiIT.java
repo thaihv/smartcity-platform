@@ -84,7 +84,7 @@ public class TemperatureCollectorApiIT {
         requests.add(TemperatureSensorDataRequest.builder().temperatureInFahrenheit(20).build());
         requests.add(TemperatureSensorDataRequest.builder().temperatureInFahrenheit(21).build());
 
-        mockMvc.perform(post("/batch/temperatures")
+        mockMvc.perform(post("/temperatures/batch")
                 .content(objectMapper.writeValueAsString((requests)))
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isMultiStatus())
