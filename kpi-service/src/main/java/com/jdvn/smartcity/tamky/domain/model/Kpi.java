@@ -1,10 +1,12 @@
 package com.jdvn.smartcity.tamky.domain.model;
 
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +30,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name = "kpi") // This table stores the general information for each KPI
-@JsonIgnoreProperties (value = { "hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Kpi {
 
 	@Id
@@ -51,11 +53,16 @@ public class Kpi {
 
 	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...
 	private String structuralElement; // The structural element that the KPI is calculated for
-	
+
 	@OneToMany(mappedBy = "kpi", cascade = CascadeType.MERGE)
-    @EqualsAndHashCode.Exclude 
-    @ToString.Exclude 
+	@EqualsAndHashCode.Exclude
+	@ToString.Exclude
 	private Collection<Measure> measures;
+
+	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
+	Set<ClassKpi> belongClass;
 	
+	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
+	Set<ReportKpi> belongReport;
 
 }
