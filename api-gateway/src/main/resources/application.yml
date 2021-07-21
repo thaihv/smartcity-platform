@@ -41,14 +41,14 @@ spring:
         - id: kpi-service
           uri: lb://kpi-service
           predicates:
-            - Path=/kpi/**, /kpi-unit/**
+            - Path=/kpi/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
         - id: realtime-service
           uri: lb://realtime-service
           predicates:
-            - Path=/temperatures/**
+            - Path=/realtime/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie

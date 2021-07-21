@@ -51,19 +51,12 @@ spring:
             token-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/token
             user-info-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/userinfo
             jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
+            logout: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/logout
+            certs-id: YxisG5U0Rhs1GOoOdEmEN4_QcJ2kSMF7cwaUEi1zSQQ
             user-name-attribute: name
             user-info-authentication-method: header
       resourceserver:
         jwt:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
-#springfox:
-#  documentation:
-#    swagger-ui:
-#      baseUrl: /kpi/swagger-ui
-#    openApi:
-#      v3:
-#        path: /kpi/v3/api-docs      
-#    swagger:
-#      v2:
-#        path: /kpi/v2/api-docs          
+
 

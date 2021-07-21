@@ -60,8 +60,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
 		</dependency>
-		<!-- dependency> <groupId>org.keycloak</groupId> <artifactId>keycloak-spring-boot-starter</artifactId> 
-			</dependency -->
+		
+		<!-- clients for security work -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>jwks-rsa</artifactId>
+            <version>0.12.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.8.3</version>
+        </dependency>
+        		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -77,8 +88,6 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<!-- dependency> <groupId>org.springdoc</groupId> <artifactId>springdoc-openapi-ui</artifactId> 
-			<version>1.5.5</version> </dependency -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>

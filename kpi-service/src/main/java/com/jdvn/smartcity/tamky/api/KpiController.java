@@ -1,4 +1,4 @@
-package com.jdvn.smartcity.tamky;
+package com.jdvn.smartcity.tamky.api;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdvn.smartcity.tamky.domain.model.Kpi;
@@ -31,6 +32,7 @@ public class KpiController {
 	private final static Logger log = LoggerFactory.getLogger(KpiController.class);
 
 	@GetMapping("/")
+	@ResponseBody
 	public String Greetings(@AuthenticationPrincipal Jwt jwt) {
 		log.info("Get Principal");
 //        KeycloakAuthenticationToken keycloakAuthenticationToken = (KeycloakAuthenticationToken) principal;
@@ -40,6 +42,7 @@ public class KpiController {
 	}
 
 	@GetMapping("/kpi-all")
+	@ResponseBody
 	public CollectionModel<Kpi> getAllKpis() {
 		List<Kpi> kpis = kpiRepository.findAll();
 		CollectionModel<Kpi> result = CollectionModel.of(kpis);

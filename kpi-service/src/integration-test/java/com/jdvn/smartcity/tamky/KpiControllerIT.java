@@ -27,7 +27,7 @@ public class KpiControllerIT {
 
 	@Test
 	public void testSayHi() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/kpi/hi"))
+//		this.mockMvc.perform(MockMvcRequestBuilders.get("/"))
 //				.andExpect(MockMvcResultMatchers.status().isOk())
 //				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 //				.andExpect(MockMvcResultMatchers.view().name("hello"))
