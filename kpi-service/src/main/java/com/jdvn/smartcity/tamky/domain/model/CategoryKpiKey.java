@@ -15,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassKpiKey implements Serializable {
+public class CategoryKpiKey implements Serializable {
 
 
 	@Column(name = "kpi_id")
     Long kpiId;
 
-    @Column(name = "classification_id")
-    Long classificationId;
+    @Column(name = "category_id")
+    Long categoryId;
 
 }

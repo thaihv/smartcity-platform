@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,22 +19,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "classification") // This table stores a first level classifications for the KPIs.
+@Table(name = "classification") // This table stores the second level classifications for the KPIs
 public class Classification {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	private String code; // Identifier in a human readable form
 	private String name;
 	
     @ManyToOne
-    @MapsId("id")
-    @JoinColumn(name = "categoryId")    
-    private Category category;	
+    @JoinColumn(name = "classtype_id") 
+    private ClassType classtype;
     
     
-    @OneToMany(mappedBy = "classification")
-    Set<ClassKpi> hasKpis;
+    @OneToMany(mappedBy="classification")
+    private Set<Category> categories;
 
 }

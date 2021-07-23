@@ -60,7 +60,7 @@ public class Kpi {
 	private Collection<Measure> measures;
 
 	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
-	Set<ClassKpi> belongClass;
+	Set<CategoryKpi> belongClass;
 	
 	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
 	Set<ReportKpi> belongReport;

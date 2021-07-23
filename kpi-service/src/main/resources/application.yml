@@ -31,9 +31,12 @@ spring:
     username: kpi
     password: kpi
     driverClassName: org.postgresql.Driver 
+    initialization-mode: always    
     hikari:
      connectionTimeout: 20000
      maximumPoolSize: 5   
+ 
+
   security:
     oauth2:
       client:

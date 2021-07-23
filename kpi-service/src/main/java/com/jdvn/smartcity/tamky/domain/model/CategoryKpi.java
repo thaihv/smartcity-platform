@@ -13,16 +13,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "classkpi")
-public class ClassKpi {
+@Table(name = "categorykpi")
+public class CategoryKpi {
 
 	@EmbeddedId
-	ClassKpiKey id;
+	CategoryKpiKey id;
 
 	@ManyToOne
-	@MapsId("classificationId")
-	@JoinColumn(name = "classification_id")
-	Classification classification;
+	@MapsId("categoryId")
+	@JoinColumn(name = "category_id")
+	Category category;
 
 	@ManyToOne
 	@MapsId("kpiId")
