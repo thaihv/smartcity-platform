@@ -12,6 +12,9 @@ keycloak-client:
 spring:
   application:
     name: kpi-service
+  data:
+    rest:
+      defaultMediaType: application/json    
   jpa:
     database: POSTGRESQL
     show-sql: true

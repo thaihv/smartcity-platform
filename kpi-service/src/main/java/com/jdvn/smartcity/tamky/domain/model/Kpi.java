@@ -37,32 +37,30 @@ public class Kpi {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NonNull
-	private String name; // Descriptive human readable name of the KPI
-
 	private String code; // Identifier in a human readable form
+	
+	@NonNull
+	private String name; // Descriptive human readable name of the KPI	
 
 	private int frequencyInDays; // How often the KPI is calculated in days
 
+	private String description; 
+	
 	@ManyToOne
 	@JoinColumn(name = "unitId")
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
 	@JsonBackReference
 	private Unit unit; // Reference to the unit of the measurements of the KPI e.g. KWh/m²
 
 	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...
 	private String structuralElement; // The structural element that the KPI is calculated for
 
-	@OneToMany(mappedBy = "kpi", cascade = CascadeType.MERGE)
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
+	@OneToMany(mappedBy = "kpi")
 	private Collection<Measure> measures;
 
-	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
-	Set<CategoryKpi> belongClass;
+	@OneToMany(mappedBy = "kpi")
+	Set<CategoryKpi> belongCategory;
 	
-	@OneToMany(mappedBy = "kpi", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "kpi")
 	Set<ReportKpi> belongReport;
 
 }

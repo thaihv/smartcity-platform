@@ -24,31 +24,31 @@ public class KpiServiceApplication {
 	}
 
 
-	@Bean
-	ApplicationRunner init(KpiRepository repository, UnitRepository unitRepository) {
-
-		Unit unit = new Unit("Degree Celsius", "ºC");
-		unitRepository.saveAndFlush(unit);
-		unit = new Unit("Watt hour", "Wh");
-		unitRepository.saveAndFlush(unit);		
-		unit = new Unit("Watt", "W");
-		unitRepository.saveAndFlush(unit);	
-		
-		return args -> {
-
-			Stream.of("Air Quality", "Water and Sanitation", "Energy", "Housing", "Food Security", "Buildings",
-					"Employment", "Electricity Supply", "Drainage", "ICT Infrastructure").forEach(name -> {
-
-						Kpi kpi = new Kpi();
-						kpi.setName(name);
-						kpi.setCode("L1");
-						kpi.setFrequencyInDays(3);
-						kpi.setStructuralElement("District");
-						kpi.setUnit(unitRepository.findAll().get(0));
-						repository.saveAndFlush(kpi);
-					});
-			repository.findAll().forEach(System.out::println);
-		};
-	}
+//	@Bean
+//	ApplicationRunner init(KpiRepository repository, UnitRepository unitRepository) {
+//
+//		Unit unit = new Unit("Degree Celsius", "ºC");
+//		unitRepository.saveAndFlush(unit);
+//		unit = new Unit("Watt hour", "Wh");
+//		unitRepository.saveAndFlush(unit);		
+//		unit = new Unit("Watt", "W");
+//		unitRepository.saveAndFlush(unit);	
+//		
+//		return args -> {
+//
+//			Stream.of("Air Quality", "Water and Sanitation", "Energy", "Housing", "Food Security", "Buildings",
+//					"Employment", "Electricity Supply", "Drainage", "ICT Infrastructure").forEach(name -> {
+//
+//						Kpi kpi = new Kpi();
+//						kpi.setName(name);
+//						kpi.setCode("L1");
+//						kpi.setFrequencyInDays(3);
+//						kpi.setStructuralElement("District");
+//						kpi.setUnit(unitRepository.findAll().get(0));
+//						repository.saveAndFlush(kpi);
+//					});
+//			repository.findAll().forEach(System.out::println);
+//		};
+//	}
 
 }

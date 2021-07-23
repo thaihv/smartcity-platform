@@ -1,7 +1,8 @@
+-- The first level classification (in term of Class-Lớp in QD-3098 ) 
 INSERT INTO classtype(code, name) VALUES ('L1','Lấy người dân làm trung tâm');
 INSERT INTO classtype(code, name) VALUES ('L2','Hoạt động hiệu quả của bộ máy Chính quyền Đô Thị');
 INSERT INTO classtype(code, name) VALUES ('L3','Định hướng và thúc đẩy');
-
+-- The second level classification (in term of Group-Nhóm in QD-3098 )
 INSERT INTO classification(code, name, classtype_id) VALUES ('L1.N1', 'Chia sẻ thông tin và lắng nghe ý kiến cư dân đô thị',1);
 INSERT INTO classification(code, name, classtype_id) VALUES ('L1.N2', 'Tạo điều kiện cho người dân đô thị tham gia xây dựng ĐTTM',1);
 INSERT INTO classification(code, name, classtype_id) VALUES ('L1.N3', 'Cảm nhận của người dân đô thị',1);
@@ -12,15 +13,12 @@ INSERT INTO classification(code, name, classtype_id) VALUES ('L3.N1', 'Hạ tầ
 INSERT INTO classification(code, name, classtype_id) VALUES ('L3.N2', 'An toàn thông tin',3);
 INSERT INTO classification(code, name, classtype_id) VALUES ('L3.N3', 'Sự chuẩn bị nguồn lực cho xây dựng',3);
 INSERT INTO classification(code, name, classtype_id) VALUES ('L3.N4', 'Đổi mới sáng tạo và tính mở của đô thị',3);
-
+-- The third level classification (in term of Group-Phân nhóm in QD-3098 )
 INSERT INTO category(code, name, classification_id) VALUES ('L1.N1.PN1', 'Dân biết',1);
 INSERT INTO category(code, name, classification_id) VALUES ('L1.N1.PN2', 'Dân bàn',1);
 INSERT INTO category(code, name, classification_id) VALUES ('L1.N1.PN3', 'Dân kiểm tra, giám sát',1);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L1.N2.PN1', 'Người dân tham gia phản hồi thông tin cho CQĐT',2);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L1.N3.PN1', 'Cảm nhận của người dân về tiến bộ của đô thị ',3);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN1', 'Dịch vụ công',4);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN2', 'Dịch vụ giao thông',4);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN3', 'Dịch vụ y tế',4);
@@ -31,21 +29,49 @@ INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN7', 'Các d
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN8', 'Dịch vụ an sinh xã hội',4);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN9', 'Dịch vụ cung cấp nước sạch',4);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N1.PN10', 'Dịch vụ cung cấp điện',4);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N2.PN1', 'Công tác quản lý đô thị',5);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N2.PN2', 'An ninh trật tự và PCCC của đô thị',5);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N3.PN1', 'Bảo vệ môi trường',6);
 INSERT INTO category(code, name, classification_id) VALUES ('L2.N3.PN2', 'Tiết kiệm năng lượng',6);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L3.N1.PN1', 'Hạ tầng thông tin băng thông rộng',7);
 INSERT INTO category(code, name, classification_id) VALUES ('L3.N1.PN2', 'Chia sẻ tài nguyên',7);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L3.N2.PN1', 'An toàn thông tin',8);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L3.N3.PN1', 'Chính sách nhân lực và tài chính cho xây dựng ĐTTM',9);
-
 INSERT INTO category(code, name, classification_id) VALUES ('L3.N4.PN1', 'Thúc đẩy, định hướng các điều kiện hỗ trợ xây dựng ĐTTM',10);
+-- The unit of KPI measurement
+INSERT INTO unit(name, symbol) VALUES ('Phần trăm', '%'); 
+INSERT INTO unit(name, symbol) VALUES ('Điểm giám sát/Km²', '');
+INSERT INTO unit(name, symbol) VALUES ('Có/Chưa', '');
+INSERT INTO unit(name, symbol) VALUES ('Degree Celsius', 'ºC');
+INSERT INTO unit(name, symbol) VALUES ('Watt hour', 'Wh');
+INSERT INTO unit(name, symbol) VALUES ('Watt', 'W');
+-- The KPI and its category (in term of Indicators Category- Chỉ số và Phân nhóm)
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN1.01','Tình hình công khai thông tin đô thị cho người dân',1,'Đánh giá mức độ công khai thông tin, sự cầu thị của CQĐT','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN2.01','Việc công khai kết quả phản hồi của người dân về hoạt động của CQDT',1,'Đánh giá việc thực hiện công khai thông tin phản hồi của người dân về hoạt động của CQĐT','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN3.01','Mức đồ thường xuyên đánh giá sự hài lòng của người dân',1,'Đánh giá mức độ quan tâm đến sự hài lòng của người dân','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N2.PN1.01','Sự sẵn sàng của hạ tầng giúp người dân tham gia phản hồi thông tin cho CQĐT',1,'Đánh giá mức độ sẵn sàng của hạ tầng ICT cho phép người dân tham gia đóng góp ý kiến cho công tác quản lý đô thị','District', 1);
+
+--INSERT INTO categorykpi(kpi_id, category_id) VALUES (1,1);
+--INSERT INTO categorykpi(kpi_id, category_id) VALUES (2,2);
+--INSERT INTO categorykpi(kpi_id, category_id) VALUES (3,3);
+--INSERT INTO categorykpi(kpi_id, category_id) VALUES (4,4);
 
 
---INSERT INTO kpi(name,category_id) VALUES ('Test 1');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

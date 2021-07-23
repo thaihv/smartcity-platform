@@ -35,7 +35,7 @@ public class Category {
     private Classification classification;
     
     
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category")    
     Set<CategoryKpi> hasKpis;
 
 }

@@ -38,9 +38,7 @@ public class Unit {
 
 	private String symbol; // symbol of the unit e.g. W, ºC, Wh
 
-	@OneToMany(mappedBy = "unit", cascade = CascadeType.MERGE)
-    @EqualsAndHashCode.Exclude 
-    @ToString.Exclude 
+	@OneToMany(mappedBy = "unit")
 	private Collection<Kpi> kpis;
 
 }

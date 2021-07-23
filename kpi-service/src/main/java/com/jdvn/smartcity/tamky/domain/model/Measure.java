@@ -31,8 +31,6 @@ public class Measure {
 
 	@ManyToOne
 	@JoinColumn(name = "kpiId")
-	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
 	private Kpi kpi;
 
 	@NonNull
@@ -45,6 +43,10 @@ public class Measure {
 	// EndDate, or the specific value of the KPI in that period of time
 	private float value;
 
+	private String methodDescription;
+	
+	private String issuer;
+	
 	// The estimated value this measure should have, according to some simulations
 	private float referenceValue;
 
