@@ -16,21 +16,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.ToString;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "kpi") // This table stores the general information for each KPI
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Kpi {
 
 	@Id
@@ -38,29 +36,30 @@ public class Kpi {
 	private Long id;
 
 	private String code; // Identifier in a human readable form
-	
+
 	@NonNull
-	private String name; // Descriptive human readable name of the KPI	
+	private String name; // Descriptive human readable name of the KPI
 
 	private int frequencyInDays; // How often the KPI is calculated in days
 
-	private String description; 
-	
+	private String description;
+
 	@ManyToOne
 	@JoinColumn(name = "unitId")
 	@JsonBackReference
 	private Unit unit; // Reference to the unit of the measurements of the KPI e.g. KWh/m²
 
-	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building, District,...
+	@Column(name = "structural_element", length = 40, columnDefinition = "varchar(40) default 'District'") // Building,
+																											// District,...
 	private String structuralElement; // The structural element that the KPI is calculated for
 
-	@OneToMany(mappedBy = "kpi")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "kpi", cascade = CascadeType.ALL)
 	private Collection<Measure> measures;
 
 	@OneToMany(mappedBy = "kpi")
 	Set<CategoryKpi> belongCategory;
-	
-	@OneToMany(mappedBy = "kpi")
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "kpi", cascade = CascadeType.ALL)
 	Set<ReportKpi> belongReport;
 
 }

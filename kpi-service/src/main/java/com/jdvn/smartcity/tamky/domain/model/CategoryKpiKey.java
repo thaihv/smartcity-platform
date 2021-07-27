@@ -6,22 +6,23 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Embeddable
 @EqualsAndHashCode
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CategoryKpiKey implements Serializable {
 
-
 	@Column(name = "kpi_id")
-    Long kpiId;
+	Long kpiId;
 
-    @Column(name = "category_id")
-    Long categoryId;
+	@Column(name = "category_id")
+	Long categoryId;
 
 }

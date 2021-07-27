@@ -6,13 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@Getter 
+@Setter
 @Embeddable
 @EqualsAndHashCode
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReportKpiKey implements Serializable {

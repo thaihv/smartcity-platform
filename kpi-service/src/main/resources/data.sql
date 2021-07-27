@@ -48,14 +48,18 @@ INSERT INTO unit(name, symbol) VALUES ('Watt', 'W');
 -- The KPI and its category (in term of Indicators Category- Chỉ số và Phân nhóm)
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN1.01','Tình hình công khai thông tin đô thị cho người dân',1,'Đánh giá mức độ công khai thông tin, sự cầu thị của CQĐT','District', 1);
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN2.01','Việc công khai kết quả phản hồi của người dân về hoạt động của CQDT',1,'Đánh giá việc thực hiện công khai thông tin phản hồi của người dân về hoạt động của CQĐT','District', 1);
-INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN3.01','Mức đồ thường xuyên đánh giá sự hài lòng của người dân',1,'Đánh giá mức độ quan tâm đến sự hài lòng của người dân','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN3.01','Mức độ thường xuyên đánh giá sự hài lòng của người dân',1,'Đánh giá mức độ quan tâm đến sự hài lòng của người dân','District', 1);
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N2.PN1.01','Sự sẵn sàng của hạ tầng giúp người dân tham gia phản hồi thông tin cho CQĐT',1,'Đánh giá mức độ sẵn sàng của hạ tầng ICT cho phép người dân tham gia đóng góp ý kiến cho công tác quản lý đô thị','District', 1);
 
---INSERT INTO categorykpi(kpi_id, category_id) VALUES (1,1);
---INSERT INTO categorykpi(kpi_id, category_id) VALUES (2,2);
---INSERT INTO categorykpi(kpi_id, category_id) VALUES (3,3);
---INSERT INTO categorykpi(kpi_id, category_id) VALUES (4,4);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N3.PN1.01','Đánh giá chung của người dân về sự tiến bộ của đô thị',365,'Đánh giá sự hài lòng của người dân về sự tiến bộ của đô thị nói chung, không xét vấn đề cụ thể','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN1.01','Tình hình sử dụng một mã số điện tử trong các dịch vụ hành chính công',90,'Đánh giá việc thực hiện cải cách hành chính của đô thị','District', 1);
 
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (1,1);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (2,2);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (3,3);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (4,4);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (5,5);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (6,6);
 
 
 
