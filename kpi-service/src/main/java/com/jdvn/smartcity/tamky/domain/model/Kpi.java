@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -54,12 +55,15 @@ public class Kpi {
 	private String structuralElement; // The structural element that the KPI is calculated for
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "kpi", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Collection<Measure> measures;
 
 	@OneToMany(mappedBy = "kpi")
+	@JsonIgnore
 	Set<CategoryKpi> belongCategory;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "kpi", cascade = CascadeType.ALL)
+	@JsonIgnore
 	Set<ReportKpi> belongReport;
 
 }

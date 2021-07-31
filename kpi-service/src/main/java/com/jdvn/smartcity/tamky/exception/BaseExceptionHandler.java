@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-
+import org.springframework.security.access.AccessDeniedException;
 import lombok.Data;
 
 /**
@@ -35,6 +35,14 @@ public abstract class BaseExceptionHandler {
         return new ErrorResponse("INTERNAL_SERVER_ERROR", "An unexpected internal server error occurred");
     }
 
+    
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseBody
+    public ErrorResponse whenAccessDenied(final Throwable ex) {
+        log.error("Unexpected error", ex);
+        return new ErrorResponse("FORBIDDEN", "Access is denied");
+    }    
     /**
      * DTO containing error information.
      */

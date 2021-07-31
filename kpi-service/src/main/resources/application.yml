@@ -6,6 +6,16 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+keycloak:
+  realm: Smartcity
+  auth-server-url: http://tamky.xyz:8080/auth
+  ssl-required: external
+  resource: kpi-service
+  credentials.secret: 4d7eeda5-c378-42d4-9fe6-a58376327165
+  use-resource-role-mappings: true
+  bearer-only: true
+  
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
