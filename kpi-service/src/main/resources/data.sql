@@ -50,9 +50,19 @@ INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, u
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN2.01','Việc công khai kết quả phản hồi của người dân về hoạt động của CQDT',1,'Đánh giá việc thực hiện công khai thông tin phản hồi của người dân về hoạt động của CQĐT','District', 1);
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N1.PN3.01','Mức độ thường xuyên đánh giá sự hài lòng của người dân',1,'Đánh giá mức độ quan tâm đến sự hài lòng của người dân','District', 1);
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N2.PN1.01','Sự sẵn sàng của hạ tầng giúp người dân tham gia phản hồi thông tin cho CQĐT',1,'Đánh giá mức độ sẵn sàng của hạ tầng ICT cho phép người dân tham gia đóng góp ý kiến cho công tác quản lý đô thị','District', 1);
-
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L1.N3.PN1.01','Đánh giá chung của người dân về sự tiến bộ của đô thị',365,'Đánh giá sự hài lòng của người dân về sự tiến bộ của đô thị nói chung, không xét vấn đề cụ thể','District', 1);
+
 INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN1.01','Tình hình sử dụng một mã số điện tử trong các dịch vụ hành chính công',90,'Đánh giá việc thực hiện cải cách hành chính của đô thị','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN1.02','Mức độ ứng dụng ICT trong cung cấp dịch vụ công trực tuyến',90,'Đánh giá việc thực hiện cải cách hành chính của đô thị','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN1.03','Hỗ trợ thực hiện thủ tục hành chính ứng dụng ICT',90,'Đánh giá việc thực hiện cải cách hành chính của đô thị','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN2.01','Tình hình cung cấp thông tin giao thông thời gian thực',90,'Đánh giá sự ứng dụng ICT phục vụ giao thông và chất lượng giao thông công cộng','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN2.02','Tình hình ứng dụng ICT trong các bãi đỗ xe',90,'Đánh giá sự ứng dụng ICT và chất lượng dịch vụ đỗ xe của CQĐT','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN2.03','Tình hình ứng dụng ICT hỗ trợ giám sát chất lượng dịch vụ giao thông công cộng',90,'Đánh giá sự ứng dụng ICT để giám sát chất lượng dịch vụ giao thông công cộng trên địa bàn đô thị','District', 1);
+
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN3.01','Tình hình sử dụng bệnh án điện tử',120,'Đánh giá sự ứng dụng ICT vào việc chăm sóc sức khỏe và hiệu quả dịch vụ y tế','District', 1);
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN3.02','Tình hình ứng dụng ICT trong đăng ký khám chữa bệnh',120,'Đánh giá sự ứng dụng ICT vào việc chăm sóc sức khỏe và hiệu quả dịch vụ y tế','District', 1);
+
+INSERT INTO kpi(code, name,frequency_in_days, description, structural_element, unit_id) VALUES ('L2.N1.PN4.01','Tình hình công khai thông tin nguồn gốc hàng hóa sản phẩm',120,'Đánh giá sự ứng dụng ICT vào việc đảm bảo an toàn vệ sinh thực phẩm','District', 1);
 
 INSERT INTO category_kpi(kpi_id, category_id) VALUES (1,1);
 INSERT INTO category_kpi(kpi_id, category_id) VALUES (2,2);
@@ -60,13 +70,14 @@ INSERT INTO category_kpi(kpi_id, category_id) VALUES (3,3);
 INSERT INTO category_kpi(kpi_id, category_id) VALUES (4,4);
 INSERT INTO category_kpi(kpi_id, category_id) VALUES (5,5);
 INSERT INTO category_kpi(kpi_id, category_id) VALUES (6,6);
-
-
-
-
-
-
-
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (7,7);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (8,8);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (9,9);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (10,10);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (11,11);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (12,12);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (13,13);
+INSERT INTO category_kpi(kpi_id, category_id) VALUES (14,14);
 
 
 
