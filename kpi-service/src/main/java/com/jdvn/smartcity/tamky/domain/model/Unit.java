@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ public class Unit {
 	private String symbol; // symbol of the unit e.g. W, ºC, Wh
 
 	@OneToMany(mappedBy = "unit")
+	@JsonIgnore
 	private Collection<Kpi> kpis;
 
 }
