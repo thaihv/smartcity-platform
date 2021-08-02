@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +35,12 @@ public class KpiController {
 
 	@GetMapping("/")
 	@RolesAllowed({"ADMIN","USER"})
-	@ResponseBody
 	public String Greetings(@AuthenticationPrincipal Jwt jwt) {
 		log.info("Get Principal");
-		return String.format("Hello");
+		return "Hello";
 	}
 	@RolesAllowed({"ADMIN","USER"})
-	@GetMapping("/kpi-all")
+	@GetMapping(path="/kpi-all", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public CollectionModel<Kpi> getAllKpis() {
 		List<Kpi> kpis = kpiRepository.findAll();
