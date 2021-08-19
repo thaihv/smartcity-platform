@@ -1,0 +1,27 @@
+version: '3.3'
+
+services:
+  mongo-db:
+    image: mongo:4.0.5
+    hostname: mongo-db
+    container_name: mongo-db
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    command: --bind_ip_all --smallfiles
+    volumes:
+      - ./mongo-db:/data
+  mongoclient:
+    image: mongoclient/mongoclient:2.2.0
+    container_name: mongoclient
+    hostname: mongoclient
+    depends_on:
+      - mongo-db
+    ports:
+      - 3000:3000
+    environment:
+      MONGO_URL: "mongodb://mongo-db:27017"
+      PORT: 3000
+    expose:
+      - "3000"
