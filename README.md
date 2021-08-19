@@ -7,7 +7,7 @@ It includes:
    Spring Boot 2
  - A KPI service for creating and storing smart city Key Performance Indicators:
    Hibernate
-   H2 database
+   PostgresSQL database
    Springboot
  - Micro-services using Sping Cloud for Discovery and Registrer and API gateway, Circuit breaker
- - Okta security framework for securing identity,Single Sign On for Users, Devices, Applications and Services    
+ - Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services    
