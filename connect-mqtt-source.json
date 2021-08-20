@@ -1,13 +1,13 @@
 {
-    "name": "mqtt-source",
+    "name": "mqtt-source-temperature",
     "config": {
         "connector.class": "io.confluent.connect.mqtt.MqttSourceConnector",
         "tasks.max": 1,
         "mqtt.server.uri": "tcp://mosquitto:1883",
-        "mqtt.topics": "mqtt-tamky-temperature",
-        "kafka.topic": "tamky-temperature",
+        "mqtt.topics": "TrackTemperature",
+        "kafka.topic": "TrackTemperature",
         "value.converter": "org.apache.kafka.connect.converters.ByteArrayConverter",
-        "confluent.topic.bootstrap.servers": "kafka:9092",
+        "confluent.topic.bootstrap.servers": "www.tamky.xyz:9092",
         "confluent.topic.replication.factor": 1
     }
 }

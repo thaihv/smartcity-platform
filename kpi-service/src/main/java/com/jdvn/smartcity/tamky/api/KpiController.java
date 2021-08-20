@@ -35,7 +35,7 @@ public class KpiController {
 
 	@GetMapping("/")
 	@RolesAllowed({"ADMIN","USER"})
-	public String Greetings(@AuthenticationPrincipal Jwt jwt) {
+	public String Greetings() {
 		log.info("Get Principal");
 		return "Hello";
 	}
