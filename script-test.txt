@@ -1,0 +1,8 @@
+# Setup MQTT Connector via HTTP
+curl -d @./connect-mqtt-source.json -H "Content-Type: application/json" -X POST http://localhost:8083/connectors
+
+# MQTT test producer
+docker run -it --rm --name mqtt-publisher --network root_default efrecon/mqtt-client pub -h mosquitto  -t "TrackTemperature" -m "{\"deviceId\":\"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14\",\"unixTimestamp\":1563142601,\"temperatureInFahrenheit\":\"98\"}" 
+
+# MQTT test consumer
+docker run --rm --network root_default confluentinc/cp-kafka:5.1.0 kafka-console-consumer --bootstrap-server www.tamky.xyz:9092 --topic TrackTemperature --from-beginning
