@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,18 +52,18 @@ public class KpiController {
 		return kpiRepository.findById(id);
 	}
 	@RolesAllowed({"ADMIN"})
-	@GetMapping("/update")
+	@PostMapping("/update")
 	public Kpi update(@RequestBody Kpi kpi) {
 		return kpiRepository.saveAndFlush(kpi);
 	}	
 	@RolesAllowed({"ADMIN"})
-	@GetMapping("/create")
+	@PostMapping("/create")
 	public List<Kpi> create(@RequestBody Kpi kpi) {
 		kpiRepository.saveAndFlush(kpi);
 		return kpiRepository.findAll();
 	}		
 	@RolesAllowed({"ADMIN"})
-	@GetMapping("/delete/{id}")
+	@PostMapping("/delete/{id}")
 	public void delete(@PathVariable Long id) {
 		kpiRepository.deleteById(id);
 	}		

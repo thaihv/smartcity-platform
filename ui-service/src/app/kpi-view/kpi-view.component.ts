@@ -73,9 +73,9 @@ export class KpiViewComponent implements OnInit {
     this.ngxSpinnerService.show();
 
     console.info(this.kpiForm.value);
-    let employee=this.kpiForm.value;
+    let kpi=this.kpiForm.value;
 
-    this.kpiService.updateKpi('http://localhost:8090/kpi/update', employee).subscribe(
+    this.kpiService.updateKpi('http://localhost:8090/kpi/update', kpi).subscribe(
       data=>
       {
         this.kpi=data;
