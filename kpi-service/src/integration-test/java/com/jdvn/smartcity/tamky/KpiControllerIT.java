@@ -40,7 +40,7 @@ public class KpiControllerIT {
     @WithMockUser
 	@Test
 	public void testSayHi() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/kpi-all"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/list"))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andDo(MockMvcResultHandlers.print());

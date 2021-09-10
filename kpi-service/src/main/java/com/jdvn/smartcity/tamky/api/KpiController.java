@@ -1,19 +1,18 @@
 package com.jdvn.smartcity.tamky.api;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.security.RolesAllowed;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +22,7 @@ import com.jdvn.smartcity.tamky.domain.repository.KpiRepository;
 import com.jdvn.smartcity.tamky.domain.repository.UnitRepository;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class KpiController {
 
 	@Autowired
@@ -40,33 +40,41 @@ public class KpiController {
 		return "Hello";
 	}
 	@RolesAllowed({"ADMIN","USER"})
-	@GetMapping(path="/kpi-all", produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path="/list", produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public CollectionModel<Kpi> getAllKpis() {
-		List<Kpi> kpis = kpiRepository.findAll();
-		CollectionModel<Kpi> result = CollectionModel.of(kpis);
-		return result;
+	public List<Kpi> getAllKpis() {
+		return kpiRepository.findAll();
 	}
 	@RolesAllowed({"ADMIN","USER"})
-	@GetMapping("/kpi-all/{kpiId}")
-	public CollectionModel<Kpi> getKpiById(@PathVariable Long kpiId) {
-
-		CollectionModel<Kpi> result = CollectionModel.of(Arrays.asList(kpiRepository.findById(kpiId).get()));
-		return result;
+	@GetMapping("/find/{id}")
+	public Optional<Kpi> findKpiById(@PathVariable Long id) {
+		return kpiRepository.findById(id);
 	}
-	@RolesAllowed("ADMIN")
-	@GetMapping("/unit-all")
-	public CollectionModel<Unit> getKpiUnits() {
-		List<Unit> units = unitRepository.findAll();
-		CollectionModel<Unit> result = CollectionModel.of(units);
-		return result;
+	@RolesAllowed({"ADMIN"})
+	@GetMapping("/update")
+	public Kpi update(@RequestBody Kpi kpi) {
+		return kpiRepository.saveAndFlush(kpi);
+	}	
+	@RolesAllowed({"ADMIN"})
+	@GetMapping("/create")
+	public List<Kpi> create(@RequestBody Kpi kpi) {
+		kpiRepository.saveAndFlush(kpi);
+		return kpiRepository.findAll();
+	}		
+	@RolesAllowed({"ADMIN"})
+	@GetMapping("/delete/{id}")
+	public void delete(@PathVariable Long id) {
+		kpiRepository.deleteById(id);
+	}		
+	@RolesAllowed({"ADMIN","USER"})
+	@GetMapping("/unit/list")
+	public List<Unit> getKpiUnits() {
+		return unitRepository.findAll();
 	}
 	
-	@RolesAllowed("ADMIN")
-	@GetMapping("/unit-all/{unitId}")
-	public CollectionModel<Unit> getUnitByUnitId(@PathVariable Long unitId) {
-		Unit unit = unitRepository.findById(unitId).get();
-		CollectionModel<Unit> result = CollectionModel.of(Arrays.asList(unit));
-		return result;
+	@RolesAllowed({"ADMIN","USER"})
+	@GetMapping("/unit/find/{id}")
+	public Optional<Unit> getUnitByUnitId(@PathVariable Long id) {
+		return unitRepository.findById(id);
 	}
 }

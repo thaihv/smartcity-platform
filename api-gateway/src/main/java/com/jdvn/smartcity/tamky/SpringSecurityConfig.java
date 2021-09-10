@@ -17,6 +17,8 @@ public class SpringSecurityConfig {
                 .authorizeExchange()
                 .anyExchange().authenticated()
                 .and()
+                .cors()
+                .and()
                 .oauth2Login()
                 .and()
                 .oauth2ResourceServer()

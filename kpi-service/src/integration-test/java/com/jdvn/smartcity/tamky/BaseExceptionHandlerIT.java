@@ -53,7 +53,7 @@ public class BaseExceptionHandlerIT {
 
         doThrow(new RuntimeException("Something bad")).when(kpiRepositoryMock).findOne(any());
 
-        mockMvc.perform(post("/kpi-all")
+        mockMvc.perform(post("/list")
         		.contentType(MediaType.APPLICATION_JSON))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError())
