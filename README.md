@@ -11,4 +11,4 @@ It includes:
    Springboot
  - Micro-services using Sping Cloud for Discovery and Registrer and API gateway, Circuit breaker
  - Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services  
- - A UI microservice to illustrate consuming APIs from above microservices   
+ - A UI microservice to illustrate consuming APIs from above microservices using Angular 11   
