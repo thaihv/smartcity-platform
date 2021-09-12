@@ -10,7 +10,7 @@
                 <th scope="col">Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Frequency In Days</th>
+                <th scope="col">Updated(days)</th>
             </tr>
         </thead>
         <tbody *ngFor="let kpi of kpis">
@@ -31,12 +31,6 @@
     <div class="container container-fluid">
         <h5>
             <button (click)="createKpi()" class="btn btn-primary"> Create</button>
-        </h5>
-    </div>
-
-    <div class="container container-fluid">
-        <h5>
-            <button [routerLink]="['/']" class="btn btn-primary">Back</button>
         </h5>
     </div>
 </div>

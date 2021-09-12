@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {KpiListComponent} from "./kpi-list/kpi-list.component";
 import {KpiViewComponent} from "./kpi-view/kpi-view.component";
+import { HomeComponent } from './home/home.component';
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import { LineChartComponent } from './realtime-charts/line-chart/line-chart.component';
 import { BarChartComponent } from './realtime-charts/bar-chart/bar-chart.component';
@@ -12,7 +13,8 @@ import { BubbleChartComponent } from './realtime-charts/bubble-chart/bubble-char
 import { RealtimeChartsComponent } from './realtime-charts/realtime-charts.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/' },
+  { path: '', pathMatch: 'full', redirectTo: 'smarttamky' },
+  { path: 'smarttamky', component: HomeComponent},
   { path: 'kpi/list', component: KpiListComponent},  
   { path: 'kpi/:id', component: KpiViewComponent},
   { path: 'userinfo', component: UserProfileComponent},
