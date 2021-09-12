@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'userinfo', component: UserProfileComponent},
   { path: 'charts', component: RealtimeChartsComponent,
     children:[
+      {path: '', pathMatch: 'full', redirectTo: 'line-chart'},
       { path: 'line-chart', component: LineChartComponent },
       { path: 'bar-chart', component: BarChartComponent },
       { path: 'doughnut-chart', component: DoughnutChartComponent },

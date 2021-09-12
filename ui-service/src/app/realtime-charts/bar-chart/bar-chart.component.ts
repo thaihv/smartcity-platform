@@ -11,13 +11,13 @@ export class BarChartComponent {
   barChartOptions: ChartOptions = {
     responsive: true,
   };
-  barChartLabels: Label[] = ['Apple', 'Banana', 'Kiwifruit', 'Blueberry', 'Orange', 'Grapes'];
+  barChartLabels: Label[] = ['An Mỹ', 'An Sơn', 'Hòa Hương', 'Tân Thạnh', 'Tam Lãnh', 'Tam Vinh'];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60, 70, 46, 33], label: 'Best Fruits' }
+    { data: [45, 37, 60, 70, 46, 33], label: 'Population Volume' }
   ];
 
 }
