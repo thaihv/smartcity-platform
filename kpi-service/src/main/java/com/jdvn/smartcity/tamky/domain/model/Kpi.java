@@ -58,7 +58,7 @@ public class Kpi {
 	@JsonIgnore
 	private Collection<Measure> measures;
 
-	@OneToMany(mappedBy = "kpi")
+	@OneToMany(mappedBy = "kpi",cascade = CascadeType.ALL)
 	@JsonIgnore
 	Set<CategoryKpi> belongCategory;
 

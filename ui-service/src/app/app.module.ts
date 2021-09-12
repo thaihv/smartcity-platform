@@ -10,6 +10,15 @@ import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { KpiListComponent } from './kpi-list/kpi-list.component';
 import { KpiViewComponent } from './kpi-view/kpi-view.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ChartsModule } from 'ng2-charts';
+import { RealtimeChartsComponent } from './realtime-charts/realtime-charts.component';
+import { BarChartComponent } from './realtime-charts/bar-chart/bar-chart.component';
+import { BubbleChartComponent } from './realtime-charts/bubble-chart/bubble-chart.component';
+import { DoughnutChartComponent } from './realtime-charts/doughnut-chart/doughnut-chart.component';
+import { LineChartComponent } from './realtime-charts/line-chart/line-chart.component';
+import { PieChartComponent } from './realtime-charts/pie-chart/pie-chart.component';
+import { RadarChartComponent } from './realtime-charts/radar-chart/radar-chart.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -29,7 +38,15 @@ function initializeKeycloak(keycloak: KeycloakService) {
   declarations: [
     AppComponent,
     KpiListComponent,
-    KpiViewComponent
+    KpiViewComponent,
+    UserProfileComponent,
+    RealtimeChartsComponent,
+    BarChartComponent,
+    BubbleChartComponent,
+    DoughnutChartComponent,
+    LineChartComponent,
+    PieChartComponent,
+    RadarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +55,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
-    KeycloakAngularModule
+    KeycloakAngularModule,
+    ChartsModule
   ],
   providers: [
     {

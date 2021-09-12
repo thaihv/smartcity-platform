@@ -36,7 +36,13 @@ spring:
         jwt:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
   cloud:
-    gateway:
+    gateway: 
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+            - GET  
       routes:
         - id: kpi-service
           uri: lb://kpi-service
