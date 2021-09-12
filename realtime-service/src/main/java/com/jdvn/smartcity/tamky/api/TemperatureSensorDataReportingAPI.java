@@ -3,6 +3,7 @@ package com.jdvn.smartcity.tamky.api;
 import com.jdvn.smartcity.tamky.dto.response.TemperatureSensorDataResponse;
 import com.jdvn.smartcity.tamky.service.TemperatureSensorDataReportingService;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This class provide API endpoint to processed report of temperature sensor data.
  */
 @RestController
+@CrossOrigin
 public class TemperatureSensorDataReportingAPI {
 
     private final TemperatureSensorDataReportingService reportingService;

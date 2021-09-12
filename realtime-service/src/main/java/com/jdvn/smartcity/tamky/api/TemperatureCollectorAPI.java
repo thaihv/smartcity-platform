@@ -6,6 +6,7 @@ import com.jdvn.smartcity.tamky.service.SensorDataCollectorService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.List;
  * This class provide API endpoints to collect temperature data from sensors.
  */
 @RestController
+@CrossOrigin
 public class TemperatureCollectorAPI {
 
     private final SensorDataCollectorService temperatureSensorDataCollectorService;
