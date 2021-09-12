@@ -37,13 +37,13 @@ export class BubbleChartComponent {
         { x: 36, y: 12, r: 33 },
         { x: 10, y: 18, r: 18 },
       ],
-      label: 'Investment Equities',
+      label: 'Power Consumption'
     },
   ];
   public bubbleChartColors: Color[] = [
     {
       backgroundColor: [
-        'red',
+        'yellow',
         'green',
         'blue',
         'purple',
