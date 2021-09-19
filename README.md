@@ -46,26 +46,18 @@
      > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1563142100&endTime=1757733151 \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
-     > {
-   "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",
-   "data":[
+     > {\
+   "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",\
+   "data":[\
+      {\
+         "unixTimestamp":1563142700,\
+         "temperatureInFahrenheit":20.0\
+      },\
       {
-         "unixTimestamp":1563142700,
-         "temperatureInFahrenheit":20.0
-      },
-      {
-         "unixTimestamp":1563142701,
-         "temperatureInFahrenheit":21.0
-      },
-      {
-         "unixTimestamp":1563142702,
-         "temperatureInFahrenheit":22.0
-      },
-      {
-         "unixTimestamp":1563142795,
-         "temperatureInFahrenheit":24.0
-      }
-   ]
+         "unixTimestamp":1563142701,\
+         "temperatureInFahrenheit":21.0\
+      }\
+   ]\
 }
 - Go to ./kpi-service/
    * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
