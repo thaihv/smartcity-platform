@@ -49,4 +49,4 @@
    * Open (http://localhost:4200) to view UI example of consuming microservices.
 - Go to ./api-gateway/ 
    * Run $ mvn spring-boot:run 
-   * Open (http://localhost:8080) and try calls to microservices if things run well.
+   * Open (http://localhost:8080) and try calls to microservices if things run well. This is a main entry point for this boilerplate code
