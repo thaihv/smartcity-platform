@@ -43,18 +43,18 @@
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
    * To test this microservice use a command curl to send a HTTP get request to get sample temperature data points from database
-     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1563142100&endTime=1757733151 \
+     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042 \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
      > {\
    "deviceId":"da153676-b1ba-4225-b785-a86361165890",\
    "data":[\
        &nbsp;&nbsp; {\
-          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142100,\
+          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1632044000,\
           &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":76.0\
        &nbsp;&nbsp; },\
        &nbsp;&nbsp; {\
-          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142101,\
+          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1632044001,\
           &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":98.0\
       &nbsp;&nbsp;  }\
    &nbsp;]\
