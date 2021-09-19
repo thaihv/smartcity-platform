@@ -47,7 +47,7 @@
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
      > {\
-   "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",\
+   "deviceId":"da153676-b1ba-4225-b785-a86361165890",\
    "data":[\
        &nbsp;&nbsp; {\
           &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142100,\
