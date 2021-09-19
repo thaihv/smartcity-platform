@@ -1,4 +1,4 @@
-# Smartcity Platform for Tamky city
+# A Smartcity Platform Using Microservices
 __A boilerplate code  for smartcity-platform.__ 
 It includes:
  1. A real time service for archiving data from sensor:
