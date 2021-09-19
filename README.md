@@ -37,8 +37,11 @@
 #### Run
 - Go to ./discovery-service/ 
    * run $ mvn spring-boot:run, open (http://localhost:8761) to see if run successfully
-- Go to ./api-gateway/, run $ mvn spring-boot:run
-- Go to ./realtime-service/, run $ mvn spring-boot:run 
-- Go to ./kpi-service/, run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
-- Go to ./ui-service/, run $ ng serve --open
-- Open (http://localhost:8080) and try calls to microservices if things run well.
+- Go to ./api-gateway/ 
+   * run $ mvn spring-boot:run
+- Go to ./realtime-service/
+   * run $ mvn spring-boot:run, open (http://localhost:8091) to see if run successfully 
+- Go to ./kpi-service/
+   * run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar, open (http://localhost:8090) to see if run successfully 
+- Go to ./ui-service/
+   * run $ ng serve --open , open (http://localhost:8080) and try calls to microservices if things run well.
