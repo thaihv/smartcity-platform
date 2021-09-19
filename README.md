@@ -25,8 +25,10 @@ __A boilerplate code  for smartcity-platform using for Tamky, Quang Nam.__ **It 
 - Docker Compose (1.23.2)
 - Nodejs 14+
 ## How to run
-### Run Keycloak, Kafka, Mosquitto, influxDB image in Docker
+#### Run Keycloak image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
+- Access to http://{your_keycloakserver:8080/auth/, login with username/password defined in __keycloak-postgres-compose.yml__ file and click Manage/Import and choose __keycloak-data-export.json__ file to import data settings for all clients (ui-service, kpi-service, realtime-service, api-gateway)  
+#### Run Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
 
 
