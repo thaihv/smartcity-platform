@@ -1,5 +1,5 @@
 # A Smartcity Platform Using Microservices
-__A boilerplate code  for smartcity-platform using for Tamky, Quang Nam.__ **It includes:**
+**A boilerplate code  for smartcity-platform using for Tamky, Quang Nam. It includes:**
  1. A real time service for archiving data from sensors (MQTT) or applications (HTTP).The techstack is used:
     * Kafka
     * Mosquitto
@@ -27,7 +27,7 @@ __A boilerplate code  for smartcity-platform using for Tamky, Quang Nam.__ **It 
 ## How to run
 #### Run and setup Keycloak image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
-- Access to http://{your_keycloakserver}:8080/auth/ !, login with username/password defined in __keycloak-postgres-compose.yml__ file and click Manage/Import and choose __keycloak-data-export.json__ file to import data settings for all clients (ui-service, kpi-service, realtime-service, api-gateway)
+- Access to ***http://{your_keycloakserver}:8080/auth/***, login with username/password defined in *keycloak-postgres-compose.yml* file and click Manage/Import and choose *keycloak-data-export.json* file to import data settings for all clients (ui-service, kpi-service, realtime-service, api-gateway)
 #### Run Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
 
