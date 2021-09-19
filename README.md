@@ -25,6 +25,7 @@
 - Docker Compose (1.23.2)
 - Nodejs 14+
 ## How to run
+These docker compose files should be run and installed in a seperate server or an instance cloud of your development infrastructure 
 #### Run and setup Keycloak image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
 - Access to ***http://{your_keycloakserver}:8080/auth/***, login with username/password is defined in *keycloak-postgres-compose.yml* file (admin/Pa55w0rd) and click Manage/Import and choose *keycloak-data-export.json* file to import data settings for all clients (ui-service, kpi-service, realtime-service, api-gateway)
@@ -32,7 +33,7 @@
 #### Run and setup Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
 - In case you want to test send/receive a message using MQTT protocal, install mqtt-connector (already have done in docker compose file) and configure it via http:
-   * curl -d @./*connect-mqtt-source.json* -H "Content-Type: application/json" -X POST http://localhost:8083/connectors 
+   * curl -d @./*connect-mqtt-source.json* -H "Content-Type: application/json" -X POST http://{your_mqttserver}:8083/connectors 
 #### Build
 - Go to ./smartcity-platform folder, run $ mvn clean compile install
 - For ui-service, this is a Angular app, you have to run it with Nodejs. Go to ./ui-service folder, run  $ npm install
