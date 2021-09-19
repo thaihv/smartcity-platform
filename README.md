@@ -1,19 +1,21 @@
 # A Smartcity Platform Using Microservices
-__A boilerplate code  for smartcity-platform.__ 
-It includes:
+__A boilerplate code  for smartcity-platform.__ **It includes:**
  1. A real time service for archiving data from sensor:
     * Kafka
     * Influxdb
     * Spring Boot 2
  1. A KPI service for creating and storing smart city Key Performance Indicators:
     * Hibernate
-    * PostgresSQL database
+    * PostgresSQL
     * Spring Boot 2
  1. Microservices using Sping Cloud for Discovery and Registrer
     * API gateway
     * Eureka
  1. Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services  
- 1. A UI microservice to illustrate consuming APIs from above microservices using Angular 12   
+ 1. A UI microservice to illustrate consuming APIs from above microservices
+    * Angular 12
+    * keycloak-js
+    * chart.js   
  
 ## Prerequisite
 - JDK 1.8 
