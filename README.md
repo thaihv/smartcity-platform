@@ -24,7 +24,8 @@ __A boilerplate code  for smartcity-platform using for Tamky, Quang Nam.__ **It 
 - Docker (18.09.2)
 - Docker Compose (1.23.2)
 - Nodejs 14+
-Run Keycloak, Kafka, influxDB image in Docker
+## How to run
+### Run Keycloak, Kafka, Mosquitto, influxDB image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
 
