@@ -1,5 +1,5 @@
-"# smartcity-platform" 
-A boilerplate code  for smartcity-platform. 
+# smartcity-platform
+__A boilerplate code  for smartcity-platform.__ 
 It includes:
  1. A real time service for archiving data from sensor:
    Kafka
