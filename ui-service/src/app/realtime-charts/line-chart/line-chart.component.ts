@@ -55,7 +55,7 @@ export class LineChartComponent implements OnInit , OnDestroy {
     this.ngxSpinnerService.show();
     
     this.subscription = timer(0, 5000).pipe(
-      switchMap(() => this.realtimeService.getTemperatures('http://localhost:8091/realtime/temperatures?startTime=1563142100&endTime=1757733151'))).subscribe(      
+      switchMap(() => this.realtimeService.getTemperatures('http://localhost:8080/realtime/temperatures?startTime=1563142100&endTime=1757733151'))).subscribe(      
         data=>
         {
           for(var key in data) {
@@ -66,7 +66,6 @@ export class LineChartComponent implements OnInit , OnDestroy {
 
           }        
           const object = Object.assign({}, ...this.temperatures);  
-
           this.X = [];
           this.Y = [];
           for (let i = 0; i < Object.keys(object).length; i++) {     

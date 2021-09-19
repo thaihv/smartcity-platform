@@ -2,9 +2,10 @@ logging:
   level:
     root: WARN
     org.springframework.web: INFO
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
-
 server:
   port: 8080
 keycloak-client:
@@ -40,9 +41,14 @@ spring:
       globalcors:
         corsConfigurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
+            allowedOrigins: "*"
+            allowedHeaders: "*"
             allowedMethods:
-            - GET  
+            - GET
+            - POST
+            - DELETE
+            - PUT
+            - PATCH
       routes:
         - id: kpi-service
           uri: lb://kpi-service
@@ -50,7 +56,7 @@ spring:
             - Path=/kpi/**
           filters:
             - TokenRelay=
-            - RemoveRequestHeader=Cookie
+            - RemoveRequestHeader=Cookie  
         - id: realtime-service
           uri: lb://realtime-service
           predicates:
@@ -58,14 +64,14 @@ spring:
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
-
+        - id: ui-service
+          uri: http://localhost:4200
+          predicates:
+            - Path=/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
-#zuul:
-#  routes:
-#    microservice-consumer:
-#      serviceId: microservice-consumer
-#      path: /api/consume/**

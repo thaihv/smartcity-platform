@@ -29,7 +29,7 @@ export class KpiListComponent implements OnInit {
   private getKpis()
   {
     this.ngxSpinnerService.show();
-    this.kpiService.getKpis('http://localhost:8090/kpi/list').subscribe(
+    this.kpiService.getKpis('http://localhost:8080/kpi/list').subscribe(
       data=>
       {
         this.kpis=data;
@@ -38,6 +38,7 @@ export class KpiListComponent implements OnInit {
       error1 =>
       {
         this.ngxSpinnerService.hide();
+        console.log(error1);
       }
     );
   }
@@ -58,7 +59,7 @@ export class KpiListComponent implements OnInit {
     kpi.frequencyInDays=30;
     kpi.name='Test';
 
-    this.kpiService.createKpi('http://localhost:8090/kpi/create',kpi).subscribe(
+    this.kpiService.createKpi('http://localhost:8080/kpi/create',kpi).subscribe(
       data=>
       {
         this.kpis=data;
@@ -73,7 +74,7 @@ export class KpiListComponent implements OnInit {
 
   deleteKpi(id: number)
   {
-    this.kpiService.deleteKpi('http://localhost:8090/kpi/delete/'+id).subscribe(
+    this.kpiService.deleteKpi('http://localhost:8080/kpi/delete/'+id).subscribe(
       data=>
       {
         this.getKpis();
@@ -87,7 +88,7 @@ export class KpiListComponent implements OnInit {
 
   editKpi(id: number)
   {
-    this.router.navigate(["/kpi/" + id, { editMode: true }
+    this.router.navigate(["/kpis/" + id, { editMode: true }
     ]);
   }
 

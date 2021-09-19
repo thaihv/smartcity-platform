@@ -15,8 +15,8 @@ import { RealtimeChartsComponent } from './realtime-charts/realtime-charts.compo
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'smarttamky' },
   { path: 'smarttamky', component: HomeComponent},
-  { path: 'kpi/list', component: KpiListComponent},  
-  { path: 'kpi/:id', component: KpiViewComponent},
+  { path: 'kpis/list', component: KpiListComponent},  
+  { path: 'kpis/:id', component: KpiViewComponent},
   { path: 'userinfo', component: UserProfileComponent},
   { path: 'charts', component: RealtimeChartsComponent,
     children:[

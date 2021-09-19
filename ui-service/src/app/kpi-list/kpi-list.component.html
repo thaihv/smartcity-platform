@@ -15,7 +15,7 @@
         </thead>
         <tbody *ngFor="let kpi of kpis">
             <tr>
-                <td> <a routerLink="/kpi/{{kpi.id}}" [queryParams]="{editMode: false}">{{kpi.id}}</a></td>
+                <td> <a routerLink="/kpis/{{kpi.id}}" [queryParams]="{editMode: false}">{{kpi.id}}</a></td>
                 <td>{{kpi.code}}</td>
                 <td>{{kpi.name}}</td>
                 <td>{{kpi.description}}</td>

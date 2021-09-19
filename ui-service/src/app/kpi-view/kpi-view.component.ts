@@ -41,7 +41,7 @@ export class KpiViewComponent implements OnInit {
     let id=this.activatedRoute.snapshot.params.id;
 
     this.ngxSpinnerService.show();
-    this.kpiService.getKpiById('http://localhost:8090/kpi/find/'+id).subscribe(
+    this.kpiService.getKpiById('http://localhost:8080/kpi/find/'+id).subscribe(
       data=>
       {
         this.kpi=data;
@@ -75,7 +75,7 @@ export class KpiViewComponent implements OnInit {
     console.info(this.kpiForm.value);
     let kpi=this.kpiForm.value;
 
-    this.kpiService.updateKpi('http://localhost:8090/kpi/update', kpi).subscribe(
+    this.kpiService.updateKpi('http://localhost:8080/kpi/update', kpi).subscribe(
       data=>
       {
         this.kpi=data;
