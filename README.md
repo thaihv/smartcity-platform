@@ -35,7 +35,8 @@
 - Go to ./smartcity-platform folder, run $ mvn clean compile install
 - For ui-service, this is a Angular app, you have to run it with Nodejs. Go to ./ui-service folder, run  $ npm install
 #### Run
-- Go to ./discovery-service/, run $ mvn spring-boot:run, 
+- Go to ./discovery-service/ 
+   * run $ mvn spring-boot:run, open (http://localhost:8761) to see if run successfully
 - Go to ./api-gateway/, run $ mvn spring-boot:run
 - Go to ./realtime-service/, run $ mvn spring-boot:run 
 - Go to ./kpi-service/, run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
