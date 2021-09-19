@@ -57,7 +57,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142701,\
           &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":21.0\
       &nbsp;&nbsp;  }\
-   ]\
+   &nbsp;]\
 }
 - Go to ./kpi-service/
    * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
