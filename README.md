@@ -28,7 +28,13 @@
 #### Run and setup Keycloak image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
 - Access to ***http://{your_keycloakserver}:8080/auth/***, login with username/password defined in *keycloak-postgres-compose.yml* file and click Manage/Import and choose *keycloak-data-export.json* file to import data settings for all clients (ui-service, kpi-service, realtime-service, api-gateway)
+- Add more users, if needed
 #### Run Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
+#### Build
+- $ mvn clean compile install
+- For ui-service, this is a Angular app, you have to run it with Nodejs. Go to ./ui-service folder, run  $ npm install
+#### Run
+
 
 
