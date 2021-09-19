@@ -50,12 +50,12 @@
    "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",\
    "data":[\
        &nbsp;&nbsp; {\
-          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142700,\
-          &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":20.0\
+          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142100,\
+          &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":76.0\
        &nbsp;&nbsp; },\
        &nbsp;&nbsp; {\
-          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142701,\
-          &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":21.0\
+          &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142101,\
+          &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":98.0\
       &nbsp;&nbsp;  }\
    &nbsp;]\
 }
