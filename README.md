@@ -45,7 +45,7 @@
    * To test this microservice use a command curl to send a HTTP get request to get sample temperature data points from database
      > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1563142100&endTime=1757733151 \
   -H 'Content-Type: application/json' 
-  and response will receive if microservie run well
+   * And response if run successfully
      > {
    "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",
    "data":[
