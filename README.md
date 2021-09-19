@@ -53,7 +53,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142700,\
           &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":20.0\
        &nbsp;&nbsp; },\
-       &nbsp;&nbsp; {
+       &nbsp;&nbsp; {\
           &nbsp;&nbsp;&nbsp;&nbsp; "unixTimestamp":1563142701,\
           &nbsp;&nbsp;&nbsp;&nbsp; "temperatureInFahrenheit":21.0\
       &nbsp;&nbsp;  }\
