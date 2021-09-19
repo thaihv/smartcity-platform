@@ -36,12 +36,12 @@
 - For ui-service, this is a Angular app, you have to run it with Nodejs. Go to ./ui-service folder, run  $ npm install
 #### Run
 - Go to ./discovery-service/ 
-   * run $ mvn spring-boot:run, open (http://localhost:8761) to see if run successfully
-- Go to ./api-gateway/ 
-   * run $ mvn spring-boot:run
+   * run $ mvn spring-boot:run, open (http://localhost:8761) if run successfully, you will see list of services registered as Eureka clients
 - Go to ./realtime-service/
    * run $ mvn spring-boot:run, open (http://localhost:8091) to see if run successfully 
 - Go to ./kpi-service/
    * run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar, open (http://localhost:8090/kpi/list) to see if run successfully 
 - Go to ./ui-service/
-   * run $ ng serve --open , open (http://localhost:8080) and try calls to microservices if things run well.
+   * run $ ng serve --open , open (http://localhost:4200) to view UI example of consuming microservices.
+- Go to ./api-gateway/ 
+   * run $ mvn spring-boot:run, open (http://localhost:8080) and try calls to microservices if things run well.
