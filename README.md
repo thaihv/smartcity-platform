@@ -42,9 +42,31 @@
    * Open (http://localhost:8761) if run successfully, you will see list of services registered as Eureka clients
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
-   * To test this microservice use a command curl to send a HTTP get request to get sample temperature data point from database
+   * To test this microservice use a command curl to send a HTTP get request to get sample temperature data points from database
      > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1563142100&endTime=1757733151 \
   -H 'Content-Type: application/json' 
+  and response will receive if microservie run well
+     > {
+   "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",
+   "data":[
+      {
+         "unixTimestamp":1563142700,
+         "temperatureInFahrenheit":20.0
+      },
+      {
+         "unixTimestamp":1563142701,
+         "temperatureInFahrenheit":21.0
+      },
+      {
+         "unixTimestamp":1563142702,
+         "temperatureInFahrenheit":22.0
+      },
+      {
+         "unixTimestamp":1563142795,
+         "temperatureInFahrenheit":24.0
+      }
+   ]
+}
 - Go to ./kpi-service/
    * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
    * Open (http://localhost:8090/kpi/list) to see the list of KPI for smart city 
