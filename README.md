@@ -40,4 +40,4 @@
 - Go to ./realtime-service/, run $ mvn spring-boot:run 
 - Go to ./kpi-service/, run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
 - Go to ./ui-service/, run $ ng serve --open
-Access [http://localhost:8080] (http://localhost:8080)
+- Open (http://localhost:8080) and try calls to microservices if things run well.
