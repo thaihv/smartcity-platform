@@ -1,7 +1,7 @@
 # A Smartcity Platform Using Microservices
 __A boilerplate code  for smartcity-platform.__ **It includes:**
  1. A real time service for archiving data from sensor:
-  ######Techstack is used######
+ ###Techstack is used: ###
     * Kafka
     * Influxdb
     * Spring Boot 2
