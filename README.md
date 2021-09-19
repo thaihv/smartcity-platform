@@ -42,7 +42,7 @@
    * Open (http://localhost:8761) if run successfully, you will see list of services registered as Eureka clients
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
-   * To test this microservice use a command curl to send a HTTP get request to get sample temperature data points from database
+   * To test this microservice use a command curl (or Postman application) to send a HTTP get request to get sample temperature data points from database
      > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042 \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
