@@ -49,14 +49,14 @@
      > {\
    "deviceId":"e01a7bc8-ee40-48ba-80ee-f8acbaba5f14",\
    "data":[\
-      {\
-         "unixTimestamp":1563142700,\
-         "temperatureInFahrenheit":20.0\
-      },\
-      {
-         "unixTimestamp":1563142701,\
-         "temperatureInFahrenheit":21.0\
-      }\
+        {\
+           "unixTimestamp":1563142700,\
+           "temperatureInFahrenheit":20.0\
+        },\
+        {
+           "unixTimestamp":1563142701,\
+           "temperatureInFahrenheit":21.0\
+        }\
    ]\
 }
 - Go to ./kpi-service/
