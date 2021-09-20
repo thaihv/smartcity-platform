@@ -22,8 +22,9 @@
 - JDK 1.8 
 - Maven 3.6.x
 - Docker (18.09.2)
-- Docker Compose (1.23.2)
+- Docker Compose (1.23.2) 
 - Nodejs 14+
+
 ## How to run
 ### Install infrastructure components in Docker
 These docker compose files should be run and installed in a seperate server or an instance cloud of your development infrastructure 
@@ -33,7 +34,7 @@ These docker compose files should be run and installed in a seperate server or a
 - Add more users, if needed
 #### Run and setup Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
-- In case you want to test send/receive a message using MQTT protocal, install mqtt-connector (already have done in docker compose file) and configure it via http:
+- In case you want to test send/receive a message using MQTT protocal, install mqtt-connector image (already have done in docker compose file) then download [MQTT connector](https://www.confluent.io/hub/) from the Confluent hub and unzip all *./lib/.jar* to *./tmp/custom/jars*. Restart mqtt-connector image and configure it via http by using a curl command:
    * curl -d @./*connect-mqtt-source.json* -H "Content-Type: application/json" -X POST http://{your_mqttserver}:8083/connectors 
 
 ### Build and Run code 
@@ -47,7 +48,7 @@ These docker compose files should be run and installed in a seperate server or a
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
    * To test this microservice use a command curl (or Postman application) to send a HTTP get request to get sample temperature data points from database
-     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042 \
+     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042  \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
      > {\
