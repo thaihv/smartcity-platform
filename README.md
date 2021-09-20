@@ -48,7 +48,7 @@ These docker compose files should be run and installed in a seperate server or a
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
    * To test this microservice use a command curl (or Postman application) to send a HTTP get request to get sample temperature data points from database
-     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042 \
+     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042  \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
      > {\
