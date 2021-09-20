@@ -22,8 +22,9 @@
 - JDK 1.8 
 - Maven 3.6.x
 - Docker (18.09.2)
-- Docker Compose (1.23.2)
+- Docker Compose (1.23.2) 
 - Nodejs 14+
+
 ## How to run
 ### Install infrastructure components in Docker
 These docker compose files should be run and installed in a seperate server or an instance cloud of your development infrastructure 
@@ -33,7 +34,7 @@ These docker compose files should be run and installed in a seperate server or a
 - Add more users, if needed
 #### Run and setup Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
-- In case you want to test send/receive a message using MQTT protocal, install mqtt-connector (already have done in docker compose file) and configure it via http:
+- In case you want to test send/receive a message using MQTT protocal, install mqtt-connector image (already have done in docker compose file) then download [https://www.confluent.io/hub/](MQTT connector) from the Confluent hub and unzip all jars to */tmp/custom/jars*. Restart mqtt-connector image and configure it via http by using a curl command:
    * curl -d @./*connect-mqtt-source.json* -H "Content-Type: application/json" -X POST http://{your_mqttserver}:8083/connectors 
 
 ### Build and Run code 
