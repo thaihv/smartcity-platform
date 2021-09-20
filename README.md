@@ -13,7 +13,7 @@
     * API gateway
     * Eureka
  1. Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services  
- 1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it Euraka client. It uses javascript libraries
+ 1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it as a Euraka client. It uses javascript libraries
     * Angular 12
     * keycloak-js
     * chart.js   
