@@ -14,12 +14,12 @@
 	<artifactId>kpi-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kpi-service</name>
-	<description>Service for monitoring of smartcity management based on Key Performance Indicators</description>
+	<description>Service for Managing of Smart City overall based on Key Performance Indicators</description>
 
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
-
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<skip.failsafe.tests>false</skip.failsafe.tests>
 		<pitest-maven.version>1.4.6</pitest-maven.version>
 		<jacoco-maven-plugin.version>0.8.3</jacoco-maven-plugin.version>

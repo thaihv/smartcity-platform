@@ -65,12 +65,20 @@ spring:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
         - id: ui-service
-          uri: http://localhost:4200
+          uri: http://localhost:8081
           predicates:
             - Path=/**
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
+        # ui-service as angular application    
+#        - id: ui-service-only-angular
+#          uri: http://localhost:4200
+#          predicates:
+#            - Path=/**
+#          filters:
+#            - TokenRelay=
+#            - RemoveRequestHeader=Cookie            
 eureka:
   client:
     serviceUrl:
