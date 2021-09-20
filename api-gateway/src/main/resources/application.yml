@@ -70,15 +70,7 @@ spring:
             - Path=/**
           filters:
             - TokenRelay=
-            - RemoveRequestHeader=Cookie
-        # ui-service as angular application    
-#        - id: ui-service-only-angular
-#          uri: http://localhost:4200
-#          predicates:
-#            - Path=/**
-#          filters:
-#            - TokenRelay=
-#            - RemoveRequestHeader=Cookie            
+            - RemoveRequestHeader=Cookie           
 eureka:
   client:
     serviceUrl:
