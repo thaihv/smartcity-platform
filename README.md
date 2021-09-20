@@ -13,7 +13,7 @@
     * API gateway
     * Eureka
  1. Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services  
- 1. A UI microservice to illustrate consuming APIs from above microservices. It uses javascript libraries
+ 1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it Euraka client. It uses javascript libraries
     * Angular 12
     * keycloak-js
     * chart.js   
@@ -68,8 +68,8 @@ These docker compose files should be run and installed in a seperate server or a
    * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
    * Open (http://localhost:8090/kpi/list) to see the list of KPI for smart city 
 - Go to ./ui-service/
-   * Run $ ng serve --open
-   * Open (http://localhost:4200) to view UI example of consuming microservices.
+   * Run $ mvn spring-boot:run
+   * Open (http://localhost:8081) to view UI example of consuming microservices.
 - Go to ./api-gateway/ 
    * Run $ mvn spring-boot:run 
    * Open (http://localhost:8080) and try calls to microservices if things run well. This is a main entry point for this boilerplate code
