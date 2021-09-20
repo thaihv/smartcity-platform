@@ -12,5 +12,6 @@
         <module>api-gateway</module>
         <module>kpi-service</module>
         <module>realtime-service</module>
+        <module>ui-service</module>
     </modules>
 </project>
