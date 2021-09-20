@@ -1,4 +1,4 @@
-# A Smartcity Platform Using Microservices
+# A Smartcity Platform using microservices
 **A boilerplate code  for smartcity-platform using for Tamky, Quang Nam. It includes:**
  1. A real time service for archiving data from sensors (MQTT) or applications (HTTP).The techstack is used:
     * Kafka
