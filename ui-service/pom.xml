@@ -19,7 +19,7 @@
 		<node.version>v14.15.5</node.version>
 		<npm.version>6.14.11</npm.version>	
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
-		<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
+		<frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
 		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 	</properties>
 
@@ -91,7 +91,7 @@
 						<configuration>
 							<arguments>run build</arguments>
 						</configuration>
-					</execution>
+					</execution>				
 				</executions>
 			</plugin>
 			<plugin>
