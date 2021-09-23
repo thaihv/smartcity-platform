@@ -19,10 +19,14 @@
     * chart.js   
  
 ## Prerequisite
-- JDK 1.8 
-- Maven 3.6.x
+#### Infrastructure components
+- Ubuntu (tested v20.04) 
 - Docker (18.09.2)
 - Docker Compose (1.23.2) 
+
+#### Development
+- JDK 1.8 
+- Maven 3.6.x
 - Nodejs 14+
 
 ## How to run
@@ -40,7 +44,7 @@ These docker compose files should be run and installed in a seperate server or a
 ### Build and Run code 
 #### Build
 - Go to ./smartcity-platform folder, run $ mvn clean compile install
-- For ui-service, this is a Angular app, you have to run it with Nodejs. Go to ./ui-service folder, run  $ npm install
+- For ui-service, this is a Angular app integrated with Spring Boot, in case you want to run it with Nodejs. Go to ././src/main/resources/frontend/ui-service folder, run  $ npm install
 #### Run
 - Go to ./discovery-service/ 
    * Run $ mvn spring-boot:run
