@@ -13,5 +13,6 @@
         <module>kpi-service</module>
         <module>realtime-service</module>
         <module>ui-service</module>
+        <module>ui-community-service</module>
     </modules>
 </project>
