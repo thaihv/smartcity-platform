@@ -18,7 +18,7 @@
     <version>1.0.0</version>
 
     <name>realtime-service</name>
-    <description>Service to archive real time  data from applications and devices</description>
+    <description>Service to archive real time  data from applications and devices for Smartcity Platform</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

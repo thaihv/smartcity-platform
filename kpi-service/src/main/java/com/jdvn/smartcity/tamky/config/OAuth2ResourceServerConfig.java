@@ -35,9 +35,7 @@ public class OAuth2ResourceServerConfig extends KeycloakWebSecurityConfigurerAda
 	        .antMatchers(HttpMethod.PUT, "/**").hasRole("ADMIN")
 	        .antMatchers(HttpMethod.PATCH, "/**").hasRole("ADMIN")
 	        .antMatchers(HttpMethod.DELETE, "/**").hasRole("ADMIN")
-//	        .antMatchers("/kpi/**").permitAll()
-            .anyRequest()
-            .permitAll();
+            .anyRequest().permitAll();
         http.cors();
         http.csrf().disable();
     }

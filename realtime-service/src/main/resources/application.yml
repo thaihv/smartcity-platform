@@ -9,7 +9,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/    
 
- 
+base-url: http://localhost:${server.port}/${server.servlet.context-path}  
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
@@ -32,7 +32,7 @@ spring:
             client-id: realtime-service
             client-secret: f127b769-f8f8-44e0-af16-735497f677d5
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8091/login/oauth2/code/keycloak
+            redirect-uri: ${base-url}/login/oauth2/code/keycloak
             scope: openid
         provider:
           keycloak:

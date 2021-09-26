@@ -2,7 +2,7 @@ server:
   port: 8083
   servlet:
     context-path: /community   
-
+base-url: http://localhost:${server.port}/${server.servlet.context-path}    
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
@@ -18,7 +18,7 @@ spring:
             client-id: ui-community-service
             client-secret: e68001aa-38ce-4e57-8a6b-1fa8e7689ef9
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8083/login/oauth2/code/keycloak
+            redirect-uri: ${base-url}/login/oauth2/code/keycloak
             scope: openid
         provider:
           keycloak:

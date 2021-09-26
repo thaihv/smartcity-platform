@@ -2,6 +2,8 @@ server:
   port: 8090
   servlet:
     context-path: /kpi  
+
+base-url: http://localhost:${server.port}/${server.servlet.context-path}      
 eureka:
   client:
     serviceUrl:
@@ -59,7 +61,7 @@ spring:
             client-id: kpi-service
             client-secret: 4d7eeda5-c378-42d4-9fe6-a58376327165
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8090/login/oauth2/code/keycloak
+            redirect-uri: ${base-url}/login/oauth2/code/keycloak
             scope: openid
         provider:
           keycloak:
