@@ -49,6 +49,7 @@ spring:
             - DELETE
             - PUT
             - PATCH
+            - OPTIONS
       routes:
         - id: kpi-service
           uri: lb://kpi-service
@@ -61,6 +62,7 @@ spring:
           uri: lb://realtime-service
           predicates:
             - Path=/realtime/**
+            - Method=GET,POST,OPTIONS
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
@@ -71,13 +73,13 @@ spring:
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie    
-#        - id: ui-service
-#          uri: http://localhost:8081
-#          predicates:
-#            - Path=/**
-#          filters:
-#            - TokenRelay=
-#            - RemoveRequestHeader=Cookie             
+        - id: ui-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie             
 eureka:
   client:
     serviceUrl:
