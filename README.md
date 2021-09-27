@@ -1,5 +1,5 @@
 # A Smartcity Platform using microservices
-**This code is used as the boilerplate code for Tamky smartcity platform of KOICA project. It includes:**
+**This code is used as the boilerplate code for Tamky smartcity platform of KOICA funded project. It includes:**
  1. A real time service for archiving data from sensors (MQTT) or applications (HTTP).The techstack is used:
     * Kafka
     * Mosquitto
