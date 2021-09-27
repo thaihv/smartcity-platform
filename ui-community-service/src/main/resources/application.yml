@@ -16,7 +16,8 @@ spring:
           keycloak:
             provider: keycloak
             client-id: ui-community-service
-            client-secret: e68001aa-38ce-4e57-8a6b-1fa8e7689ef9
+#            client-secret: e68001aa-38ce-4e57-8a6b-1fa8e7689ef9
+            public-client: true
             authorization-grant-type: authorization_code
             redirect-uri: ${base-url}/login/oauth2/code/keycloak
             scope: openid
