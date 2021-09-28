@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+import {KeycloakService} from 'keycloak-angular';
 import {Kpi} from "./kpi";
 import {KpiService} from "./kpi.service";
 
@@ -15,6 +16,7 @@ export class KpiListComponent implements OnInit {
   kpis: Array<Kpi>;
 
   constructor(private kpiService:KpiService,
+              private keycloakService:KeycloakService,
               private ngxSpinnerService:NgxSpinnerService,
               private router:Router)
   { }
@@ -44,7 +46,7 @@ export class KpiListComponent implements OnInit {
 
   logout()
   {
-
+    this.keycloakService.logout();
   }
 
   createKpi()

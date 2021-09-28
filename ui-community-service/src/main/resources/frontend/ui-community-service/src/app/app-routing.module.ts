@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {KpiListComponent} from "./kpi-list/kpi-list.component";
 import {KpiViewComponent} from "./kpi-view/kpi-view.component";
 import { HomeComponent } from './home/home.component';
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 import { LineChartComponent } from './realtime-charts/line-chart/line-chart.component';
 import { BarChartComponent } from './realtime-charts/bar-chart/bar-chart.component';
 import { DoughnutChartComponent } from './realtime-charts/doughnut-chart/doughnut-chart.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'smarttamky', component: HomeComponent},
   { path: 'kpis/list', component: KpiListComponent},  
   { path: 'kpis/:id', component: KpiViewComponent},
+  { path: 'userinfo', component: UserProfileComponent},
   { path: 'charts', component: RealtimeChartsComponent,
     children:[
       {path: '', pathMatch: 'full', redirectTo: 'line-chart'},

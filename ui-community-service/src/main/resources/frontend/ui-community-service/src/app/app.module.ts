@@ -5,6 +5,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxSpinnerModule} from "ngx-spinner";
 
+
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KpiListComponent } from './kpi-list/kpi-list.component';
@@ -19,7 +21,16 @@ import { PieChartComponent } from './realtime-charts/pie-chart/pie-chart.compone
 import { RadarChartComponent } from './realtime-charts/radar-chart/radar-chart.component';
 import { HomeComponent } from './home/home.component';
 
-@NgModule({
+function initializeKeycloak(keycloak: KeycloakService) {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://tamky.xyz:8080/auth',
+        realm: 'Smartcity',
+        clientId: 'ui-service',
+      }
+    });
+}@NgModule({
   declarations: [
     AppComponent,
     KpiListComponent,

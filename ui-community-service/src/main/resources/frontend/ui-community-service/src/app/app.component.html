@@ -3,9 +3,8 @@
     <a class="navbar-brand" routerLink="smarttamky">Smart Tamky</a>
     <a class="navbar-brand" routerLink="charts">Realtime Service</a>
     <a class="navbar-brand" routerLink="kpis/list">Kpi Service</a>
-    <a class="navbar-brand"  href="#">User Profile</a>
-    <a class="navbar-brand"  href="http://localhost:8080/community/logout">Log out</a>
-    <!-- button type="button" (click)="logout()">Log out</button-->
+    <a class="navbar-brand" routerLink="userinfo">User Profile</a>
+    <button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
 </nav>
 
 <router-outlet></router-outlet>

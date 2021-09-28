@@ -3,6 +3,7 @@ import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
+import {KeycloakService} from 'keycloak-angular';
 import {TemperaturePoint} from "../temperature-point";
 import {RealtimeService} from "../realtime.service";
 
@@ -42,6 +43,7 @@ export class LineChartComponent implements OnInit , OnDestroy {
   
   temperatures: TemperaturePoint[] =[];
   constructor(private realtimeService:RealtimeService,
+    private keycloakService:KeycloakService,
     private ngxSpinnerService:NgxSpinnerService,
     private router:Router){ }  
   ngOnInit()
