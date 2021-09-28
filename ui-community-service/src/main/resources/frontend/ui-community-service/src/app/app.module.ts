@@ -1,16 +1,18 @@
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {NgModule} from "@angular/core";
+import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxSpinnerModule} from "ngx-spinner";
 
+import {TokenInterceptor} from './interceptors/token-interceptor';
 
-import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { KpiListComponent } from './kpi-list/kpi-list.component';
 import { KpiViewComponent } from './kpi-view/kpi-view.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChartsModule } from 'ng2-charts';
 import { RealtimeChartsComponent } from './realtime-charts/realtime-charts.component';
 import { BarChartComponent } from './realtime-charts/bar-chart/bar-chart.component';
@@ -27,14 +29,22 @@ function initializeKeycloak(keycloak: KeycloakService) {
       config: {
         url: 'http://tamky.xyz:8080/auth',
         realm: 'Smartcity',
-        clientId: 'ui-service',
-      }
+        clientId: 'ui-community-service',
+      },
+      initOptions: {
+ //       onLoad: 'check-sso',
+ //       silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+        onLoad: 'login-required',
+        checkLoginIframe: false
+      },
     });
-}@NgModule({
+}
+@NgModule({
   declarations: [
     AppComponent,
     KpiListComponent,
     KpiViewComponent,
+    UserProfileComponent,
     RealtimeChartsComponent,
     BarChartComponent,
     BubbleChartComponent,
@@ -51,9 +61,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,
+    KeycloakAngularModule,
     ChartsModule
   ],
   providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    }
   ],
   bootstrap: [AppComponent]
 })
