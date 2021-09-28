@@ -66,13 +66,6 @@ spring:
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie
-        - id: ui-community-service
-          uri: lb://ui-community-service
-          predicates:
-            - Path=/community/**
-          filters:
-            - TokenRelay=
-            - RemoveRequestHeader=Cookie    
         - id: ui-service
           uri: lb://ui-service
           predicates:
@@ -80,6 +73,14 @@ spring:
           filters:
             - TokenRelay=
             - RemoveRequestHeader=Cookie             
+        - id: ui-community-service
+          uri: lb://ui-community-service
+          predicates:
+            - Path=/community/**
+          filters:
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie    
+            
 eureka:
   client:
     serviceUrl:
