@@ -73,7 +73,7 @@ These docker compose files should be run and installed in a seperate server or a
    * Open (http://localhost:8090/kpi/list) to see the list of KPI for smart city 
 - Go to ./ui-service/
    * Run $ mvn spring-boot:run
-   * Open (http://localhost:8081) to view UI example of consuming microservices.
+   * Open (http://localhost:8081/mytamky/) to view UI example of consuming microservices.
 - Go to ./api-gateway/ 
    * Run $ mvn spring-boot:run 
-   * Open (http://localhost:8080) and try calls to microservices if things run well. This is a main entry point for this boilerplate code
+   * Open (http://localhost:8080/mytamky/) and try calls to microservices if things run well. This is a main entry point for this boilerplate code
