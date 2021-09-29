@@ -10,8 +10,8 @@
     * PostgresSQL
     * Spring Boot 2
  1. Microservices using Sping Cloud for Discovery and Registrer
-    * API gateway
-    * Eureka
+    * Sring Cloud Gateway
+    * Netflix Eureka
  1. Keycloak security framework for securing identity,Single Sign On for Users, Devices, Applications and Services  
  1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it as a Euraka client. It uses javascript libraries
     * Angular 12
