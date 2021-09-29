@@ -32,10 +32,10 @@ function initializeKeycloak(keycloak: KeycloakService) {
         clientId: 'ui-community-service',
       },
       initOptions: {
- //       onLoad: 'check-sso',
- //       silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
-        onLoad: 'login-required',
-        checkLoginIframe: false
+       onLoad: 'check-sso',
+       //silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+        // onLoad: 'login-required',
+       checkLoginIframe: false
       },
     });
 }
