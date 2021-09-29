@@ -19,13 +19,6 @@ public class UiCommunityServiceApplication {
 	public String greet() {
 		return "Welcome!";
 	}
-
-	@GetMapping(path = "/logout")
-	public String logout(HttpServletRequest request) throws ServletException {
-		request.logout();
-		return "/";
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(UiCommunityServiceApplication.class, args);
 	}

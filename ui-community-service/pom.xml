@@ -15,9 +15,9 @@
 	<description>UI project for Smart Tamky Project to get involved citizens to system</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 		<node.version>v14.15.5</node.version>
 		<npm.version>6.14.11</npm.version>	
+		<spring-cloud.version>Hoxton.SR8</spring-cloud.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
 		<frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>		
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,22 +27,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-		  <groupId>org.springframework.security.oauth.boot</groupId>
-		  <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-		</dependency>	
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -62,15 +46,8 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
-			<dependency>
-				<groupId>org.keycloak.bom</groupId>
-				<artifactId>keycloak-adapter-bom</artifactId>
-				<version>11.0.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
 		</dependencies>
-	</dependencyManagement>
+	</dependencyManagement>	
 	<build>
 		<plugins>
 			<plugin>
