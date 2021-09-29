@@ -50,6 +50,7 @@ spring:
             - PUT
             - PATCH
             - OPTIONS
+            add-to-simple-url-handler-mapping: true
       routes:
         - id: kpi-service
           uri: lb://kpi-service
