@@ -15,6 +15,7 @@ public class SpringSecurityConfig {
     	
         http.csrf().disable()
                 .authorizeExchange()
+                .pathMatchers("/community/**").permitAll()
                 .anyExchange().authenticated()
                 .and()
                 .cors()
