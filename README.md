@@ -44,7 +44,7 @@ These docker compose files should be run and installed in a seperate server or a
 ### Build and Run code 
 #### Build
 - Go to ./smartcity-platform folder, run $ mvn clean compile install
-- For ui-service, this is a Angular app integrated with Spring Boot, in case you want to run it with Nodejs. Go to ././src/main/resources/frontend/ui-service folder, run  $ npm install
+- For ui-service, this is a Angular app integrated with Spring Boot, in case you want to run it with Nodejs. Go to ././src/main/resources/frontend/ui-service folder, run  $ npm install, and then $ng serve --open to view it in your default browser.
 #### Run
 - Go to ./discovery-service/ 
    * Run $ mvn spring-boot:run
