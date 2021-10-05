@@ -77,6 +77,6 @@ These docker compose files should be run and installed in a seperate server or a
 - Go to ./api-gateway/ 
    * Run $ mvn spring-boot:run 
    * Open (http://localhost:8080/mytamky/) and try calls to microservices if things run well. This is a main entry point for this boilerplate code. Every API calls will go to port 8080.
-- Optionally, In order to test the ui service that is not needed to access behind the Gateway and user can login to system every time she wants, go to ./ui-community-service/ 
+- Optionally, In order to test the ui service that is not needed to access behind the Gateway and ignore the automatically login step from Keycloak, go to ./ui-community-service/ 
    * Run $ mvn spring-boot:run 
-   * Open (http://localhost:18081/community/) to test API calls with/without loggedin!
+   * Open (http://localhost:18081/community/) to test API calls with/without a loggedin user!
