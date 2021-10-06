@@ -1,4 +1,4 @@
-# Setup MQTT Connector via HTTP
+# Setup MQTT Connector via HTTP Post
 curl -d @./connect-mqtt-source.json -H "Content-Type: application/json" -X POST http://localhost:8083/connectors
 
 # MQTT test producer
