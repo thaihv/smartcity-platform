@@ -34,7 +34,7 @@
 These docker compose files should be run and installed in a seperate server or an instance cloud of your development infrastructure 
 #### Run and setup Keycloak image in Docker
 - $ docker-compose -f keycloak-postgres-compose.yml up
-- Access to ***http://{your_keycloakserver}:8080/auth/***, login with username/password is defined in *keycloak-postgres-compose.yml* file and click Manage/Import and choose *keycloak-data-export.json* file to import data settings for all clients (**ui-service**, **kpi-service**, **realtime-service**, **api-gateway**)
+- Access to ***http://{your_keycloakserver}:8080/auth/***, login with username/password is defined in *keycloak-postgres-compose.yml* file and click Manage/Import and choose *./keycloak-data-export.json* file to import data settings for all clients (**ui-service**, **kpi-service**, **realtime-service**, **api-gateway**)
 - Add more users, if needed
 #### Run and setup Kafka, Mosquitto, influxDB images in Docker
 - $ docker-compose -f kafka-mqtt-influxdb-compose.yml up
