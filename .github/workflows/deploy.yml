@@ -8,9 +8,7 @@ on:
     branches: [ master ]
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 8
@@ -22,6 +20,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml
+  deploy:
+    runs-on: ubuntu-latest
+    steps:      
     - name: Deploy To DigitalOcean
       uses: appleboy/ssh-action@v0.1.2
       with:
