@@ -22,14 +22,5 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml
-    - name: Deploy Docker Images
-      uses: appleboy/ssh-action@v0.1.2
-      with:
-        host: @{{secrets.SSH_HOST}}
-        key: @{{secrets.SSH_KEY}}
-        username: @{{secrets.SSH_USERNAME}}
-        script: |
-          mkdir test
-          cd test
-          git clone git@github.com:thaihv/smartcity-platform.git
+
         
