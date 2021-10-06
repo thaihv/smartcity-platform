@@ -19,17 +19,13 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn -B clean install --file pom.xml
-  deploy:
-    runs-on: ubuntu-latest
-    steps:      
+      run: mvn -B clean install --file pom.xml  
     - name: Deploy To DigitalOcean
       uses: appleboy/ssh-action@v0.1.2
       with:
-        host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
-        key: ${{secrets.SSH_KEY}} # Private or public key of the server
-        username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
-
+        host: ${{secrets.SSH_HOST}} 
+        key: ${{secrets.SSH_KEY}} 
+        username: ${{ secrets.SSH_USERNAME }}
         script: |
           mkdir test 
           cd test 
