@@ -21,4 +21,4 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B clean install --file pom.xml
