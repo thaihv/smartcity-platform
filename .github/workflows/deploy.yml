@@ -19,14 +19,21 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn -B clean install --file pom.xml  
+      run: mvn -B clean install --file pom.xml
     - name: Deploy To DigitalOcean
+      env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock    
       uses: appleboy/ssh-action@v0.1.4
       with:
         host: ${{secrets.SSH_HOST}} 
         key: ${{secrets.SSH_KEY}} 
         username: ${{ secrets.SSH_USERNAME }}
         passphrase: ${{ secrets.SERVER_PASSPHRASE }}
+        run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+            ssh-add - <<< "${{ secrets.SSH_KEY}}"        
         script: |
           mkdir test 
           cd test 
