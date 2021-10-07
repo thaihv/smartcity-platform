@@ -21,7 +21,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml  
     - name: Deploy To DigitalOcean
-      uses: appleboy/ssh-action@v0.1.2
+      uses: appleboy/ssh-action@v0.1.4
       with:
         host: ${{secrets.SSH_HOST}} 
         key: ${{secrets.SSH_KEY}} 
