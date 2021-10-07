@@ -22,15 +22,14 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml
-    - name: Deploy To DigitalOcean
-      env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock    
+    - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
         host: ${{secrets.SSH_HOST}} 
         key: ${{secrets.SSH_PRIVATE_KEY}} 
         username: ${{ secrets.SSH_USERNAME }}     
-        script: |        
+        script: |  
+          rm github
           mkdir github 
           cd github 
           git clone git@github.com:thaihv/smartcity-platform.git 
