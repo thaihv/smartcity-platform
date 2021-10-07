@@ -20,7 +20,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml  
-      
     - name: Deploy To DigitalOcean
       uses: appleboy/ssh-action@v0.1.4
       with:
