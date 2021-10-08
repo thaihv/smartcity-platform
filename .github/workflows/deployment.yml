@@ -28,15 +28,19 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD   
-    - name: Get current time
-      uses: gerred/actions/current-time@master
-      id: current-time       
+  
+    - name: Build discovery-service Image
+      working-directory: ./discovery-service
+      run: docker build . --file Dockerfile --tag thaihv/discovery-service:0.0.1      
+    - name: Docker Push discovery-service    
+      run: docker push thaihv/discovery-service:0.0.1
       
     - name: Build Api-Gateway Image
       working-directory: ./api-gateway
       run: docker build . --file Dockerfile --tag thaihv/api-gateway:0.0.1      
     - name: Docker Push api-gateway     
       run: docker push thaihv/api-gateway:0.0.1
+      
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
