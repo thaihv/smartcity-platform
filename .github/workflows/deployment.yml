@@ -40,7 +40,31 @@ jobs:
       run: docker build . --file Dockerfile --tag thaihv/api-gateway:0.0.1      
     - name: Docker Push api-gateway     
       run: docker push thaihv/api-gateway:0.0.1
+
+    - name: Build kpi-service Image
+      working-directory: ./kpi-service
+      run: docker build . --file Dockerfile --tag thaihv/kpi-service:0.0.1      
+    - name: Docker Push kpi-service     
+      run: docker push thaihv/kpi-service:0.0.1
       
+    - name: Build realtime-service Image
+      working-directory: ./realtime-service
+      run: docker build . --file Dockerfile --tag thaihv/realtime-service:0.0.1      
+    - name: Docker Push realtime-service     
+      run: docker push thaihv/realtime-service:0.0.1      
+      
+    - name: Build ui-community-service Image
+      working-directory: ./ui-community-service
+      run: docker build . --file Dockerfile --tag thaihv/ui-community-service:0.0.1      
+    - name: Docker Push ui-community-service     
+      run: docker push thaihv/ui-community-service:0.0.1    
+      
+    - name: Build ui-service Image
+      working-directory: ./ui-service
+      run: docker build . --file Dockerfile --tag thaihv/ui-service:0.0.1      
+    - name: Docker Push ui-service     
+      run: docker push thaihv/ui-service:0.0.1  
+
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
