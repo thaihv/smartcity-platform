@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      TAG: $(date +%s)    
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 8
@@ -26,14 +28,13 @@ jobs:
       env:
         DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        TAG: $(date +%s)
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD       
     - name: Build Api-Gateway Image
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TAG      
+      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/api-gateway:$TAG      
     - name: Docker Push api-gateway
-      run: docker push thaihv/api-gateway::$TAG    
+      run: docker push ${{secrets.DOCKER_USERNAME}}/api-gateway:$TAG    
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
