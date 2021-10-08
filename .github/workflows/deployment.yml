@@ -33,14 +33,10 @@ jobs:
       id: current-time       
       
     - name: Build Api-Gateway Image
-      env:
-        TIME: "${{ steps.current-time.outputs.time }}"    
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TIME      
-    - name: Docker Push api-gateway
-      env:
-        TIME: "${{ steps.current-time.outputs.time }}"      
-      run: docker push thaihv/api-gateway:$TIME
+      run: docker build . --file Dockerfile --tag thaihv/api-gateway:0.0.1      
+    - name: Docker Push api-gateway     
+      run: docker push thaihv/api-gateway:0.0.1
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
