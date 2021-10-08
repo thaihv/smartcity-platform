@@ -22,17 +22,18 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B clean install --file pom.xml
-    - name: docker login
+    - name: Docker Login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        TAG: $(date +%s)
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD       
     - name: Build Api-Gateway Image
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$(date +%s)      
+      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TAG      
     - name: Docker Push api-gateway
-      run: docker push thaihv/api-gateway    
+      run: docker push thaihv/api-gateway::$TAG    
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
