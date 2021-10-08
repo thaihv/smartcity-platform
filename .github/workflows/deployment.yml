@@ -10,9 +10,7 @@ on:
     branches: [ master ]    
 jobs:
   build:
-    runs-on: ubuntu-latest
-    env:
-      TAG: $(date +%s)    
+    runs-on: ubuntu-latest  
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 8
@@ -29,12 +27,20 @@ jobs:
         DOCKER_USER: ${{secrets.DOCKER_USERNAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD       
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD   
+    - name: Get current time
+      uses: gerred/actions/current-time@master
+      id: current-time       
+      
     - name: Build Api-Gateway Image
+      env:
+        TIME: "${{ steps.current-time.outputs.time }}"    
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TAG      
+      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TIME      
     - name: Docker Push api-gateway
-      run: docker push thaihv/api-gateway:$TAG
+      env:
+        TIME: "${{ steps.current-time.outputs.time }}"      
+      run: docker push thaihv/api-gateway:$TIME
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
