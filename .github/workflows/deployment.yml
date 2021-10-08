@@ -32,9 +32,9 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD       
     - name: Build Api-Gateway Image
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USERNAME}}/api-gateway:$TAG      
+      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$TAG      
     - name: Docker Push api-gateway
-      run: docker push ${{secrets.DOCKER_USERNAME}}/api-gateway:$TAG    
+      run: docker push thaihv/api-gateway:$TAG
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
