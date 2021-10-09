@@ -3,11 +3,11 @@ server:
   servlet:
     context-path: /kpi  
 
-base-url: http://www.tamky.xyz:${server.port}/${server.servlet.context-path}      
+base-url: http://localhost:${server.port}/${server.servlet.context-path}      
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://www.tamky.xyz:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 
 keycloak:
   realm: Smartcity

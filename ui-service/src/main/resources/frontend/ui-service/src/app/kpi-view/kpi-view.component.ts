@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Kpi} from "src/app/kpi-list/kpi";
 import {KpiService} from "src/app/kpi-list/kpi.service";
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-kpi-view',
@@ -41,7 +42,7 @@ export class KpiViewComponent implements OnInit {
     let id=this.activatedRoute.snapshot.params.id;
 
     this.ngxSpinnerService.show();
-    this.kpiService.getKpiById('http://localhost:8080/kpi/find/'+id).subscribe(
+    this.kpiService.getKpiById(environment.apiUrlBase + '/kpi/find/'+id).subscribe(
       data=>
       {
         this.kpi=data;
@@ -75,7 +76,7 @@ export class KpiViewComponent implements OnInit {
     console.info(this.kpiForm.value);
     let kpi=this.kpiForm.value;
 
-    this.kpiService.updateKpi('http://localhost:8080/kpi/update', kpi).subscribe(
+    this.kpiService.updateKpi(environment.apiUrlBase + '/kpi/update', kpi).subscribe(
       data=>
       {
         this.kpi=data;

@@ -3,7 +3,11 @@ server:
   port: 8093
   servlet:
     context-path: /mytamky   
-base-url: http://www.tamky.xyz:${server.port}/${server.servlet.context-path}    
+base-url: http://localhost:${server.port}/${server.servlet.context-path} 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/   
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
@@ -32,7 +36,3 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${keycloak-client.server-url}/realms/${keycloak-client.realm}/protocol/openid-connect/certs
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
