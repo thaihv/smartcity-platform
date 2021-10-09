@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
+import { ChartDataSets, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import {Router} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
-import {KeycloakService} from 'keycloak-angular';
 import {TemperaturePoint} from "../temperature-point";
 import {RealtimeService} from "../realtime.service";
+import { environment } from '../../../environments/environment';
 
-import { Subscription, Observable, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
@@ -43,7 +43,6 @@ export class LineChartComponent implements OnInit , OnDestroy {
   
   temperatures: TemperaturePoint[] =[];
   constructor(private realtimeService:RealtimeService,
-    private keycloakService:KeycloakService,
     private ngxSpinnerService:NgxSpinnerService,
     private router:Router){ }  
   ngOnInit()
@@ -55,7 +54,7 @@ export class LineChartComponent implements OnInit , OnDestroy {
     this.ngxSpinnerService.show();
     
     this.subscription = timer(0, 5000).pipe(
-      switchMap(() => this.realtimeService.getTemperatures('http://localhost:8080/realtime/temperatures?startTime=1563142100&endTime=1757733151'))).subscribe(      
+      switchMap(() => this.realtimeService.getTemperatures(environment.apiUrlBase + '/realtime/temperatures?startTime=1563142100&endTime=1757733151'))).subscribe(      
         data=>
         {
           for(var key in data) {

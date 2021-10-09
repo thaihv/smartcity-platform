@@ -4,7 +4,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {KeycloakService} from 'keycloak-angular';
 import {Kpi} from "./kpi";
 import {KpiService} from "./kpi.service";
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-kpi-list',
@@ -29,7 +29,7 @@ export class KpiListComponent implements OnInit {
   private getKpis()
   {
     this.ngxSpinnerService.show();
-    this.kpiService.getKpis('http://localhost:8080/kpi/list').subscribe(
+    this.kpiService.getKpis(environment.apiUrlBase + '/kpi/list').subscribe(
       data=>
       {
         this.kpis=data;
@@ -59,7 +59,7 @@ export class KpiListComponent implements OnInit {
     kpi.frequencyInDays=30;
     kpi.name='Test';
 
-    this.kpiService.createKpi('http://localhost:8080/kpi/create',kpi).subscribe(
+    this.kpiService.createKpi(environment.apiUrlBase + '/kpi/create',kpi).subscribe(
       data=>
       {
         this.kpis=data;
@@ -74,7 +74,7 @@ export class KpiListComponent implements OnInit {
 
   deleteKpi(id: number)
   {
-    this.kpiService.deleteKpi('http://localhost:8080/kpi/delete/'+id).subscribe(
+    this.kpiService.deleteKpi(environment.apiUrlBase + '/kpi/delete/'+id).subscribe(
       data=>
       {
         this.getKpis();

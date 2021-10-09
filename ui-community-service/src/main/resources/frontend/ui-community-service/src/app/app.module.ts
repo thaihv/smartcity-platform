@@ -1,12 +1,11 @@
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxSpinnerModule} from "ngx-spinner";
 
-import {TokenInterceptor} from './interceptors/token-interceptor';
-
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
@@ -27,7 +26,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
     keycloak.init({
       config: {
-        url: 'http://tamky.xyz:8080/auth',
+        url: environment.keycloakUrlBase,
         realm: 'Smartcity',
         clientId: 'ui-community-service',
       },
