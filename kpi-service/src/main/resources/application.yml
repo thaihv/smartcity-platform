@@ -51,7 +51,6 @@ spring:
      connectionTimeout: 20000
      maximumPoolSize: 5   
  
-
   security:
     oauth2:
       client:
