@@ -3,7 +3,7 @@ server:
   port: 8093
   servlet:
     context-path: /mytamky   
-base-url: http://localhost:${server.port}/${server.servlet.context-path}    
+base-url: http://www.tamky.xyz:${server.port}/${server.servlet.context-path}    
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
