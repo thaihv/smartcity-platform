@@ -8,6 +8,7 @@ logging:
     org.springframework.security.oauth2: DEBUG
 server:
   port: 8090
+base-url: http://www.tamky.xyz:${server.port}    
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
@@ -23,7 +24,7 @@ spring:
             client-id: api-gateway
             client-secret: e4b09b9b-fc83-4253-a32b-ffce5f7e9b1b
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:8080/login/oauth2/code/keycloak
+            redirect-uri: ${base-url}/login/oauth2/code/keycloak
             scope: openid
         provider:
           keycloak:

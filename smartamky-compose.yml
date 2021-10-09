@@ -2,44 +2,45 @@ version: '3.3'
 
 services:
   discovery:
-    image: thaihv/discovery-service
+    image: thaihv/discovery-service:0.0.1
     container_name: discovery-service
     expose:
       - "8761"
     ports:
       - "8761:8761"
   api-gateway:
-    image: thaihv/api-gateway
+    image: thaihv/api-gateway:0.0.1
     container_name: api-gateway
-    expose:
-      - "8000"
-    ports:
-      - "8000:8000"
-  kpi-service:
-    image: thaihv/kpi-service
-    container_name: kpi-service
     expose:
       - "8090"
     ports:
       - "8090:8090"
-  realtime-service:
-    image: thaihv/realtime-service
-    container_name: realtime-service
+  kpi-service:
+    image: thaihv/kpi-service:0.0.1
+    container_name: kpi-service
     expose:
       - "8091"
     ports:
-      - "8091:8091"      
-  ui-community:
-    image: thaihv/ui-community-service
-    container_name: ui-community-service
+      - "8091:8091"   
+  realtime-service:
+    image: thaihv/realtime-service:0.0.1
+    container_name: realtime-service
     expose:
       - "8092"
     ports:
       - "8092:8092"
-  ui-service:
-    image: thaihv/ui-service
-    container_name: ui-service
+#  ui-service:
+#    image: thaihv/ui-service::0.0.1
+#    container_name: ui-service
+#    expose:
+#      - "8093"
+#    ports:
+#      - "8093:8093"       
+  ui-community:
+    image: thaihv/ui-community-service:0.0.1
+    container_name: ui-community-service
     expose:
-      - "8093"
+      - "8094"
     ports:
-      - "8093:8093"      
+      - "8094:8094"
+     
