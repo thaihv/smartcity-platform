@@ -75,7 +75,13 @@ jobs:
           rm -rf github
           mkdir github 
           cd github 
-          git clone git@github.com:thaihv/smartcity-platform.git 
+          git clone git@github.com:thaihv/smartcity-platform.git
+          cd ..
+          cp /github/smartamky-compose.yml .
+          docker-compose -f smartamky-compose.yml stop  discovery api-gateway
+          docker pull thaihv/discovery-service:0.0.1
+          docker pull thaihv/api-gateway:0.0.1
+          docker-compose -f smartamky-compose.yml up discovery api-gateway
           echo 'Deployment successful to Digital Ocean' 
 
         
