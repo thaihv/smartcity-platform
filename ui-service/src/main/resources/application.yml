@@ -1,6 +1,6 @@
 
 server:
-  port: 8081
+  port: 8093
   servlet:
     context-path: /mytamky   
 base-url: http://localhost:${server.port}/${server.servlet.context-path}    

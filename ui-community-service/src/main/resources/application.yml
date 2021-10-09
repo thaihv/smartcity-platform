@@ -1,5 +1,5 @@
 server:
-  port: 18081
+  port: 8094
   servlet:
     context-path: /community   
 spring:
@@ -8,4 +8,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://www.tamky.xyz:8761/eureka/

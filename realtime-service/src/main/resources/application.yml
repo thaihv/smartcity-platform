@@ -1,7 +1,7 @@
 ### Common
 
 server:
-  port: 8091
+  port: 8092
   servlet:
     context-path: /realtime    
 eureka:

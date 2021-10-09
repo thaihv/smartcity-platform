@@ -7,7 +7,7 @@ logging:
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
 server:
-  port: 8080
+  port: 8090
 keycloak-client:
   server-url: http://tamky.xyz:8080/auth
   realm:  Smartcity
@@ -85,4 +85,4 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://www.tamky.xyz:8761/eureka/
