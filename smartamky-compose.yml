@@ -33,8 +33,10 @@ services:
       - "8091:8091"
     depends_on:
       - discovery
+      - keycloak
     links:
-      - discovery         
+      - discovery
+      - keycloak         
   realtime-service:
     image: thaihv/realtime-service:0.0.1
     container_name: realtime-service
@@ -67,6 +69,8 @@ services:
     depends_on:
       - discovery
       - kpi-service
+      - keycloak
     links:
       - discovery
-      - kpi-service                 
+      - kpi-service
+      - keycloak                 
