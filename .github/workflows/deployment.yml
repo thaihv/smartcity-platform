@@ -54,9 +54,9 @@ jobs:
       
     - name: Build realtime-service Image
       working-directory: ./realtime-service
-      run: docker build . --file Dockerfile --tag thaihv/realtime-service:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/realtime-service:$VERSION      
     - name: Docker Push realtime-service     
-      run: docker push thaihv/realtime-service:0.0.1      
+      run: docker push thaihv/realtime-service:$VERSION      
       
     - name: Build ui-community-service Image
       working-directory: ./ui-community-service
