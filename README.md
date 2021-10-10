@@ -49,10 +49,16 @@ These docker compose files should be run and installed in a seperate server or a
 - Go to ./discovery-service/ 
    * Run $ mvn spring-boot:run
    * Open (http://localhost:8761) if run successfully, you will see list of services registered as Eureka clients
+- Go to ./api-gateway/ 
+   * Run $ mvn spring-boot:run 
+   * As an API gateway, **the port 8090 is a only entry port** for this boilerplate code. With api-gateway up and run, every API calls to other servives will go to port 8090.
+- Go to ./kpi-service/
+   * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
+   * Open (http://localhost:8090/kpi/list) to see the list of KPI for smart city. 
 - Go to ./realtime-service/
    * Run $ mvn spring-boot:run 
    * To test this microservice use a command curl (or Postman application) to send a HTTP get request to get sample temperature data points from database
-     > curl -X GET http://localhost:8091/realtime/temperatures?startTime=1632044000&endTime=1632044042  \
+     > curl -X GET http://localhost:8090/realtime/temperatures?startTime=1632044000&endTime=1632044042  \
   -H 'Content-Type: application/json' 
    * And response to get if run successfully
      > {\
@@ -68,15 +74,9 @@ These docker compose files should be run and installed in a seperate server or a
       &nbsp;&nbsp;  }\
    &nbsp;]\
 }
-- Go to ./kpi-service/
-   * Run $ mvn spring-boot:run Or $ java -Dfile.encoding=UTF-8 -jar kpi-service-0.0.1-SNAPSHOT.jar
-   * Open (http://localhost:8090/kpi/list) to see the list of KPI for smart city 
 - Go to ./ui-service/
    * Run $ mvn spring-boot:run
-   * Open (http://localhost:8081/mytamky/) to view UI example of consuming microservices.
-- Go to ./api-gateway/ 
+   * Open (http://localhost:8090/mytamky/) to view UI example of consuming microservices.
+- In order to test the ui service that is not behind the Gateway (not need access to port 8090) and ignore the automatically login step from Keycloak. Go to ./ui-community-service/ 
    * Run $ mvn spring-boot:run 
-   * Open (http://localhost:8080/mytamky/) and try calls to microservices if things run well. This is a main entry point for this boilerplate code. Every API calls will go to port 8080.
-- Optionally, In order to test the ui service that is not needed to access behind the Gateway and ignore the automatically login step from Keycloak, go to ./ui-community-service/ 
-   * Run $ mvn spring-boot:run 
-   * Open (http://localhost:18081/community/) to test API calls with/without a loggedin user!
+   * Open (http://localhost:8094/community/) to test API calls that is setup CORS with/without a loggedin user!
