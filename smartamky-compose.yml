@@ -11,10 +11,17 @@ services:
   api-gateway:
     image: thaihv/api-gateway:0.0.1
     container_name: api-gateway
+    environment: 
+      # Important for clients to register with eureka
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/    
     expose:
       - "8090"
     ports:
       - "8090:8090"
+    depends_on:
+      - discovery
+    links:
+      - discovery            
   kpi-service:
     image: thaihv/kpi-service:0.0.1
     container_name: kpi-service
