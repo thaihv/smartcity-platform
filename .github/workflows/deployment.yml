@@ -6,11 +6,16 @@ name: Build & Deployment
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+    - 'README.md'
+    - 'docs/**'
   pull_request:
     branches: [ master ]    
 jobs:
   build:
     runs-on: ubuntu-latest  
+    env:
+      VERSION: '0.0.1'
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 8
@@ -31,21 +36,21 @@ jobs:
   
     - name: Build discovery-service Image
       working-directory: ./discovery-service
-      run: docker build . --file Dockerfile --tag thaihv/discovery-service:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/discovery-service:$VERSION      
     - name: Docker Push discovery-service    
-      run: docker push thaihv/discovery-service:0.0.1
+      run: docker push thaihv/discovery-service:$VERSION
       
     - name: Build Api-Gateway Image
       working-directory: ./api-gateway
-      run: docker build . --file Dockerfile --tag thaihv/api-gateway:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/api-gateway:$VERSION      
     - name: Docker Push api-gateway     
-      run: docker push thaihv/api-gateway:0.0.1
+      run: docker push thaihv/api-gateway:$VERSION
 
     - name: Build kpi-service Image
       working-directory: ./kpi-service
-      run: docker build . --file Dockerfile --tag thaihv/kpi-service:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/kpi-service:$VERSION     
     - name: Docker Push kpi-service     
-      run: docker push thaihv/kpi-service:0.0.1
+      run: docker push thaihv/kpi-service:$VERSION
       
     - name: Build realtime-service Image
       working-directory: ./realtime-service
@@ -55,15 +60,15 @@ jobs:
       
     - name: Build ui-community-service Image
       working-directory: ./ui-community-service
-      run: docker build . --file Dockerfile --tag thaihv/ui-community-service:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/ui-community-service:$VERSION      
     - name: Docker Push ui-community-service     
-      run: docker push thaihv/ui-community-service:0.0.1    
+      run: docker push thaihv/ui-community-service:$VERSION    
       
     - name: Build ui-service Image
       working-directory: ./ui-service
-      run: docker build . --file Dockerfile --tag thaihv/ui-service:0.0.1      
+      run: docker build . --file Dockerfile --tag thaihv/ui-service:$VERSION      
     - name: Docker Push ui-service     
-      run: docker push thaihv/ui-service:0.0.1  
+      run: docker push thaihv/ui-service:$VERSION  
 
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
@@ -79,8 +84,8 @@ jobs:
           cd ..
           cp github/smartcity-platform/smartamky-compose.yml .
           docker-compose -f smartamky-compose.yml stop  discovery api-gateway
-          docker pull thaihv/discovery-service:0.0.1
-          docker pull thaihv/api-gateway:0.0.1
+          docker pull thaihv/discovery-service:$VERSION
+          docker pull thaihv/api-gateway:$VERSION
           docker-compose -f smartamky-compose.yml up -d discovery api-gateway
           echo 'Deployment successful to Digital Ocean' 
 
