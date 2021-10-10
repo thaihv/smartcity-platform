@@ -25,17 +25,29 @@ services:
   kpi-service:
     image: thaihv/kpi-service:0.0.1
     container_name: kpi-service
+    environment: 
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/     
     expose:
       - "8091"
     ports:
-      - "8091:8091"   
+      - "8091:8091"
+    depends_on:
+      - discovery
+    links:
+      - discovery         
   realtime-service:
     image: thaihv/realtime-service:0.0.1
     container_name: realtime-service
+    environment: 
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/       
     expose:
       - "8092"
     ports:
       - "8092:8092"
+    depends_on:
+      - discovery
+    links:
+      - discovery      
 #  ui-service:
 #    image: thaihv/ui-service::0.0.1
 #    container_name: ui-service
@@ -46,8 +58,15 @@ services:
   ui-community:
     image: thaihv/ui-community-service:0.0.1
     container_name: ui-community-service
+    environment: 
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/       
     expose:
       - "8094"
     ports:
       - "8094:8094"
-     
+    depends_on:
+      - discovery
+      - kpi-service
+    links:
+      - discovery
+      - kpi-service                 
