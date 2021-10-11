@@ -83,7 +83,7 @@ jobs:
           git clone git@github.com:thaihv/smartcity-platform.git
           cd ..
           cp github/smartcity-platform/*.yml .
-          # docker-compose -f smartamky-compose.yml up -d discovery api-gateway kpi-service ui-community
+          # docker-compose -f smartamky-compose.yml up -d discovery api-gateway kpi-service realtime-service ui-service ui-community
           echo 'Deployment successful to Digital Ocean' 
 
         
