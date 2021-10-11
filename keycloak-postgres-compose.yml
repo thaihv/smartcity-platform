@@ -7,7 +7,8 @@ volumes:
 
 services:
   postgres:
-      image: postgres
+      image: postgres:13
+      container_name: keycloak_db
       ports:
         - "5432:5432"
       volumes:
@@ -17,7 +18,8 @@ services:
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
   kpi_db:
-    image: postgres
+    image: postgres:13
+    container_name: kpi_db
     environment:
       POSTGRES_DB: kpi
       POSTGRES_USER: kpi
@@ -31,6 +33,8 @@ services:
 
   keycloak:
       image: quay.io/keycloak/keycloak:latest
+      container_name: keycloak
+      hostname: tamky.xyz
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
