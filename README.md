@@ -76,7 +76,7 @@ These docker compose files should be run and installed in a seperate server or a
 }
 - Go to ./ui-service/
    * Run $ mvn spring-boot:run
-   * Open (http://localhost:8090/mytamky/) to view UI example of consuming microservices.
+   * Open (http://localhost:8090/mytamky/) to view UI example of consuming microservice APIs.
 - In order to test the ui service that is not behind the Gateway (not need access to port 8090) and ignore the automatically login step from Keycloak. Go to ./ui-community-service/ 
    * Run $ mvn spring-boot:run 
    * Open (http://localhost:8094/community/) to test API calls that is setup CORS with/without a loggedin user!
