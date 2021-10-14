@@ -27,7 +27,6 @@ import com.jdvn.smartcity.tamky.domain.repository.KpiRepository;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {KpiServiceApplication.class})
 @AutoConfigureMockMvc
-@ActiveProfiles("it")
 public class BaseExceptionHandlerIT {
 
     @Autowired
