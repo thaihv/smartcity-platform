@@ -33,7 +33,13 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD   
-  
+ 
+    - name: Build config-server Image
+      working-directory: ./config-server
+      run: docker build . --file Dockerfile --tag thaihv/config-server:$VERSION      
+    - name: Docker Push config-server    
+      run: docker push thaihv/config-server:$VERSION
+ 
     - name: Build discovery-service Image
       working-directory: ./discovery-service
       run: docker build . --file Dockerfile --tag thaihv/discovery-service:$VERSION      
