@@ -1,62 +1,83 @@
 version: '3.3'
 
 services:
+  config-server:
+    image: thaihv/config-server:0.0.1
+    container_name: config-server
+    expose:
+      - "8888"
+    ports:
+      - "8888:8888"
   discovery:
     image: thaihv/discovery-service:0.0.1
     container_name: discovery-service
+    environment: 
+      - spring.cloud.config.uri=http://config-server:8888    
     expose:
       - "8761"
     ports:
       - "8761:8761"
+    depends_on:
+      - config-server      
   api-gateway:
     image: thaihv/api-gateway:0.0.1
     container_name: api-gateway
     environment: 
-      # Important for clients to register with eureka
       - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+      - spring.cloud.config.uri=http://config-server:8888
     expose:
       - "8090"
     ports:
       - "8090:8090"
     depends_on:
+      - config-server
       - discovery
   kpi-service:
     image: thaihv/kpi-service:0.0.1
     container_name: kpi-service
     environment: 
+      - spring.cloud.config.uri=http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
     expose:
       - "8091"
     ports:
       - "8091:8091"
     depends_on:
+      - config-server
       - discovery
   realtime-service:
     image: thaihv/realtime-service:0.0.1
     container_name: realtime-service
     environment: 
+      - spring.cloud.config.uri=http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/   
     expose:
       - "8092"
     ports:
       - "8092:8092"
     depends_on:
+      - config-server
       - discovery   
-#  ui-service:
-#    image: thaihv/ui-service::0.0.1
-#    container_name: ui-service
-#    expose:
-#      - "8093"
-#    ports:
-#      - "8093:8093"       
+  ui-service:
+    image: thaihv/ui-service::0.0.1
+    container_name: ui-service
+    environment: 
+      - spring.cloud.config.uri=http://config-server:8888
+      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/ 
+    expose:
+      - "8093"
+    ports:
+      - "8093:8093"       
   ui-community:
     image: thaihv/ui-community-service:0.0.1
     container_name: ui-community-service
     environment: 
+      - spring.cloud.config.uri=http://config-server:8888
       - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/       
     expose:
       - "8094"
     ports:
       - "8094:8094"
     depends_on:
+      - config-server
       - discovery
