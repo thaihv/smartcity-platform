@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
     <name>smartcity-platform</name>
     <modules>
+    	<module>config-server</module>
         <module>discovery-service</module>
         <module>api-gateway</module>
         <module>kpi-service</module>
