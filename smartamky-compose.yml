@@ -12,7 +12,8 @@ services:
     image: thaihv/discovery-service:0.0.1
     container_name: discovery-service
     environment: 
-      - spring.cloud.config.uri=http://config-server:8888    
+      - spring.cloud.config.uri=http://config-server:8888
+      - "SPRING_PROFILES_ACTIVE=production"    
     expose:
       - "8761"
     ports:
@@ -23,8 +24,8 @@ services:
     image: thaihv/api-gateway:0.0.1
     container_name: api-gateway
     environment: 
-      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
       - spring.cloud.config.uri=http://config-server:8888
+      - "SPRING_PROFILES_ACTIVE=production"
     expose:
       - "8090"
     ports:
@@ -37,7 +38,7 @@ services:
     container_name: kpi-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
-      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/
+      - "SPRING_PROFILES_ACTIVE=production"
     expose:
       - "8091"
     ports:
@@ -50,7 +51,7 @@ services:
     container_name: realtime-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
-      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/   
+      - "SPRING_PROFILES_ACTIVE=production"  
     expose:
       - "8092"
     ports:
@@ -63,7 +64,7 @@ services:
     container_name: ui-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
-      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/ 
+      - "SPRING_PROFILES_ACTIVE=production"
     expose:
       - "8093"
     ports:
@@ -73,7 +74,7 @@ services:
     container_name: ui-community-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
-      - eureka.client.serviceUrl.defaultZone=http://discovery:8761/eureka/       
+      - "SPRING_PROFILES_ACTIVE=production"   
     expose:
       - "8094"
     ports:
