@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from geoalchemy2 import Geometry
 from sqlalchemy.ext.declarative import declarative_base
 
-#conn_string = 'postgresql://postgres:postgres@www.tamky.xyz:25432/geospatial'
 conn_string = 'postgresql://postgres:postgres@localhost:5432/geospatial'
 engine = create_engine(conn_string, echo=True)
 # Uncomment the line below if you need to recreate the database.
