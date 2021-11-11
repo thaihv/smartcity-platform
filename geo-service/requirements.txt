@@ -4,7 +4,6 @@ gunicorn==20.1.0
 flask-oidc==1.4.0
 Flask-SQLAlchemy==2.5.1
 Flask-WTF==1.0.0
-GDAL==2.3.2
 GeoAlchemy2==0.9.4
 geopandas==0.9.0
 psycopg2==2.9.1
