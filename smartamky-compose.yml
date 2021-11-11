@@ -58,7 +58,14 @@ services:
       - "8092:8092"
     depends_on:
       - config-server
-      - discovery   
+      - discovery
+  geo-service:
+    image: thaihv/geo-service::0.0.1
+    container_name: geo-service
+    expose:
+      - "5000"
+    ports:
+      - "5000:5000"         
   ui-service:
     image: thaihv/ui-service::0.0.1
     container_name: ui-service
