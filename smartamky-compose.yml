@@ -60,14 +60,14 @@ services:
       - config-server
       - discovery
   geo-service:
-    image: thaihv/geo-service::0.0.1
+    image: thaihv/geo-service:0.0.1
     container_name: geo-service
     expose:
       - "5000"
     ports:
       - "5000:5000"         
   ui-service:
-    image: thaihv/ui-service::0.0.1
+    image: thaihv/ui-service:0.0.1
     container_name: ui-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
