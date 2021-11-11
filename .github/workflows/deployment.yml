@@ -76,6 +76,12 @@ jobs:
     - name: Docker Push ui-service     
       run: docker push thaihv/ui-service:$VERSION  
 
+    - name: Build geo-service Image
+      working-directory: ./geo-service
+      run: docker build . --file Dockerfile --tag thaihv/geo-service:$VERSION      
+    - name: Docker Push geo-service     
+      run: docker push thaihv/geo-service:$VERSION  
+      
     - name: Deploy To DigitalOcean  
       uses: appleboy/ssh-action@v0.1.4
       with:
