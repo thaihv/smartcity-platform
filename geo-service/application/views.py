@@ -17,7 +17,7 @@ from application import app
 logging.basicConfig(level=logging.DEBUG)
 oidc = OpenIDConnect(app)
 
-@app.route('/api', methods=['GET'])
+@app.route('/geo-api/api-uid', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def hello_api():
     if oidc.user_loggedin:
@@ -27,35 +27,35 @@ def hello_api():
         return 'Not logged in'
 
 
-@app.route('/login')
+@app.route('/geo-api/login')
 @oidc.require_login
 def login():
     return 'Welcome %s' % oidc.user_getfield('email')
 
 
-@app.route('/logout')
+@app.route('/geo-api/logout')
 def logout():
     oidc.logout()
     return 'Hi, you have been logged out! <a href="/">Return</a>'
 
 
-@app.route("/")
+@app.route("/geo-api/")
 def home():
     return render_template("home.html")
 
 
-@app.route("/about/")
+@app.route("/geo-api/about/")
 def about():
     return render_template("about.html")
 
 
-@app.route("/contact/")
+@app.route("/geo-api/contact/")
 def contact():
     return render_template("contact.html")
 
 
-@app.route("/hello/")
-@app.route("/hello/<name>")
+@app.route("/geo-api/hello/")
+@app.route("/geo-api/hello/<name>")
 def hello_there(name=None):
     return render_template(
         "hello_there.html",
@@ -64,7 +64,7 @@ def hello_there(name=None):
     )
 
 
-@app.route('/arenas/', methods=["GET", "POST"])
+@app.route('/geo-api/arenas/', methods=["GET", "POST"])
 def arenas():
     form = ArenaForm(request.form)
     arenas = session.query(Arena).all()
@@ -92,12 +92,12 @@ def arenas():
 
 
 # REST APIs
-@app.route("/api/v0.1/data")
+@app.route("/geo-api/v0.1/data_test")
 def get_data():
     return app.send_static_file("data.json")
 
 
-@app.route('/api/v0.1', methods=['GET'])
+@app.route('/geo-api/v0.1', methods=['GET'])
 def get_endpoints():
     data = [{'name': "Arena", "endpoint": "/arena"},
             {'name': "State", "endpoint": "/state"},
@@ -106,7 +106,7 @@ def get_endpoints():
     return jsonify({"endpoints": data})
 
 
-@app.route('/api/v0.1/arena', methods=['GET'])
+@app.route('/geo-api/v0.1/arena', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arenas():
     if 'name' in request.args:
@@ -118,7 +118,7 @@ def get_arenas():
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/arena/<int:arena_id>', methods=['GET'])
+@app.route('/geo-api/v0.1/arena/<int:arena_id>', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arena(arena_id):
     arena = session.query(Arena).get(arena_id)
@@ -133,7 +133,7 @@ def get_arena(arena_id):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/arena/<arena_name>', methods=['GET'])
+@app.route('/geo-api/v0.1/arena/<arena_name>', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arena_name(arena_name):
     arenas = session.query(Arena).filter(Arena.name.like(arena_name+"%")).all()
@@ -142,7 +142,7 @@ def get_arena_name(arena_name):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/arena/<int:arena_id>/intersect', methods=['GET'])
+@app.route('/geo-api/v0.1/arena/<int:arena_id>/intersect', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def arena_intersect(arena_id):
     arena = session.query(Arena).get(arena_id)
@@ -169,7 +169,7 @@ def arena_intersect(arena_id):
         return redirect('/api/v0.1/arena/' + str(arena_id))
 
 
-@app.route('/api/v0.1/arena/add', methods=['GET', 'POST'])
+@app.route('/geo-api/v0.1/arena/add', methods=['GET', 'POST'])
 def add_arenas():
     form = AddForm(request.form)
     form.name.data = "New Arena"
@@ -189,13 +189,13 @@ def add_arenas():
     return render_template('addarena.html', form=form)
 
 
-@app.route('/api/v0.1/arena/delete/<int:arena_id>', methods=['DELETE'])
+@app.route('/geo-api/v0.1/arena/delete/<int:arena_id>', methods=['DELETE'])
 def delete_arena(arena_id):
     arena = session.query(Arena).delete(arena_id)
     return jsonify({"deleted": "success"})
 
 
-@app.route('/api/v0.1/county', methods=['GET'])
+@app.route('/geo-api/v0.1/county', methods=['GET'])
 def get_counties():
     counties = session.query(County).all()
     geoms = {county.id: shapely.geometry.geo.mapping(
@@ -208,7 +208,7 @@ def get_counties():
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/county/query/size/<float:size>', methods=['GET'])
+@app.route('/geo-api/v0.1/county/query/size/<float:size>', methods=['GET'])
 def get_county_size(size):
     counties = session.query(County).filter(County.geom.ST_Area() > size).all()
     data = [{"type": "Feature", "properties": {"name": county.name, "id": county.id, "state": county.state.name, "area": to_shape(county.geom).area},
@@ -216,7 +216,7 @@ def get_county_size(size):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/county/<int:county_id>', methods=['GET'])
+@app.route('/geo-api/v0.1/county/<int:county_id>', methods=['GET'])
 def get_county(county_id):
 
     county = session.query(County).get(county_id)
@@ -230,7 +230,7 @@ def get_county(county_id):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/county/<county_name>', methods=['GET'])
+@app.route('/geo-api/v0.1/county/<county_name>', methods=['GET'])
 def get_county_name(county_name):
     counties = session.query(County).filter(
         County.name.like(county_name+"%")).all()
@@ -242,7 +242,7 @@ def get_county_name(county_name):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/state', methods=['GET'])
+@app.route('/geo-api/v0.1/state', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_states():
     states = session.query(State).all()
@@ -257,7 +257,7 @@ def get_states():
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/state/<int:state_id>', methods=['GET'])
+@app.route('/geo-api/v0.1/state/<int:state_id>', methods=['GET'])
 def get_state(state_id):
 
     state = session.query(State).get(state_id)
@@ -271,7 +271,7 @@ def get_state(state_id):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/state/<int:state_id>/within', methods=['GET'])
+@app.route('/geo-api/v0.1/state/<int:state_id>/within', methods=['GET'])
 def get_state_arenas(state_id):
 
     state = session.query(State).get(state_id)
@@ -292,7 +292,7 @@ def get_state_arenas(state_id):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/state/<state_name>', methods=['GET'])
+@app.route('/geo-api/v0.1/state/<state_name>', methods=['GET'])
 def get_state_name(state_name):
     states = session.query(State).filter(State.name.like(state_name+"%")).all()
     data = [{"type": "Feature",
@@ -303,7 +303,7 @@ def get_state_name(state_name):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/district', methods=['GET'])
+@app.route('/geo-api/v0.1/district', methods=['GET'])
 def get_districts():
     districts = session.query(District).all()
     if 'geometry' in request.args.keys() and request.args['geometry'] in ('1', 'True'):
@@ -323,7 +323,7 @@ def get_districts():
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/district/<int:district_id>', methods=['GET'])
+@app.route('/geo-api/v0.1/district/<int:district_id>', methods=['GET'])
 def get_district(district_id):
 
     district = session.query(District).get(district_id)
@@ -337,7 +337,7 @@ def get_district(district_id):
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
-@app.route('/api/v0.1/district/<district_name>', methods=['GET'])
+@app.route('/geo-api/v0.1/district/<district_name>', methods=['GET'])
 def get_district_name(district_name):
 
     districts = session.query(District).filter(
