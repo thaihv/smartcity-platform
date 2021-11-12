@@ -17,6 +17,7 @@ from application import app
 logging.basicConfig(level=logging.DEBUG)
 oidc = OpenIDConnect(app)
 
+
 @app.route('/geo-api/api-uid', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def hello_api():
