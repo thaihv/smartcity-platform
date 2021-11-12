@@ -17,7 +17,6 @@ conn_string = 'postgresql://postgres:postgres@www.tamky.xyz:25432/geospatial'
 # app.config['OIDC_INTROSPECTION_AUTH_METHOD'] = 'client_secret_post'
 # app.config['OIDC_TOKEN_TYPE_HINT'] = 'access_token'
 # app.config['OIDC-SCOPES'] = ["openid","email","profile"]
-
 app.config.update({
     'SQLALCHEMY_DATABASE_URI': conn_string,
     'SECRET_KEY': 'SECRET_KEY',
@@ -25,7 +24,7 @@ app.config.update({
     'DEBUG': True,
     'OIDC_CLIENT_SECRETS': 'client_secrets.json',
     'OIDC_ID_TOKEN_COOKIE_SECURE': False,
-    'OIDC_RESOURCE_SERVER_ONLY': False,
+    'OIDC_RESOURCE_SERVER_ONLY': True,
     'OIDC_OPENID_REALM': 'Smartcity',
     'OIDC_INTROSPECTION_AUTH_METHOD': 'client_secret_post',
     'OIDC_TOKEN_TYPE_HINT': 'access_token',

@@ -17,7 +17,6 @@ from application import app
 logging.basicConfig(level=logging.DEBUG)
 oidc = OpenIDConnect(app)
 
-
 @app.route('/api', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def hello_api():
@@ -108,7 +107,7 @@ def get_endpoints():
 
 
 @app.route('/api/v0.1/arena', methods=['GET'])
-@oidc.accept_token()
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arenas():
     if 'name' in request.args:
         arenas = session.query(Arena).filter(name=request.args['name'])
@@ -120,6 +119,7 @@ def get_arenas():
 
 
 @app.route('/api/v0.1/arena/<int:arena_id>', methods=['GET'])
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arena(arena_id):
     arena = session.query(Arena).get(arena_id)
     if arena != None:
@@ -134,7 +134,7 @@ def get_arena(arena_id):
 
 
 @app.route('/api/v0.1/arena/<arena_name>', methods=['GET'])
-@oidc.accept_token()
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_arena_name(arena_name):
     arenas = session.query(Arena).filter(Arena.name.like(arena_name+"%")).all()
     data = [{"type": "Feature", "properties": {"name": arena.name}, "geometry": {"type": "Point", "coordinates": [round(arena.longitude, 6), round(arena.latitude, 6)]},
@@ -143,6 +143,7 @@ def get_arena_name(arena_name):
 
 
 @app.route('/api/v0.1/arena/<int:arena_id>/intersect', methods=['GET'])
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def arena_intersect(arena_id):
     arena = session.query(Arena).get(arena_id)
     county = session.query(County).filter(
@@ -242,6 +243,7 @@ def get_county_name(county_name):
 
 
 @app.route('/api/v0.1/state', methods=['GET'])
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def get_states():
     states = session.query(State).all()
     data = [{"type": "Feature",
