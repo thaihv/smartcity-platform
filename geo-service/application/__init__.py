@@ -1,8 +1,8 @@
 import flask
 import py_eureka_client.eureka_client as eureka_client
 
-rest_port = 5000
-eureka_client.init(eureka_server="http://discovery:8761/eureka", app_name="geo-service", instance_port=rest_port)
+# rest_port = 5000
+# eureka_client.init(eureka_server="http://discovery:8761/eureka", app_name="geo-service", instance_port=rest_port)
 
 app = flask.Flask(__name__)
 
