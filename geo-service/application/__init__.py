@@ -6,7 +6,7 @@ eureka_client.init(eureka_server="http://discovery:8761/eureka", app_name="geo-s
 
 app = flask.Flask(__name__)
 
-conn_string = 'postgresql://postgres:postgres@www.tamky.xyz:25432/geospatial'
+conn_string = 'postgresql://postgres:postgres@geospatial:25432/geospatial'
 # app.config['SQLALCHEMY_DATABASE_URI'] = conn_string
 # app.config['SECRET_KEY'] = "SECRET_KEY"
 # app.config['DEBUG'] = True
