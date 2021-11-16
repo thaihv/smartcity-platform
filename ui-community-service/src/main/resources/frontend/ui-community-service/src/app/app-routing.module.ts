@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {KpiListComponent} from "./kpi-list/kpi-list.component";
 import {KpiViewComponent} from "./kpi-view/kpi-view.component";
+import {MapComponent} from "./map/map.component";
 import { HomeComponent } from './home/home.component';
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import { LineChartComponent } from './realtime-charts/line-chart/line-chart.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'smarttamky', component: HomeComponent},
   { path: 'kpis/list', component: KpiListComponent},  
   { path: 'kpis/:id', component: KpiViewComponent},
+  { path: 'geoanalysis', component: MapComponent},
   { path: 'userinfo', component: UserProfileComponent},
   { path: 'charts', component: RealtimeChartsComponent,
     children:[

@@ -15,6 +15,7 @@ from application import app
 
 # REQUEST WITH VIEWS
 logging.basicConfig(level=logging.DEBUG)
+logging.getLogger('flask_cors').level = logging.DEBUG
 oidc = OpenIDConnect(app)
 
 

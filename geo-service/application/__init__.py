@@ -1,12 +1,17 @@
 import flask
+import logging
+from flask_cors import CORS
 import py_eureka_client.eureka_client as eureka_client
 
-# rest_port = 5000
-# eureka_client.init(eureka_server="http://discovery:8761/eureka", app_name="geo-service", instance_port=rest_port)
-
+rest_port = 5000
+eureka_client.init(eureka_server="http://discovery:8761/eureka", app_name="geo-service", instance_port=rest_port)
+#eureka_client.init(eureka_server="http://localhost:8761/eureka", app_name="geo-service", instance_host="localhost", instance_port=rest_port)
 app = flask.Flask(__name__)
+cors = CORS(app, resources={r"/geo-api/*": {"origins": "*"}})
+logging.getLogger('flask_cors').level = logging.DEBUG
 
-conn_string = 'postgresql://postgres:postgres@geospatial:25432/geospatial'
+conn_string = 'postgresql://postgres:postgres@geospatial:5432/geospatial'
+#conn_string = 'postgresql://postgres:postgres@localhost:5432/geospatial'
 # app.config['SQLALCHEMY_DATABASE_URI'] = conn_string
 # app.config['SECRET_KEY'] = "SECRET_KEY"
 # app.config['DEBUG'] = True

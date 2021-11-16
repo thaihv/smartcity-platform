@@ -21,6 +21,7 @@ import { LineChartComponent } from './realtime-charts/line-chart/line-chart.comp
 import { PieChartComponent } from './realtime-charts/pie-chart/pie-chart.component';
 import { RadarChartComponent } from './realtime-charts/radar-chart/radar-chart.component';
 import { HomeComponent } from './home/home.component';
+import { MapComponent } from './map/map.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -51,7 +52,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     LineChartComponent,
     PieChartComponent,
     RadarChartComponent,
-    HomeComponent
+    HomeComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
