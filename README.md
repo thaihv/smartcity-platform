@@ -20,6 +20,7 @@
  1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it as a Euraka client. It uses javascript libraries
     * Angular 12
     * keycloak-js
+    * leaflet.js
     * chart.js   
  
 ## Prerequisite
