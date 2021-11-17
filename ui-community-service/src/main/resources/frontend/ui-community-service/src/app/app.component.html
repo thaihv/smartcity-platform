@@ -1,12 +1,65 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" routerLink="smarttamky">Smart Tamky</a>
-    <a class="navbar-brand" routerLink="charts">Realtime IOT</a>
-    <a class="navbar-brand" routerLink="kpis/list">CityKPIs </a>
-    <a class="navbar-brand" routerLink="geoanalysis">GeoAnalysis</a>
-    <a class="navbar-brand" routerLink="userinfo">User Profile</a>
-    <button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
-    <button *ngIf="isLoggedIn == false" type="button" (click)="login()">Log in</button>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">SmartTamky</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" routerLink="smarttamky">
+                        <i class="fa fa-home"></i> Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="charts"><i class="fa fa-area-chart">
+                      </i>
+                      Realtime IOT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="kpis/list"><i class="fa fa-calculator">
+                    </i>
+                    CityKPIs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="geoanalysis"><i class="fa fa-globe">
+                    </i>GeoAnalysis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"> <i class="fa fa-bell">
+                        <span class="badge badge-info">8</span>
+                      </i>Notification</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="userProfile ; else noUser">
+                        <i class=" fa fa-user-secret "></i> {{ userProfile.username }}
+                    </a>
+                    <ng-template #noUser>
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class=" fa fa-user "></i> User
+                        </a>
+                    </ng-template>
+                    <ul class="dropdown-menu " aria-labelledby="navbarDropdown ">
+                        <li><a class="dropdown-item " routerLink="userinfo">Profile</a></li>
+                        <li><a class="dropdown-item " href="# ">Permission</a></li>
+                        <li>
+                            <hr class="dropdown-divider ">
+                        </li>
+                        <li><a class="dropdown-item " href="# ">Language</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex ">
+                <input class="form-control me-2 " type="search " placeholder="Search " aria-label="Search ">
+                <button class="btn btn-outline-success " type="submit ">Search</button>
+                <button *ngIf="isLoggedIn " class="btn btn-outline-success " type="submit " (click)="logout() ">Logout</button>
+                <button *ngIf="isLoggedIn==false " class="btn btn-outline-success " type="submit " (click)="login() ">Login</button>
+            </form>
+        </div>
+    </div>
 </nav>
-
-<router-outlet></router-outlet>
+<router-outlet *ngIf="isLoggedIn ; else loggedOut "> </router-outlet>
+<ng-template #loggedOut>
+    <app-home></app-home>
+</ng-template>

@@ -8,7 +8,7 @@ services:
       - "8888"
     ports:
       - "8888:8888"
-  discovery-service:
+  discovery:
     image: thaihv/discovery-service:0.0.1
     container_name: discovery-service
     environment: 
@@ -76,7 +76,7 @@ services:
       - "8093"
     ports:
       - "8093:8093"       
-  ui-community-service:
+  ui-community:
     image: thaihv/ui-community-service:0.0.1
     container_name: ui-community-service
     environment: 

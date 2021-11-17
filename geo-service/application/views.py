@@ -18,6 +18,12 @@ logging.basicConfig(level=logging.DEBUG)
 logging.getLogger('flask_cors').level = logging.DEBUG
 oidc = OpenIDConnect(app)
 
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
+    return response
 
 @app.route('/geo-api/token-info/', methods=['GET'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])

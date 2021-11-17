@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
 
   public async ngOnInit() {
     this.isLoggedIn = await this.keycloak.isLoggedIn();
+    if (this.isLoggedIn)
+      this.userProfile = await this.keycloak.loadUserProfile();
   }
 
   public login() {
