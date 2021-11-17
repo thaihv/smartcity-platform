@@ -9,6 +9,10 @@
     * Hibernate
     * PostgresSQL
     * Spring Boot 2
+ 1. A geo service for processing spatial analysis and create maps, it works as a supplement to OGC Web services (WMS, WFS, WMT-S). The techstack is used:
+    * Flask
+    * GDAL and GIS tools
+    * PostGIS
  1. Microservices using Sping Cloud for Discovery and Registrer
     * Sring Cloud Gateway
     * Netflix Eureka
@@ -16,6 +20,7 @@
  1. A UI microservice to illustrate consuming APIs from above microservices. It is an angular application wrapped by spring boot to make it as a Euraka client. It uses javascript libraries
     * Angular 12
     * keycloak-js
+    * leaflet.js
     * chart.js   
  
 ## Prerequisite
@@ -28,6 +33,7 @@
 - JDK 1.8 
 - Maven 3.6.x
 - Nodejs 14+
+- Python 3.6+
 
 ## How to run
 ### Install infrastructure components in Docker
@@ -77,6 +83,9 @@ These docker compose files should be run and installed in a seperate server or a
       &nbsp;&nbsp;  }\
    &nbsp;]\
 }
+- Go to ./geo-service/ 
+   * Run $ python app.py 
+   * This a Python microservice, it is used as an example to leverage the strength of microservice architecture for using multiple development environments and Python based geospatial analysis capability. The default port for this microservice is 5000 and it works well with infrastructure components as config server, api gateway, Eureka server which are created by Spring Framework. 
 - Go to ./ui-service/
    * Run $ mvn spring-boot:run
    * Open (http://localhost:8090/mytamky/) to view UI example of consuming microservice APIs.
