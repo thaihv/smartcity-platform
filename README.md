@@ -9,6 +9,10 @@
     * Hibernate
     * PostgresSQL
     * Spring Boot 2
+ 1. A geo service for processing spatial analysis and create maps, it works as a supplement to OGC Web services (WMS, WFS, WMT-S). The techstack is used:
+    * Flask
+    * GDAL and GIS tools
+    * PostGIS
  1. Microservices using Sping Cloud for Discovery and Registrer
     * Sring Cloud Gateway
     * Netflix Eureka
