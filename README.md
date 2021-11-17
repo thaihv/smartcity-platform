@@ -28,6 +28,7 @@
 - JDK 1.8 
 - Maven 3.6.x
 - Nodejs 14+
+- Python 3.6+
 
 ## How to run
 ### Install infrastructure components in Docker
@@ -77,6 +78,9 @@ These docker compose files should be run and installed in a seperate server or a
       &nbsp;&nbsp;  }\
    &nbsp;]\
 }
+- Go to ./geo-service/ 
+   * Run $ python app.py 
+   * This a Python microservice, it is used as an example to leverage the strength of microservice architecture for using multiple development environments and Python based geospatial analysis capability. The default port for this microservice is 5000 and it works well with infrastructure components as config server, api gateway, Eureka server which are created by Spring Framework. 
 - Go to ./ui-service/
    * Run $ mvn spring-boot:run
    * Open (http://localhost:8090/mytamky/) to view UI example of consuming microservice APIs.
