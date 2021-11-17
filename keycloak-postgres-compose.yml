@@ -31,7 +31,7 @@ services:
     ports:
        - "15432:5432"
     restart: unless-stopped
-  geospatial:
+  geo_db:
     image: kartoza/postgis:14-3.1
     container_name: geo_db
     volumes:
