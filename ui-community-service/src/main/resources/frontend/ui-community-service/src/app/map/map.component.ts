@@ -48,32 +48,25 @@ export class MapComponent implements AfterViewInit {
       "Streets": streets
     };
 
-    var arenas = L.layerGroup();
-    var states = L.layerGroup();
-
-    const overlays = {
-      "Arenas": arenas,
-      "States": states
-    };
     this.map = L.map('map', {
       center: [38.89304, -77.03699],
       zoom: 13,
       layers: [watercolor]
     });
-    L.control.layers(baseLayers, overlays).addTo(this.map);
-
+    var controlLayers = L.control.layers(baseLayers).addTo(this.map);
     // Arenas
     let arena_url = environment.apiUrlBase + '/geo-api/v0.1/arena/';
 
     this.httpClient.get<any>(arena_url).subscribe(
       data => {
         console.log(data);
-        L.geoJSON(data, {
+        var geojsonLayer = L.geoJSON(data, {
 
           onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name).addTo(arenas)
+            layer.bindPopup(feature.properties.name)
           }
         }).addTo(this.map);
+        controlLayers.addOverlay(geojsonLayer, 'Arenas');
       },
       err => {
         console.log(err);
@@ -90,23 +83,18 @@ export class MapComponent implements AfterViewInit {
           "weight": 5,
           "opacity": 0.65
         };
-        L.geoJSON(data, {
+        var geojsonLayer = L.geoJSON(data, {
           style: myStyle,
           onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name).addTo(states)
+            layer.bindPopup(feature.properties.name)
           }
         }).addTo(this.map);
+        controlLayers.addOverlay(geojsonLayer, 'Districts');
       },
       err => {
         console.log(err);
       });
-
-    // var latlngs: [number, number][] = [[37, -109.05], [41, -109.03], [41, -102.05], [37, -102.04]];
-    // var polygon = L.polygon(latlngs, { color: 'red' }).addTo(this.map);
-    // this.map.fitBounds(polygon.getBounds());      
-
     var popup = L.popup();
-
     this.map.on('click', <LeafletMouseEvent>(e: { latlng: { lat: any; lng: any; }; }) => {
       console.log(e.latlng.lat);
       console.log(e.latlng.lng);
@@ -115,8 +103,6 @@ export class MapComponent implements AfterViewInit {
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(this.map);
     });
-
-
   }
   constructor(private httpClient: HttpClient) { }
   ngAfterViewInit(): void {

@@ -9,6 +9,7 @@ GeoAlchemy2==0.9.4
 geopandas==0.9.0
 psycopg2==2.9.1
 py-eureka-client==0.10.0
+config-client==0.13.0
 pygeoif==0.7
 pyproj==3.0.1
 rasterio==1.2.10
