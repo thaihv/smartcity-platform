@@ -62,6 +62,9 @@ services:
   geo-service:
     image: thaihv/geo-service:0.0.1
     container_name: geo-service
+    environment: 
+      - CONFIG_URI=http://config-server:8888
+      - PROFILE=production    
     expose:
       - "5000"
     ports:

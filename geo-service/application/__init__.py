@@ -7,17 +7,15 @@ from requests.auth import HTTPBasicAuth
 from config.spring import ConfigClient
 
 
-if os.environ['FLASK_ENV'] == 'production':
-    profile='production'
-else:
-    profile='development'
+address = os.getenv('CONFIG_URI', 'http://localhost:8888')
+profile = os.getenv('PROFILE', 'development')
 
 config_client = ConfigClient(
-    app_name='geo-service',
-    address='http://localhost:8888',
-    branch='master',
-    profile=profile,
-    url="{address}/{branch}/{app_name}-{profile}.yml"
+    app_name = 'geo-service',
+    address = address,
+    branch = 'master',
+    profile = profile,
+    url = "{address}/{branch}/{app_name}-{profile}.yml"
 )
 response = config_client.get_config(auth=HTTPBasicAuth("jamescrafts80", "p4thaihv"))
 print(config_client.config)
