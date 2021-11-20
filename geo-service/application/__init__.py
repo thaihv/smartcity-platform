@@ -5,7 +5,7 @@ from flask_cors import CORS
 import py_eureka_client.eureka_client as eureka_client
 from requests.auth import HTTPBasicAuth
 from config.spring import ConfigClient
-
+from werkzeug.exceptions import HTTPException
 
 address = os.getenv('CONFIG_URI', 'http://localhost:8888')
 profile = os.getenv('PROFILE', 'development')
@@ -18,7 +18,7 @@ config_client = ConfigClient(
     url = "{address}/{branch}/{app_name}-{profile}.yml"
 )
 response = config_client.get_config(auth=HTTPBasicAuth("jamescrafts80", "p4thaihv"))
-print(config_client.config)
+print(response)
 
 rest_port = config_client.get_attribute('server.port')
 eureka_server = config_client.get_attribute('eureka.client.serviceUrl.defaultZone')
@@ -28,8 +28,6 @@ instance_host = config_client.get_attribute('instance_host')
 app_name = config_client.get_attribute('app_name')
 
 eureka_client.init(eureka_server=eureka_server, app_name=app_name, instance_host=instance_host, instance_port=rest_port)
-# for production
-#eureka_client.init(eureka_server=eureka_server, app_name=app_name, instance_port=rest_port)
 
 app = flask.Flask(__name__)
 cors = CORS(app, resources={contextpath + '/*': {"origins": "*"}})

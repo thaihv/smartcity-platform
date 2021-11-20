@@ -1,13 +1,15 @@
 .map-container {
-    width: 600px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
 }
 
 .map-frame {
     border: 1px inset rgb(21, 22, 22);
-    height: 100%;
+    width: 60%;
+    height: 70vh;
 }
 
 #map {
+    width: 100%;
     height: 100%;
 }

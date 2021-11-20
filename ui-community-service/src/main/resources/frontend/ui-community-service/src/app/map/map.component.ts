@@ -1,4 +1,5 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from "@angular/forms";
 import * as L from 'leaflet';
 import { environment } from '../../environments/environment';
 import { HttpClient } from "@angular/common/http";
@@ -8,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit, OnInit {
 
   private map: L.Map;
 
@@ -104,9 +105,44 @@ export class MapComponent implements AfterViewInit {
         .openOn(this.map);
     });
   }
-  constructor(private httpClient: HttpClient) { }
+
   ngAfterViewInit(): void {
     this.initMap();
   }
+  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder) { }
+
+  isValidated = false;
+  arenaForm = this.formBuilder.group({
+    name: ['', [Validators.required]],
+    longitude: [''],
+    latitude: ['']
+  });
+  Arena: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
+
+
+  // Getter method to access formcontrols
+  get arenaName() {
+    return this.arenaForm.get('name');
+  }
+
+  // Choose city using select dropdown
+  changeArena(e: { target: { value: any; }; }) {
+    this.arenaName?.setValue(e.target.value, {
+      onlySelf: true
+    })
+  }
+  onSubmit() {
+    this.isValidated = true;
+    if (!this.arenaForm.valid) {
+
+    }
+    else {
+      alert(JSON.stringify(this.arenaForm.value))
+    }
+  }
+  ngOnInit(): void {
+
+  }
+
 
 }

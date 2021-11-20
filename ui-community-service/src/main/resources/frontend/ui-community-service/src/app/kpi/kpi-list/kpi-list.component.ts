@@ -4,7 +4,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {KeycloakService} from 'keycloak-angular';
 import {Kpi} from "./kpi";
 import {KpiService} from "./kpi.service";
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-kpi-list',

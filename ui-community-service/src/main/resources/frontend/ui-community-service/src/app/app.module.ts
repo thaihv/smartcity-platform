@@ -9,8 +9,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
-import { KpiListComponent } from './kpi-list/kpi-list.component';
-import { KpiViewComponent } from './kpi-view/kpi-view.component';
+import { KpiListComponent } from './kpi/kpi-list/kpi-list.component';
+import { KpiViewComponent } from './kpi/kpi-view/kpi-view.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ChartsModule } from 'ng2-charts';
 import { RealtimeChartsComponent } from './realtime-charts/realtime-charts.component';
@@ -22,6 +22,8 @@ import { PieChartComponent } from './realtime-charts/pie-chart/pie-chart.compone
 import { RadarChartComponent } from './realtime-charts/radar-chart/radar-chart.component';
 import { HomeComponent } from './home/home.component';
 import { MapComponent } from './map/map.component';
+import { KpiComponent } from './kpi/kpi.component';
+import { OngoingComponent } from './ongoing/ongoing.component';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -53,7 +55,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     PieChartComponent,
     RadarChartComponent,
     HomeComponent,
-    MapComponent
+    MapComponent,
+    KpiComponent,
+    OngoingComponent
   ],
   imports: [
     BrowserModule,

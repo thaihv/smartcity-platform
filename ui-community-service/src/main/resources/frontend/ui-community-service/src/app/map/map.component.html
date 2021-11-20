@@ -1,6 +1,92 @@
 <div class="container container-fluid">
     <ng-container>
-        <div class="map-container">
+        <div class="map-container d-flex">
+            <div class="me-2">
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Search a location
+                        </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <form class="d-flex " [formGroup]="arenaForm" (ngSubmit)="onSubmit()">
+                                    <select class="custom-select col-md-9 me-2" formControlName="name">
+                                        <option value="">Choose a your Arena</option>
+                                        <option *ngFor="let arena of Arena" [ngValue]="arena">{{arena}}</option>
+                                    </select>
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-secondary col-md-3">Find</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Create a new location
+                        </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <form>
+                                    <div class="form-group row mb-2">
+                                        <label for="inputEmail3" class="col-md-3 col-form-label">Lon: </label>
+                                        <div class="col-md-9">
+                                            <input type="email" class="form-control" id="inputEmail3" placeholder="Longitude">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-2">
+                                        <label for="inputPassword3" class="col-md-3 col-form-label">Lat: </label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Latitude">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mb-2">
+                                        <label for="inputEmail3" class="col-md-3 col-form-label">Name: </label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Input a name to add">
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit " class="btn btn-secondary ">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Data conversion
+                        </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <form>
+                                    <div class="form-group row">
+                                        <input type="file" class="form-control-file form-control-sm mb-2" id="filetoconvert">
+                                    </div>
+                                    <div class="form-group row">
+                                        <select class="form-select mb-2" aria-label="Default select example">
+                                            <option selected>Select a format</option>
+                                            <option value="1">shp</option>
+                                            <option value="2">geojson</option>
+                                            <option value="3">csv</option>
+                                            <option value="3">dgn</option>
+                                            <option value="3">dxf</option>
+                                        </select>
+                                        <div class="text-center">
+                                            <button type="submit " class="btn btn-secondary">Convert</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="map-frame">
                 <div id="map"></div>
             </div>

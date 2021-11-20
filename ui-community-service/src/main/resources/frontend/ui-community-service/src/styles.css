@@ -12,13 +12,37 @@
 
 .list-group-item {
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .list-group-item:hover,
 .list-group-item.active {
     color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #6c757d;
+    border-color: #6c757d;
     outline: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #FFF !important;
+    background-color: #6c757d !important;
+}
+
+.accordion-button:link,
+.accordion-button:visited,
+.accordion-button:hover,
+.accordion-button:active {
+    background-color: #6c757d !important;
+    color: #FFF !important;
+    text-decoration: none !important;
+    border: hidden !important;
+    border-color: #6c757d !important;
+    box-shadow: 0px !important;
+}
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: #6c757d !important;
+    outline: 0;
+    box-shadow: 0 0 0 .25rem #FFF !important;
 }

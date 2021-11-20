@@ -15,10 +15,10 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="charts"><i class="fa fa-area-chart">
                       </i>
-                      Realtime IOT</a>
+                      Realtime IoT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" routerLink="kpis/list"><i class="fa fa-calculator">
+                    <a class="nav-link" routerLink="kpis"><i class="fa fa-calculator">
                     </i>
                     CityKPIs</a>
                 </li>
@@ -28,7 +28,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#"> <i class="fa fa-bell">
-                        <span class="badge badge-info rounded-pill bg-danger">8</span>
+                        <span *ngIf="userProfile " class="badge badge-info rounded-pill bg-danger">8</span>
                       </i>Notification</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -52,14 +52,14 @@
             </ul>
             <form class="d-flex ">
                 <input class="form-control me-2 " type="search " placeholder="Search " aria-label="Search ">
-                <button class="btn btn-outline-success " type="submit ">Search</button>
+                <button class="btn btn-secondary btn-sm me-2" type="submit ">Search</button>
                 <button *ngIf="isLoggedIn " class="btn btn-outline-success " type="submit " (click)="logout() ">Logout</button>
                 <button *ngIf="isLoggedIn==false " class="btn btn-outline-success " type="submit " (click)="login() ">Login</button>
             </form>
         </div>
     </div>
 </nav>
-<router-outlet *ngIf="isLoggedIn ; else loggedOut "> </router-outlet>
+<router-outlet *ngIf="userProfile ; else loggedOut "> </router-outlet>
 <ng-template #loggedOut>
     <app-home></app-home>
 </ng-template>

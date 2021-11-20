@@ -3,14 +3,15 @@
 </ngx-spinner>
 
 <div class="container container-fluid">
-    <table class="table">
-        <thead>
+    <table class="table table-hover table-md">
+        <thead class="table-secondary">
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
-                <th scope="col">Updated(days)</th>
+                <th scope="col">Frequency</th>
+                <th scope="col" class="text-center">Action</th>
             </tr>
         </thead>
         <tbody *ngFor="let kpi of kpis">
@@ -21,16 +22,19 @@
                 <td>{{kpi.description}}</td>
                 <td>{{kpi.frequencyInDays}}</td>
                 <td>
-                    <button (click)="editKpi(kpi.id)" class="btn btn-primary" style="margin-right: 10px">Edit</button>
-                    <button (click)="deleteKpi(kpi.id)" class="btn btn-danger">Delete</button>
+                    <div class="d-flex ">
+                        <button (click)="editKpi(kpi.id) " class="btn btn-secondary " style="margin-right: 10px ">Edit</button>
+                        <button (click)="deleteKpi(kpi.id) " class="btn btn-danger ">Delete</button>
+                    </div>
+
                 </td>
             </tr>
         </tbody>
     </table>
-    <br/>
-    <div class="container container-fluid">
-        <h5>
-            <button (click)="createKpi()" class="btn btn-primary"> Create</button>
-        </h5>
+</div>
+<br/>
+<div class="container container-fluid">
+    <div class="text-center">
+        <button (click)="createKpi() " class="btn btn-secondary "> Create</button>
     </div>
 </div>

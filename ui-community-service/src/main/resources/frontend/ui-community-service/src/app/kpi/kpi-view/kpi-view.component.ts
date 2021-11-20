@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
-import {Kpi} from "src/app/kpi-list/kpi";
-import {KpiService} from "src/app/kpi-list/kpi.service";
-import { environment } from '../../environments/environment';
+import {Kpi} from "src/app/kpi/kpi-list/kpi";
+import {KpiService} from "src/app/kpi/kpi-list/kpi.service";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-kpi-view',
