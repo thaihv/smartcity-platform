@@ -3,6 +3,10 @@ import { FormBuilder, Validators } from "@angular/forms";
 import * as L from 'leaflet';
 import { environment } from '../../environments/environment';
 import { HttpClient } from "@angular/common/http";
+import { Arena } from "./arena";
+import { GeoService } from "./geo.service";
+import { NgxSpinnerService } from "ngx-spinner";
+
 
 @Component({
   selector: 'app-map',
@@ -12,7 +16,10 @@ import { HttpClient } from "@angular/common/http";
 export class MapComponent implements AfterViewInit, OnInit {
 
   private map: L.Map;
+  districts: any = [];
+  arenas: Arena[] = [];;
 
+  constructor(private httpClient: HttpClient, private geoService: GeoService, private ngxSpinnerService: NgxSpinnerService, private formBuilder: FormBuilder) { }
   private initMap(): void {
 
     const iconRetinaUrl = './assets/marker-icon-2x.png';
@@ -55,16 +62,41 @@ export class MapComponent implements AfterViewInit, OnInit {
       layers: [watercolor]
     });
     var controlLayers = L.control.layers(baseLayers).addTo(this.map);
-    // Arenas
+
+    // Get Arenas
     let arena_url = environment.apiUrlBase + '/geo-api/v0.1/arena/';
 
     this.httpClient.get<any>(arena_url).subscribe(
       data => {
-        console.log(data);
-        var geojsonLayer = L.geoJSON(data, {
 
+        for (var key in data) {
+          var value = data[key];
+          if (key == 'features') {
+            value.forEach((element: { [x: string]: any; }) => {
+              var properties = element['properties'];
+              var geometry = element['geometry'];
+              const arena: Arena = {
+                id: 0,
+                name: '',
+                longitude: 0,
+                latitude: 0
+              };
+
+              arena.id = properties['id']
+              arena.name = properties['name'];
+              arena.longitude = geometry['coordinates'][0];
+              arena.latitude = geometry['coordinates'][1];
+              //console.log("Arena is :" + arena.id + "; " + arena.name + "; " + arena.longitude + "; " + arena.latitude);
+              this.arenas.push(arena);
+            });
+          }
+
+        }
+
+        var geojsonLayer = L.geoJSON(data, {
           onEachFeature: function (feature, layer) {
             layer.bindPopup(feature.properties.name)
+
           }
         }).addTo(this.map);
         controlLayers.addOverlay(geojsonLayer, 'Arenas');
@@ -73,28 +105,22 @@ export class MapComponent implements AfterViewInit, OnInit {
         console.log(err);
       });
 
-    // District
-    let district_url = environment.apiUrlBase + '/geo-api/v0.1/district/5/';
 
-    this.httpClient.get<any>(district_url).subscribe(
-      data => {
-        console.log(data);
-        var myStyle = {
-          "color": "#ff7800",
-          "weight": 5,
-          "opacity": 0.65
-        };
-        var geojsonLayer = L.geoJSON(data, {
-          style: myStyle,
-          onEachFeature: function (feature, layer) {
-            layer.bindPopup(feature.properties.name)
-          }
-        }).addTo(this.map);
-        controlLayers.addOverlay(geojsonLayer, 'Districts');
-      },
-      err => {
-        console.log(err);
-      });
+    this.getDistricts();
+    var myStyle = {
+      "color": "#ff7800",
+      "weight": 5,
+      "opacity": 0.65
+    };
+    var geojsonLayer = L.geoJSON(this.districts, {
+      style: myStyle,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.name)
+      }
+    }).addTo(this.map);
+    controlLayers.addOverlay(geojsonLayer, 'Districts');
+
+
     var popup = L.popup();
     this.map.on('click', <LeafletMouseEvent>(e: { latlng: { lat: any; lng: any; }; }) => {
       console.log(e.latlng.lat);
@@ -106,19 +132,32 @@ export class MapComponent implements AfterViewInit, OnInit {
     });
   }
 
+  private getDistricts() {
+    this.ngxSpinnerService.show();
+    this.geoService.getDistricts(environment.apiUrlBase + '/geo-api/v0.1/district/').subscribe(
+      data => {
+        this.districts = data;
+        this.ngxSpinnerService.hide();
+      },
+      error1 => {
+        this.ngxSpinnerService.hide();
+        console.log(error1);
+      }
+    );
+  }
+
   ngAfterViewInit(): void {
     this.initMap();
   }
-  constructor(private httpClient: HttpClient, private formBuilder: FormBuilder) { }
+
 
   isValidated = false;
   arenaForm = this.formBuilder.group({
-    name: ['', [Validators.required]],
+    id: [''],
+    name: [''],
     longitude: [''],
     latitude: ['']
   });
-  Arena: any = ['Florida', 'South Dakota', 'Tennessee', 'Michigan']
-
 
   // Getter method to access formcontrols
   get arenaName() {
@@ -137,8 +176,12 @@ export class MapComponent implements AfterViewInit, OnInit {
 
     }
     else {
-      alert(JSON.stringify(this.arenaForm.value))
+      var id = this.arenaForm.value['id'] - 1;
+      var lat = this.arenas[id].latitude;
+      var lon = this.arenas[id].longitude;
+      this.map.flyTo(new L.LatLng(lat, lon));
     }
+
   }
   ngOnInit(): void {
 

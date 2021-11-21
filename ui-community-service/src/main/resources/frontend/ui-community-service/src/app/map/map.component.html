@@ -2,7 +2,7 @@
     <ng-container>
         <div class="map-container d-flex">
             <div class="me-2">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion" id="accordionFlushExample">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -12,9 +12,9 @@
                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <form class="d-flex " [formGroup]="arenaForm" (ngSubmit)="onSubmit()">
-                                    <select class="custom-select col-md-9 me-2" formControlName="name">
+                                    <select class="custom-select col-md-9 me-2" formControlName="id">
                                         <option value="">Choose a your Arena</option>
-                                        <option *ngFor="let arena of Arena" [ngValue]="arena">{{arena}}</option>
+                                        <option *ngFor="let arena of arenas" [ngValue]="arena.id">{{arena.name}}</option>
                                     </select>
                                     <!-- Submit Button -->
                                     <button type="submit" class="btn btn-secondary col-md-3">Find</button>
@@ -32,21 +32,21 @@
                             <div class="accordion-body">
                                 <form>
                                     <div class="form-group row mb-2">
-                                        <label for="inputEmail3" class="col-md-3 col-form-label">Lon: </label>
+                                        <label class="col-md-3 col-form-label">Lon: </label>
                                         <div class="col-md-9">
-                                            <input type="email" class="form-control" id="inputEmail3" placeholder="Longitude">
+                                            <input class="form-control" id="inputLon" placeholder="Longitude">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
-                                        <label for="inputPassword3" class="col-md-3 col-form-label">Lat: </label>
+                                        <label class="col-md-3 col-form-label">Lat: </label>
                                         <div class="col-md-9">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Latitude">
+                                            <input type="password" class="form-control" id="inputLat" placeholder="Latitude">
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
-                                        <label for="inputEmail3" class="col-md-3 col-form-label">Name: </label>
+                                        <label class="col-md-3 col-form-label">Name: </label>
                                         <div class="col-md-9">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Input a name to add">
+                                            <input class="form-control" id="inputName" placeholder="Input a name to add">
                                         </div>
                                     </div>
                                     <div class="text-center">
