@@ -183,14 +183,23 @@ def add_arenas():
     form.name.data = "New Arena"
     form.longitude.data = -121.5
     form.latitude.data = 37.8
+
     if request.method == "POST":
         arena = Arena()
-        arena.name = request.form['name']
-        arena.longitude = float(request.form['longitude'])
-        arena.latitude = float(request.form['latitude'])
-        arena.geom = 'SRID=4326;POINT({0} {1})'.format(arena.longitude,
-                                                       arena.latitude)
+        json = request.get_json(force=True, silent = True)
+        
+        if (json == None): # Post request using Form submit
+            arena.name = request.form['name']
+            arena.longitude = float(request.form['longitude'])
+            arena.latitude = float(request.form['latitude'])
+        else: # Post request using Json Payload
+            arena.name = json['name']
+            arena.longitude = float(json['longitude'])
+            arena.latitude = float(json['latitude'])
+
+        arena.geom = 'SRID=4326;POINT({0} {1})'.format(arena.longitude, arena.latitude)
         session.add(arena)
+        session.commit()
         data = [{"type": "Feature", "properties": {"name": arena.name}, "geometry": {
             "type": "Point", "coordinates": [round(arena.longitude, 6), round(arena.latitude, 6)]}, }]
         return jsonify({'added': 'success', "type": "FeatureCollection", "features": data})

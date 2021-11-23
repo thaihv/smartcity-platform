@@ -21,6 +21,9 @@ export class MapComponent implements AfterViewInit {
     id: [''],
     name: ['']
   });
+  longitude = -77.03699;
+  latitude = 38.89304;
+  name = 'New Arena';
   constructor(private geoService: GeoService, private ngxSpinnerService: NgxSpinnerService, private formBuilder: FormBuilder) { }
   private addArenasToMap(controlLayers: L.Control.Layers) {
     this.ngxSpinnerService.show();
@@ -85,17 +88,50 @@ export class MapComponent implements AfterViewInit {
       }
     );
   }
+
+  get areaName() {
+    return this.arenaForm.get('name');
+  }
+
+  onChangeEvent(event: any) {
+    this.areaName?.setValue(event.target.value, {
+      onlySelf: true
+    })
+    this.name = this.arenaForm.get('name')?.value
+  }
   onSubmit() {
     this.isValidated = true;
     if (!this.arenaForm.valid) {
 
     }
     else {
-      var id = this.arenaForm.value['id'] - 1;
-      var lat = this.arenas[id].latitude;
-      var lon = this.arenas[id].longitude;
-      this.map.flyTo(new L.LatLng(lat, lon));
+      for (var i = 0; i < this.arenas.length; i++) {
+        var obj = this.arenas[i];
+        var id = this.arenaForm.value['id'];
+        if (id == obj.id) {
+          this.map.panTo(new L.LatLng(obj.latitude, obj.longitude));
+          break;
+        }
+      }
+
     }
+
+  }
+  addNewLocation() {
+
+    this.ngxSpinnerService.show();
+    let arena = new Arena();
+    arena.name = this.name;
+    arena.latitude = this.latitude;
+    arena.longitude = this.longitude;
+    this.geoService.createArena(environment.apiUrlBase + '/geo-api/v0.1/arena/add/', arena).subscribe(
+      data => {
+        this.ngxSpinnerService.hide();
+      },
+      error1 => {
+        this.ngxSpinnerService.hide();
+      }
+    );
 
   }
   private initMap() {
@@ -135,17 +171,20 @@ export class MapComponent implements AfterViewInit {
     };
 
     this.map = L.map('map', {
-      center: [38.89304, -77.03699],
+      center: [this.latitude, this.longitude],
       zoom: 13,
       layers: [watercolor]
     });
     var controlLayers = L.control.layers(baseLayers).addTo(this.map);
     this.addArenasToMap(controlLayers);
     this.addDistrictsToMap(controlLayers);
+
     var popup = L.popup();
     this.map.on('click', <LeafletMouseEvent>(e: { latlng: { lat: any; lng: any; }; }) => {
       console.log(e.latlng.lat);
       console.log(e.latlng.lng);
+      this.longitude = e.latlng.lng
+      this.latitude = e.latlng.lat
       popup
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())

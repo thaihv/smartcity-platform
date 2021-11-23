@@ -19,6 +19,6 @@ export class GeoService {
   }
   createArena(url: string, arena: Arena)
   {
-    return this.httpClient.post<Arena[]>(url, arena);
+    return this.httpClient.post<any>(url, arena);
   }  
 }

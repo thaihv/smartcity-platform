@@ -18,7 +18,7 @@ config_client = ConfigClient(
     url = "{address}/{branch}/{app_name}-{profile}.yml"
 )
 response = config_client.get_config(auth=HTTPBasicAuth("jamescrafts80", "p4thaihv"))
-print(response)
+print(config_client.config)
 
 rest_port = config_client.get_attribute('server.port')
 eureka_server = config_client.get_attribute('eureka.client.serviceUrl.defaultZone')
@@ -26,6 +26,8 @@ contextpath = config_client.get_attribute('server.servlet.context-path')
 conn_string = config_client.get_attribute('conn_string')
 instance_host = config_client.get_attribute('instance_host')
 app_name = config_client.get_attribute('app_name')
+
+
 
 eureka_client.init(eureka_server=eureka_server, app_name=app_name, instance_host=instance_host, instance_port=rest_port)
 

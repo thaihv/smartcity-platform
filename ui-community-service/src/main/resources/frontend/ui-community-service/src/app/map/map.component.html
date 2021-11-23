@@ -16,7 +16,6 @@
                                         <option value="">Choose a your Arena</option>
                                         <option *ngFor="let arena of arenas" [ngValue]="arena.id">{{arena.name}}</option>
                                     </select>
-                                    <!-- Submit Button -->
                                     <button type="submit" class="btn btn-secondary col-md-3">Find</button>
                                 </form>
                             </div>
@@ -32,25 +31,25 @@
                             <div class="accordion-body">
                                 <form>
                                     <div class="form-group row mb-2">
-                                        <label class="col-md-3 col-form-label">Lon: </label>
+                                        <label class="col-md-3 col-form-label"><strong>Lon:</strong> </label>
                                         <div class="col-md-9">
-                                            <input class="form-control" id="inputLon" placeholder="Longitude">
+                                            <input type="text" class="form-control" id="inputLon" placeholder="Longitude" value={{longitude}}>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
-                                        <label class="col-md-3 col-form-label">Lat: </label>
+                                        <label class="col-md-3 col-form-label"><strong>Lat:</strong> </label>
                                         <div class="col-md-9">
-                                            <input type="password" class="form-control" id="inputLat" placeholder="Latitude">
+                                            <input type="text" class="form-control" id="inputLat" placeholder="Latitude" value={{latitude}}>
                                         </div>
                                     </div>
                                     <div class="form-group row mb-2">
-                                        <label class="col-md-3 col-form-label">Name: </label>
+                                        <label class="col-md-3 col-form-label"><strong>Name:</strong></label>
                                         <div class="col-md-9">
-                                            <input class="form-control" id="inputName" placeholder="Input a name to add">
+                                            <input class="form-control" id="inputName" placeholder="Input a name to add" (change)="onChangeEvent($event)" value={{name}}>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <button type="submit " class="btn btn-secondary ">Add</button>
+                                        <button (click)="addNewLocation() " class="btn btn-secondary ">Add</button>
                                     </div>
                                 </form>
                             </div>
