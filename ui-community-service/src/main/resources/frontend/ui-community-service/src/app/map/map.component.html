@@ -58,10 +58,28 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingThree">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Data conversion
+                                Delete a location
                         </button>
                         </h2>
                         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <form class="d-flex " [formGroup]="arenaForm" (ngSubmit)="onSubmit()">
+                                    <select class="custom-select col-md-9 me-2" formControlName="id">
+                                        <option value="">Choose a your Arena</option>
+                                        <option *ngFor="let arena of arenas" [ngValue]="arena.id">{{arena.name}}</option>
+                                    </select>
+                                    <button (click)="deleteLocation() " class="btn btn-secondary col-md-3">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                Data conversion
+                        </button>
+                        </h2>
+                        <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <form>
                                     <div class="form-group row">

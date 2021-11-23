@@ -178,6 +178,7 @@ def arena_intersect(arena_id):
 
 
 @app.route('/geo-api/v0.1/arena/add/', methods=['GET', 'POST'])
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def add_arenas():
     form = AddForm(request.form)
     form.name.data = "New Arena"
@@ -207,14 +208,17 @@ def add_arenas():
 
 
 @app.route('/geo-api/v0.1/arena/delete/<int:arena_id>/', methods=['DELETE'])
+@oidc.accept_token(require_token=True, scopes_required=['openid'])
 def delete_arena(arena_id):
-    arena = session.query(Arena).delete(arena_id)
+    arena = session.query(Arena).filter(Arena.id == arena_id).delete(synchronize_session='fetch')
+    session.commit()
     return jsonify({"deleted": "success"})
 
 
 @app.route('/geo-api/v0.1/county/', methods=['GET'])
 def get_counties():
     counties = session.query(County).all()
+    # print(counties)
     geoms = {county.id: shapely.geometry.geo.mapping(
         to_shape(county.geom)) for county in counties}
     data = [{"type": "Feature",

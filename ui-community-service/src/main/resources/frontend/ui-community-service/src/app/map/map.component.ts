@@ -134,6 +134,26 @@ export class MapComponent implements AfterViewInit {
     );
 
   }
+  deleteLocation() {
+    this.ngxSpinnerService.show();
+    var id = this.arenaForm.value['id'];
+    for (var i = 0; i < this.arenas.length; i++) {
+      var obj = this.arenas[i];
+      if (id == obj.id) {
+        this.map.panTo(new L.LatLng(obj.latitude, obj.longitude));
+        break;
+      }
+    }    
+    this.geoService.deleteArena(environment.apiUrlBase + '/geo-api/v0.1/arena/delete/' + id + '/').subscribe(
+      data => {
+        window.location.reload();
+        this.ngxSpinnerService.hide();
+      },
+      error1 => {
+        this.ngxSpinnerService.hide();
+      }
+    );
+  }
   private initMap() {
 
     const iconRetinaUrl = './assets/marker-icon-2x.png';

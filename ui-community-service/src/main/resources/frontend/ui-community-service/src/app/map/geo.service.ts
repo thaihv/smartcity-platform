@@ -21,4 +21,9 @@ export class GeoService {
   {
     return this.httpClient.post<any>(url, arena);
   }  
+  deleteArena(url: string)
+  {
+    return this.httpClient.delete(url);
+  }
+
 }
