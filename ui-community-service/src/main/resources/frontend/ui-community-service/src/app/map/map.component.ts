@@ -6,7 +6,6 @@ import { Arena } from "./arena";
 import { GeoService } from "./geo.service";
 import { NgxSpinnerService } from "ngx-spinner";
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -17,9 +16,15 @@ export class MapComponent implements AfterViewInit {
   private map: L.Map;
   arenas: Arena[] = [];
   isValidated = false;
+  convertDone = false;
+  fileDownload = '';
   arenaForm = this.formBuilder.group({
     id: [''],
     name: ['']
+  });
+  convertForm = this.formBuilder.group({
+    srcfile: [''],
+    format: ['geojson']
   });
   longitude = -77.03699;
   latitude = 38.89304;
@@ -143,7 +148,7 @@ export class MapComponent implements AfterViewInit {
         this.map.panTo(new L.LatLng(obj.latitude, obj.longitude));
         break;
       }
-    }    
+    }
     this.geoService.deleteArena(environment.apiUrlBase + '/geo-api/v0.1/arena/delete/' + id + '/').subscribe(
       data => {
         window.location.reload();
@@ -153,6 +158,46 @@ export class MapComponent implements AfterViewInit {
         this.ngxSpinnerService.hide();
       }
     );
+  }
+  get srcFile() {
+    return this.convertForm.get('srcfile');
+  }
+  uploadFile(event: any) {
+    const file = event.target.files[0];
+    this.convertForm.patchValue({
+      srcfile: file
+    });
+    this.convertForm.get('srcfile')?.updateValueAndValidity()
+
+  }
+  covertToFile() {
+    this.ngxSpinnerService.show();
+    const formData = new FormData();
+    formData.append('file', this.convertForm.value['srcfile']);
+    formData.append('format', this.convertForm.value['format']);
+    this.geoService.convertToFile(environment.apiUrlBase + '/geo-api/v0.1/convertofile/', formData).subscribe(
+      data => {
+        this.convertDone = true
+        this.fileDownload = data['filename']
+        this.ngxSpinnerService.hide();
+      },
+      error1 => {
+        this.ngxSpinnerService.hide();
+      }
+    );
+
+  }
+  download(){
+    this.ngxSpinnerService.show();
+    this.geoService.downloadFile(environment.apiUrlBase + '/geo-api/v0.1/return-files/' + this.fileDownload + '/').subscribe(
+      data => {
+        this.convertDone = false
+        this.ngxSpinnerService.hide();
+      },
+      error1 => {
+        this.ngxSpinnerService.hide();
+      }
+    );    
   }
   private initMap() {
 

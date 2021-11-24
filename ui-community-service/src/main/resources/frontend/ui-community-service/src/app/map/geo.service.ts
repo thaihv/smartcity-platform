@@ -25,5 +25,12 @@ export class GeoService {
   {
     return this.httpClient.delete(url);
   }
-
+  convertToFile(url: string, formData: FormData)
+  {
+    return this.httpClient.post<any>(url, formData);
+  }    
+  downloadFile(filename:string)
+  {
+    return this.httpClient.get<any>(filename);
+  } 
 }

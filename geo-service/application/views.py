@@ -1,38 +1,34 @@
 from datetime import datetime
-from flask import render_template, request, jsonify, redirect, g
-import json
+from flask import render_template, request, jsonify, redirect, send_file, send_from_directory
 import logging
+from werkzeug.utils import secure_filename
+import os
 from .forms import AddForm
 from flask_oidc import OpenIDConnect
 
 import shapely
 from geoalchemy2.shape import to_shape
+import geopandas as gpd
 
 from .forms import *
 from .models import *
 from application import app
 
-
-# REQUEST WITH VIEWS
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger('flask_cors').level = logging.DEBUG
 oidc = OpenIDConnect(app)
 
+
 @app.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')
+    response.headers.add('Access-Control-Allow-Headers',
+                         'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods',
+                         'GET,PUT,POST,DELETE,PATCH,OPTIONS')
     return response
 
-@app.route('/geo-api/token-info/', methods=['GET'])
-@oidc.accept_token(require_token=True, scopes_required=['openid'])
-def hello_api():
-    if oidc.user_loggedin:
-        logging.warning('Watch out!')
-        return json.dumps('Welcome %s' % g.oidc_token_info['sub'])
-    else:
-        return 'Not logged in'
+# APIs return views
 
 
 @app.route('/geo-api/login/')
@@ -99,7 +95,14 @@ def arenas():
     return render_template('map.html', form=form)
 
 
+@app.route("/geo-api/downloadfile/<filename>/", methods=['GET'])
+def download_file(filename):
+    value = filename
+    return render_template('download.html', value=value)
+
 # REST APIs
+
+
 @app.route("/geo-api/v0.1/data_test/")
 def get_data():
     return app.send_static_file("data.json")
@@ -187,18 +190,19 @@ def add_arenas():
 
     if request.method == "POST":
         arena = Arena()
-        json = request.get_json(force=True, silent = True)
-        
-        if (json == None): # Post request using Form submit
+        json = request.get_json(force=True, silent=True)
+
+        if (json == None):  # Post request using Form submit
             arena.name = request.form['name']
             arena.longitude = float(request.form['longitude'])
             arena.latitude = float(request.form['latitude'])
-        else: # Post request using Json Payload
+        else:  # Post request using Json Payload
             arena.name = json['name']
             arena.longitude = float(json['longitude'])
             arena.latitude = float(json['latitude'])
 
-        arena.geom = 'SRID=4326;POINT({0} {1})'.format(arena.longitude, arena.latitude)
+        arena.geom = 'SRID=4326;POINT({0} {1})'.format(
+            arena.longitude, arena.latitude)
         session.add(arena)
         session.commit()
         data = [{"type": "Feature", "properties": {"name": arena.name}, "geometry": {
@@ -210,7 +214,8 @@ def add_arenas():
 @app.route('/geo-api/v0.1/arena/delete/<int:arena_id>/', methods=['DELETE'])
 @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def delete_arena(arena_id):
-    arena = session.query(Arena).filter(Arena.id == arena_id).delete(synchronize_session='fetch')
+    arena = session.query(Arena).filter(
+        Arena.id == arena_id).delete(synchronize_session='fetch')
     session.commit()
     return jsonify({"deleted": "success"})
 
@@ -372,3 +377,75 @@ def get_district_name(district_name):
                           "coordinates": geoms[district.id]["coordinates"]},
              } for district in districts]
     return jsonify({"type": "FeatureCollection", "features": data})
+
+
+# Utility APIs
+ALLOWED_EXTENSIONS = {'zip', 'shp', 'geojson', 'csv', 'dgn', 'dxf'}
+
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+@app.route('/geo-api/v0.1/uploadfile/', methods=['GET', 'POST'])
+# @oidc.accept_token(require_token=True, scopes_required=['openid'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            print('no file')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            return 'No filename'
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print(os.getcwd())
+            print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            print("saved file successfully")
+            # send file name as parameter to downlad
+            return 'File Uploaded! That is OK.'
+    return 'File error or file type is not supported to upload'
+
+
+@app.route('/geo-api/v0.1/return-files/<filename>/')
+def return_files_tut(filename):
+    print(os.getcwd())
+    print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    file_path = os.path.join(
+        os.getcwd(), app.config['UPLOAD_FOLDER'], filename)
+    return send_file(file_path, as_attachment=True, attachment_filename=filename)
+
+
+@app.route('/geo-api/v0.1/convertofile/', methods=['GET', 'POST'])
+def convert_to_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            print('no file')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            return 'No filename'
+        if file and allowed_file(file.filename):
+        # else:
+            srcfilename = secure_filename(file.filename)
+            srcfilename = os.path.join(
+                app.config['UPLOAD_FOLDER'], srcfilename)
+            file.save(srcfilename)
+
+            format = request.form['format']
+            baseTargetName = file.filename + '_to_.' + format
+            targetfilename = os.path.join(
+                app.config['UPLOAD_FOLDER'], baseTargetName)
+
+            df = gpd.read_file(srcfilename)
+            if format == 'csv':
+                df.to_csv(path_or_buf=targetfilename,
+                          sep='\t', encoding='utf-8')
+            if format == 'geojson':
+                df.to_file(driver='GeoJSON', filename=targetfilename)
+
+            return jsonify({"convert": "success",  "filename": baseTargetName})
+    return jsonify({"convert": "failed"})

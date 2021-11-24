@@ -35,11 +35,14 @@ app = flask.Flask(__name__)
 cors = CORS(app, resources={contextpath + '/*': {"origins": "*"}})
 logging.getLogger('flask_cors').level = logging.DEBUG
 
+
+UPLOAD_FOLDER = 'uploads/'
 app.config.update({
     'SQLALCHEMY_DATABASE_URI': conn_string,
     'SECRET_KEY': 'SECRET_KEY',
     'TESTING': True,
     'DEBUG': True,
+    'UPLOAD_FOLDER': UPLOAD_FOLDER,
     'OIDC_CLIENT_SECRETS': 'client_secrets.json',
     'OIDC_ID_TOKEN_COOKIE_SECURE': False,
     'OIDC_RESOURCE_SERVER_ONLY': True,
