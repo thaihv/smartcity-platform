@@ -4,6 +4,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {NgxSpinnerModule} from "ngx-spinner";
+import { FileSaverModule } from 'ngx-filesaver';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -63,6 +64,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FileSaverModule,
     AppRoutingModule,
     HttpClientModule,
     NgxSpinnerModule,

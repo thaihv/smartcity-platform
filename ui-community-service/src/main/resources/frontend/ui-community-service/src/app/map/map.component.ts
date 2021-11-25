@@ -5,6 +5,8 @@ import { environment } from '../../environments/environment';
 import { Arena } from "./arena";
 import { GeoService } from "./geo.service";
 import { NgxSpinnerService } from "ngx-spinner";
+import { FileSaverService } from 'ngx-filesaver'; 
+
 
 @Component({
   selector: 'app-map',
@@ -29,7 +31,7 @@ export class MapComponent implements AfterViewInit {
   longitude = -77.03699;
   latitude = 38.89304;
   name = 'New Arena';
-  constructor(private geoService: GeoService, private ngxSpinnerService: NgxSpinnerService, private formBuilder: FormBuilder) { }
+  constructor(private geoService: GeoService, private _FileSaverService: FileSaverService, private ngxSpinnerService: NgxSpinnerService, private formBuilder: FormBuilder) { }
   private addArenasToMap(controlLayers: L.Control.Layers) {
     this.ngxSpinnerService.show();
     this.geoService.getArenas(environment.apiUrlBase + '/geo-api/v0.1/arena/').subscribe(
@@ -175,7 +177,7 @@ export class MapComponent implements AfterViewInit {
     const formData = new FormData();
     formData.append('file', this.convertForm.value['srcfile']);
     formData.append('format', this.convertForm.value['format']);
-    this.geoService.convertToFile(environment.apiUrlBase + '/geo-api/v0.1/convertofile/', formData).subscribe(
+    this.geoService.convertToFile(environment.apiUrlBase + '/geo-api/v0.1/util/convertofile/', formData).subscribe(
       data => {
         this.convertDone = true
         this.fileDownload = data['filename']
@@ -187,17 +189,22 @@ export class MapComponent implements AfterViewInit {
     );
 
   }
-  download(){
+  download() {
     this.ngxSpinnerService.show();
-    this.geoService.downloadFile(environment.apiUrlBase + '/geo-api/v0.1/return-files/' + this.fileDownload + '/').subscribe(
+    this.geoService.downloadFile(environment.apiUrlBase + '/geo-api/v0.1/util/return-files/' + this.fileDownload + '/').subscribe(
       data => {
-        this.convertDone = false
+        let filename = this.fileDownload
+        const blob = new Blob([data], { type: 'application/zip' });
+        this._FileSaverService.save(data, filename)
         this.ngxSpinnerService.hide();
+        this.convertDone = false
       },
       error1 => {
+        console.log(error1)
         this.ngxSpinnerService.hide();
+
       }
-    );    
+    );
   }
   private initMap() {
 

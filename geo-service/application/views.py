@@ -9,6 +9,8 @@ from flask_oidc import OpenIDConnect
 import shapely
 from geoalchemy2.shape import to_shape
 import geopandas as gpd
+import zipfile
+from zipfile import ZipFile
 
 from .forms import *
 from .models import *
@@ -94,12 +96,6 @@ def arenas():
         return render_template('map.html', form=form)
     return render_template('map.html', form=form)
 
-
-@app.route("/geo-api/downloadfile/<filename>/", methods=['GET'])
-def download_file(filename):
-    value = filename
-    return render_template('download.html', value=value)
-
 # REST APIs
 
 
@@ -113,7 +109,8 @@ def get_endpoints():
     data = [{'name': "Arena", "endpoint": "/arena"},
             {'name': "State", "endpoint": "/state"},
             {'name': "County", "endpoint": "/county"},
-            {'name': "District", "endpoint": "/district"}, ]
+            {'name': "District", "endpoint": "/district"},
+            {'name': "Utility", "endpoint": "/util"}]
     return jsonify({"endpoints": data})
 
 
@@ -387,7 +384,12 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route('/geo-api/v0.1/uploadfile/', methods=['GET', 'POST'])
+@app.route('/geo-api/v0.1/util/', methods=['GET'])
+def get_utilities():
+    return jsonify({"status": "ongoing"})
+
+
+@app.route('/geo-api/v0.1/util/uploadfile/', methods=['GET', 'POST'])
 # @oidc.accept_token(require_token=True, scopes_required=['openid'])
 def upload_file():
     if request.method == 'POST':
@@ -409,16 +411,33 @@ def upload_file():
     return 'File error or file type is not supported to upload'
 
 
-@app.route('/geo-api/v0.1/return-files/<filename>/')
+@app.route("/geo-api/v0.1/util/list-uploaded/", methods=['GET'])
+def list_files():
+    """Endpoint to list files on the server."""
+    files = []
+    for filename in os.listdir(app.config['UPLOAD_FOLDER']):
+        path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        if os.path.isfile(path):
+            files.append(filename)
+    return jsonify(files)
+
+
+@app.route("/geo-api/v0.1/util/downloadfile/<filename>/", methods=['GET'])
+def download_file(filename):
+    value = filename
+    return render_template('download.html', value=value)
+
+
+@app.route('/geo-api/v0.1/util/return-files/<filename>/')
 def return_files_tut(filename):
     print(os.getcwd())
     print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
     file_path = os.path.join(
         os.getcwd(), app.config['UPLOAD_FOLDER'], filename)
-    return send_file(file_path, as_attachment=True, attachment_filename=filename)
+    return send_file(file_path, mimetype='application/zip', as_attachment=True, attachment_filename=filename)
 
 
-@app.route('/geo-api/v0.1/convertofile/', methods=['GET', 'POST'])
+@app.route('/geo-api/v0.1/util/convertofile/', methods=['GET', 'POST'])
 def convert_to_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -429,23 +448,46 @@ def convert_to_file():
         if file.filename == '':
             return 'No filename'
         if file and allowed_file(file.filename):
-        # else:
-            srcfilename = secure_filename(file.filename)
-            srcfilename = os.path.join(
-                app.config['UPLOAD_FOLDER'], srcfilename)
-            file.save(srcfilename)
+            # else:
+            uploadFileName = secure_filename(file.filename)
+            srcFileName = os.path.join(
+                app.config['UPLOAD_FOLDER'], uploadFileName)
+            file.save(srcFileName)
 
-            format = request.form['format']
-            baseTargetName = file.filename + '_to_.' + format
-            targetfilename = os.path.join(
-                app.config['UPLOAD_FOLDER'], baseTargetName)
+            ext = srcFileName.rsplit('.', 1)[1].lower()
+            base = srcFileName.rsplit('.', 1)[0]
+            # If Shape files in zip, select .shp
+            if ext == 'zip':
+                with ZipFile(srcFileName, 'r') as zip_ref:
+                    zip_ref.extractall(app.config['UPLOAD_FOLDER'])
+                srcFileName = base + '.shp'
 
-            df = gpd.read_file(srcfilename)
-            if format == 'csv':
-                df.to_csv(path_or_buf=targetfilename,
+            print(srcFileName)
+
+            # Create target file temporarily at current folder using name from source file and new format
+            targetFormat = request.form['format']
+            targetFilename = uploadFileName.rsplit('.', 1)[0] + '.' + targetFormat
+
+            print(targetFilename)
+
+            df = gpd.read_file(srcFileName)
+            if targetFormat == 'csv':
+                df.to_csv(path_or_buf=targetFilename,
                           sep='\t', encoding='utf-8')
-            if format == 'geojson':
-                df.to_file(driver='GeoJSON', filename=targetfilename)
+            if targetFormat == 'geojson':
+                df.to_file(driver='GeoJSON', filename=targetFilename)
 
-            return jsonify({"convert": "success",  "filename": baseTargetName})
+            # Zip file and save to Uploads folder before return to clients
+            zipToDownload = os.path.join(app.config['UPLOAD_FOLDER'], targetFilename + '.zip')
+            zipf = ZipFile(zipToDownload, "w", zipfile.ZIP_DEFLATED)
+            zipf.write(targetFilename)
+            zipf.close()
+            # Delete the target temporary file 
+            os.remove(targetFilename)
+            for f in os.listdir(app.config['UPLOAD_FOLDER']):
+                if f.endswith(".zip"):
+                    continue
+                os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f))
+
+            return jsonify({"convert": "success",  "filename": targetFilename + '.zip'})
     return jsonify({"convert": "failed"})

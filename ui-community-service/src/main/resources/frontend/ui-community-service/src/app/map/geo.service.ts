@@ -29,8 +29,8 @@ export class GeoService {
   {
     return this.httpClient.post<any>(url, formData);
   }    
-  downloadFile(filename:string)
+  downloadFile(url:string)
   {
-    return this.httpClient.get<any>(filename);
+    return this.httpClient.get(url, { responseType: 'blob'});
   } 
 }
