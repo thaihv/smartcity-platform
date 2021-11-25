@@ -5,7 +5,8 @@ import { environment } from '../../environments/environment';
 import { Arena } from "./arena";
 import { GeoService } from "./geo.service";
 import { NgxSpinnerService } from "ngx-spinner";
-import { FileSaverService } from 'ngx-filesaver'; 
+import { FileSaverService } from 'ngx-filesaver';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class MapComponent implements AfterViewInit {
   arenas: Arena[] = [];
   isValidated = false;
   convertDone = false;
+  progress: number = 0;
   fileDownload = '';
   arenaForm = this.formBuilder.group({
     id: [''],
@@ -178,13 +180,30 @@ export class MapComponent implements AfterViewInit {
     formData.append('file', this.convertForm.value['srcfile']);
     formData.append('format', this.convertForm.value['format']);
     this.geoService.convertToFile(environment.apiUrlBase + '/geo-api/v0.1/util/convertofile/', formData).subscribe(
-      data => {
-        this.convertDone = true
-        this.fileDownload = data['filename']
-        this.ngxSpinnerService.hide();
-      },
-      error1 => {
-        this.ngxSpinnerService.hide();
+      (event: HttpEvent<any>) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            console.log('Request has been made!');
+            break;
+          case HttpEventType.ResponseHeader:
+            console.log('Response header has been received!');
+            break;
+          case HttpEventType.UploadProgress:
+            var eventTotal = event.total ? event.total : 0;
+            this.progress = Math.round(event.loaded / eventTotal * 100);
+            console.log(event.total);
+            console.log(event.loaded);
+            console.log('Uploaded! ${this.progress}%');
+            break;
+          case HttpEventType.Response:
+            console.log('Image Upload Successfully!', event.body);
+            this.convertDone = true
+            this.fileDownload = event.body['filename']
+            setTimeout(() => {
+              this.progress = 0;
+            }, 1500);
+
+        }
       }
     );
 
