@@ -35,14 +35,13 @@ services:
       - discovery
   kpi-service:
     image: thaihv/kpi-service:0.0.1
-    container_name: kpi-service
     environment: 
       - spring.cloud.config.uri=http://config-server:8888
       - "SPRING_PROFILES_ACTIVE=production"
     expose:
       - "8091"
     ports:
-      - "8091:8091"
+      - "8091"
     depends_on:
       - config-server
       - discovery
