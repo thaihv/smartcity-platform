@@ -1,4 +1,4 @@
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {APP_INITIALIZER, NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BrowserModule} from "@angular/platform-browser";
@@ -25,6 +25,7 @@ import { HomeComponent } from './home/home.component';
 import { MapComponent } from './map/map.component';
 import { KpiComponent } from './kpi/kpi.component';
 import { OngoingComponent } from './ongoing/ongoing.component';
+import {TokenInterceptor} from './interceptors/token-interceptor';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -77,6 +78,11 @@ function initializeKeycloak(keycloak: KeycloakService) {
       useFactory: initializeKeycloak,
       multi: true,
       deps: [KeycloakService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

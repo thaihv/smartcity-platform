@@ -18,3 +18,4 @@ SQLAlchemy==1.4.26
 SQLAlchemy-Utils==0.37.9
 Werkzeug==2.0.2
 WTForms==2.3.3
+flask-zipkin==0.0.5

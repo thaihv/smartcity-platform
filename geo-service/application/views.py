@@ -1,11 +1,11 @@
 from datetime import datetime
-from flask import render_template, request, jsonify, redirect, send_file, send_from_directory
+from flask import render_template, request, jsonify, redirect, send_file
 import logging
 from werkzeug.utils import secure_filename
 import os
 from .forms import AddForm
 from flask_oidc import OpenIDConnect
-
+from flask_zipkin import Zipkin
 import shapely
 from geoalchemy2.shape import to_shape
 import geopandas as gpd
@@ -16,10 +16,11 @@ from .forms import *
 from .models import *
 from application import app
 
+
 logging.basicConfig(level=logging.DEBUG)
 logging.getLogger('flask_cors').level = logging.DEBUG
 oidc = OpenIDConnect(app)
-
+zipkin = Zipkin(app, sample_rate=100)
 
 @app.after_request
 def after_request(response):
@@ -31,7 +32,6 @@ def after_request(response):
     return response
 
 # APIs return views
-
 
 @app.route('/geo-api/login/')
 @oidc.require_login
@@ -122,7 +122,7 @@ def get_arenas():
     else:
         arenas = session.query(Arena).all()
         data = [{"type": "Feature", "properties": {"name": arena.name, "id": arena.id}, "geometry": {"type": "Point", "coordinates": [round(arena.longitude, 6), round(arena.latitude, 6)]},
-                 } for arena in arenas]
+                } for arena in arenas]
     return jsonify({"type": "FeatureCollection", "features": data})
 
 
@@ -491,3 +491,11 @@ def convert_to_file():
 
             return jsonify({"convert": "success",  "filename": targetFilename + '.zip'})
     return jsonify({"convert": "failed"})
+
+# @zipkin.transport_handler
+# def default_handler(encoded_span):
+#     return requests.post(
+# 		app.config['ZIPKIN_DSN'],
+#         data=encoded_span,
+#         headers={'Content-Type': 'application/x-thrift'},
+# )
